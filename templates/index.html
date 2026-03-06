@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicción del Clima</title>
+    <title>Weather forecast</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -11,40 +11,40 @@
 
     <nav class="navbar navbar-dark bg-primary">
         <div class="container">
-            <span class="navbar-brand fw-bold">Prediccion del Clima — Machine Learning</span>
+            <span class="navbar-brand fw-bold">Weather forecast — Machine Learning</span>
         </div>
     </nav>
 
     <div class="container mt-4">
 
-        <h3 class="text-primary fw-bold mb-1">Predictor de Clima</h3>
-        <p class="text-muted mb-4">Ingresa las condiciones climaticas y el modelo predecira el clima.</p>
+        <h3 class="text-primary fw-bold mb-1">Weather fore cast</h3>
+        <p class="text-muted mb-4">Enter the Weather conditions and the model will predic the weather.</p>
 
         <div class="row mb-4">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
 
-                        <h5 class="card-title text-primary">Datos de Entrenamiento</h5>
-                        <p class="text-muted small">Registros usados para entrenar el modelo.</p>
+                        <h5 class="card-title text-primary">Training data</h5>
+                        <p class="text-muted small">Records used to train the model.</p>
                         <hr>
 
                         <table class="table table-striped table-bordered table-hover">
                             <thead class="table-primary">
                                 <tr>
-                                    <th>Ciudad</th>
-                                    <th>Temperatura (C)</th>
-                                    <th>Humedad (%)</th>
-                                    <th>Clima</th>
+                                    <th>City</th>
+                                    <th>Temperature (C)</th>
+                                    <th>Humidity (%)</th>
+                                    <th>Weather</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for dato in datosIniciales %}
+                                {% for data in initialData %}
                                 <tr>
-                                    <td>{{ dato.ciudad }}</td>
-                                    <td>{{ dato.temp }}</td>
-                                    <td>{{ dato.humedad }}</td>
-                                    <td>{{ dato.clima }}</td>
+                                    <td>{{ data.city }}</td>
+                                    <td>{{ data.temp }}</td>
+                                    <td>{{ data.humidity }}</td>
+                                    <td>{{ data.weather }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -59,43 +59,43 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h5 class="card-title text-primary">Ingresar Datos</h5>
+                        <h5 class="card-title text-primary">Enter data</h5>
                         <hr>
 
                         <form method="POST" action="/">
 
                             <div class="mb-3">
-                                <label for="temperatura" class="form-label">
-                                    Temperatura (C)
+                                <label for="temperature" class="form-label">
+                                    Temperature (C)
                                 </label>
                                 <input type="number"
                                        class="form-control"
-                                       id="temperatura"
-                                       name="temperatura"
+                                       id="Temperature"
+                                       name="temperature"
                                        min="0" max="50"
                                        placeholder="c°"
-                                       value="{{ datos.get('temperatura', '') }}"
+                                       value="{{ data.get('Temperature', '') }}"
                                        required>
-                                <small class="text-muted">Entre 0 y 50</small>
+                                <small class="text-muted">Between 0 y 50</small>
                             </div>
 
                             <div class="mb-3">
-                                <label for="humedad" class="form-label">
-                                    Humedad (%)
+                                <label for="humidity" class="form-label">
+                                    Humidity (%)
                                 </label>
                                 <input type="number"
                                        class="form-control"
-                                       id="humedad"
-                                       name="humedad"
+                                       id="humidity"
+                                       name="humidity"
                                        min="0" max="100"
                                        placeholder="%"
-                                       value="{{ datos.get('humedad', '') }}"
+                                       value="{{ data.get('humidity', '') }}"
                                        required>
                                 <small class="text-muted">Entre 0 y 100</small>
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100">
-                                Predecir Clima
+                                Predict the weather
                             </button>
 
                         </form>
@@ -107,16 +107,16 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
 
-                        <h5 class="card-title text-primary">Resultado de la Prediccion</h5>
+                        <h5 class="card-title text-primary">Prediction result</h5>
                         <hr>
 
-                        {% if resultado %}
-                            <p class="text-muted mt-3">El modelo predice que el clima sera:</p>
-                            <h2 class="text-primary my-3">{{ resultado }}</h2>
+                        {% if result %}
+                            <p class="text-muted mt-3">The model predict that the weather will be:</p>
+                            <h2 class="text-primary my-3">{{ result }}</h2>
                             <hr>
                             <p class="text-muted">
-                                Temperatura ingresada: {{ datos.temperatura }} C<br>
-                                Humedad ingresada: {{ datos.humedad }} %
+                                Input temperature: {{ data.temperature }} C<br>
+                                Imput humidity: {{ data.temperature }} %
                             </p>
                         {% endif %}
                     </div>

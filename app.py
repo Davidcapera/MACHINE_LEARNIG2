@@ -2,41 +2,41 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-datosIniciales = [
-    {"ciudad": "Bogota",    "temp": 14, "humedad": 24, "clima": "Lluvioso"},
-    {"ciudad": "Medellin",  "temp": 20, "humedad": 34, "clima": "Soleado"},
-    {"ciudad": "Cartagena", "temp": 40, "humedad": 44, "clima": "Muy Soleado"},
+initialData = [
+    {"city": "Bogota",    "temp": 14, "humidity": 24, "weather": "rainy"},
+    {"city": "Medellin",  "temp": 20, "humidity": 34, "weather": "Sunny"},
+    {"city": "Cartagena", "temp": 40, "humidity": 44, "weather": "very sunny"},
 ]
 
-def predecir(temperatura, humedad):
+def predit(temperature, humidity):
 
-    if (temperatura >= 14 and temperatura < 20) and (humedad >= 24 and humedad < 34):
-        return "Lluvioso"
-    elif (temperatura >= 20 and temperatura < 40) and (humedad >= 34 and humedad < 44):
-        return "Soleado"
-    elif temperatura >= 40 and humedad > 44:
-        return "Muy Soleado"
+    if (temperature >= 14 and temperature < 20) and (humidity >= 24 and humidity < 34):
+        return "Rainy"
+    elif (temperature >= 20 and temperature < 40) and (humidity >= 34 and humidity < 44):
+        return "Sunny"
+    elif temperature >= 40 and humidity > 44:
+        return "Very Sunny"
     else:
-        return "Nublado"
+        return "Cloudy"
 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
 
-    resultado = 0
-    datos = {}
+    result = 0
+    data = {}
 
     if request.method == "POST":
-        temperatura = int(request.form["temperatura"])
-        humedad     = int(request.form["humedad"])
-        datos = {"temperatura": temperatura,
-                  "humedad": humedad}
-        resultado = predecir(temperatura, humedad)
+        temperature = int(request.form["temperature"])
+        humidity    = int(request.form["humidity"])
+        data = {"temperature": temperature,
+                  "humedad": humidity}
+        result = predit(temperature, humidity)
 
     return render_template("index.html",
-        resultado      = resultado,
-        datos          = datos,
-        datosIniciales = datosIniciales
+        result     = result,
+        data          = data,
+        initialData = initialData
     )
 
 
