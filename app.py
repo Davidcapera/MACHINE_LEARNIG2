@@ -3,9 +3,9 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 initialData = [
-    {"city": "Bogota",    "temp": 14, "humidity": 24, "weather": "rainy"},
+    {"city": "Bogota",    "temp": 14, "humidity": 24, "weather": "Rainy"},
     {"city": "Medellin",  "temp": 20, "humidity": 34, "weather": "Sunny"},
-    {"city": "Cartagena", "temp": 40, "humidity": 44, "weather": "very sunny"},
+    {"city": "Cartagena", "temp": 40, "humidity": 44, "weather": "very Sunny"},
 ]
 
 def predit(temperature, humidity):
@@ -30,7 +30,7 @@ def home():
         temperature = int(request.form["temperature"])
         humidity    = int(request.form["humidity"])
         data = {"temperature": temperature,
-                  "humedad": humidity}
+                  "humidity": humidity}
         result = predit(temperature, humidity)
 
     return render_template("index.html",
