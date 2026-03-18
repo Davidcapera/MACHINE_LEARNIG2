@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import LinearRegression
 
 app = Flask(__name__)
 
@@ -45,3 +46,15 @@ def firstPage(name = None):
         return render_template("index.html",
                                name=name)
 
+@app.route("/LinearRegression", methods=["GET","POST"])
+def CalculateGrate():
+    result= None
+    
+    if request.method=="POST":
+        hours=float(request.form["Hours"])
+        if (hours <= 50):
+            result = LinearRegression.CalculateGrate(hours)
+        else: 
+            result="Hours tienen que ser menores a 50"
+
+    return render_template("LinearRegression.html",resultFinal=result)
