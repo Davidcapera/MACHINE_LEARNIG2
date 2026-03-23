@@ -7,9 +7,12 @@ regression_bp = Blueprint("regression", __name__)
 def index():
     result, error = None, None
     if request.method == "POST":
-        hours = float(request.form["Hours"])
-        if hours <= 50:
-            result = CalculateGrate(hours)
-        else:
-            error = "Las horas deben ser menores a 50"
-    return render_template("linearRegression.html", resultFinal=result)
+        try:
+            tv = float(request.form["tv"])
+            radio =float(request.form["radio"])
+            newspaper =float(request.form["newspaper"])
+            result = CalculateGrate(tv,radio,newspaper)
+        except Exception as e:
+            error=str(e)
+        
+    return render_template("linearRegression.html", resultFinal=result,fail=error)
