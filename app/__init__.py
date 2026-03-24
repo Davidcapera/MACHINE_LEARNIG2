@@ -6,8 +6,11 @@ def create_app():
     from app.controllers.weatherController import weather_bp
     from app.controllers.regressionController import regression_bp
     from app.controllers.indexController import index_bp
+    from app.controllers.airController import air_bp  
+
     app.register_blueprint(weather_bp)
     app.register_blueprint(regression_bp)
     app.register_blueprint(index_bp)
+    app.register_blueprint(air_bp)  
 
     return app
