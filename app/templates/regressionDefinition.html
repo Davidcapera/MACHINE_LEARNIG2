@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<title>Linear Regression Definition</title>
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+<h4 class="mb-0">Linear Regression - Basic Concepts</h4>
+</div>
+
+<div class="card-body">
+
+<h5>What is Linear Regression?</h5>
+<p>
+Linear regression is a supervised machine learning algorithm used to model
+the relationship between a dependent variable and an independent variable.
+The model predicts continuous values by fitting a straight line to the data.
+</p>
+
+<hr>
+
+<h5>Independent Variable (X)</h5>
+<p>
+The independent variable represents the input data used to make predictions.
+This variable influences the dependent variable.
+</p>
+
+Example:
+<ul>
+<li>Study Hours</li>
+<li>Advertising Budget</li>
+<li>Temperature</li>
+</ul>
+
+<hr>
+
+<h5>Dependent Variable (Y)</h5>
+<p>
+The dependent variable is the value that we want to predict.
+It depends on the independent variable.
+</p>
+
+Example:
+<ul>
+<li>Final Grade</li>
+<li>Sales</li>
+<li>Energy Consumption</li>
+</ul>
+
+<hr>
+
+<h5>Training Data</h5>
+<p>
+Training data consists of known input and output values used to train
+the linear regression model.
+</p>
+
+<table class="table table-bordered">
+<thead class="table-light">
+<tr>
+<th>Study Hours</th>
+<th>Final Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>2</td><td>2.5</td></tr>
+<tr><td>4</td><td>3.0</td></tr>
+<tr><td>6</td><td>3.5</td></tr>
+<tr><td>8</td><td>4.0</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h5>Regression Equation</h5>
+
+<p class="fw-bold text-center">
+Y = mX + b
+</p>
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>Y = Dependent variable</li>
+<li>X = Independent variable</li>
+<li>m = Slope</li>
+<li>b = Intercept</li>
+</ul>
+
+<hr>
+
+<h5>Slope (m)</h5>
+<p>
+The slope represents how much the dependent variable changes when
+the independent variable increases by one unit.
+</p>
+
+Example:
+<p class="fw-bold">
+If slope = 0.5, then each additional study hour increases the grade by 0.5
+</p>
+
+<hr>
+
+<h5>Intercept (b)</h5>
+<p>
+The intercept represents the predicted value when X equals zero.
+It is the starting point of the regression line.
+</p>
+
+Example:
+<p class="fw-bold">
+If intercept = 2.0, then the predicted grade is 2.0 when study hours are zero
+</p>
+
+<hr>
+
+<h5>Example Interpretation</h5>
+<p>
+If a student studies more hours, the predicted grade increases.
+Linear regression finds the best line that describes this relationship.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

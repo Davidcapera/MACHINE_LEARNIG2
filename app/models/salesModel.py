@@ -1,40 +1,43 @@
-import numpy as np
-from sklearn.linear_model import LinearRegression
+def low_sales():
+    advertising = 500
+    price = 50
+    demand = 60
 
-# Training dataset
-# [advertising, price]
-X = np.array([
-    [100, 10],
-    [200, 9],
-    [300, 8],
-    [400, 7],
-    [500, 6],
-    [600, 5],
-    [700, 4],
-    [800, 3],
-    [900, 2],
-    [1000, 1]
-])
+    sales = (0.4 * advertising) - (2 * price) + (1.5 * demand)
 
-# sales
-y = np.array([
-    120,
-    150,
-    200,
-    260,
-    320,
-    400,
-    480,
-    560,
-    650,
-    740
-])
-
-# Train model
-model = LinearRegression()
-model.fit(X, y)
+    return {
+        "advertising": advertising,
+        "price": price,
+        "demand": demand,
+        "sales": round(sales, 2)
+    }
 
 
-def predict(advertising: float, price: float) -> float:
-    prediction = model.predict([[advertising, price]])
-    return round(prediction[0], 2)
+def medium_sales():
+    advertising = 1500
+    price = 45
+    demand = 75
+
+    sales = (0.4 * advertising) - (2 * price) + (1.5 * demand)
+
+    return {
+        "advertising": advertising,
+        "price": price,
+        "demand": demand,
+        "sales": round(sales, 2)
+    }
+
+
+def high_sales():
+    advertising = 2500
+    price = 40
+    demand = 90
+
+    sales = (0.4 * advertising) - (2 * price) + (1.5 * demand)
+
+    return {
+        "advertising": advertising,
+        "price": price,
+        "demand": demand,
+        "sales": round(sales, 2)
+    }

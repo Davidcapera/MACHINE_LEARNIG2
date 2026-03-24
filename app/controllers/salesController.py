@@ -1,17 +1,24 @@
 from flask import Blueprint, render_template, request
-from app.models.salesModel import predict
+from app.models.salesModel import low_sales, medium_sales, high_sales
 
 sales_bp = Blueprint("sales", __name__)
 
-@sales_bp.route("/sales", methods=["GET", "POST"])
+@sales_bp.route("/sales")
 def sales():
 
-    prediction = None
+    case = request.args.get("case")
+    example = None
 
-    if request.method == "POST":
-        advertising = float(request.form["advertising"])
-        price = float(request.form["price"])
+    if case == "low":
+        example = low_sales()
+        example["name"] = "Low Advertising"
 
-        prediction = predict(advertising, price)
+    elif case == "medium":
+        example = medium_sales()
+        example["name"] = "Medium Advertising"
 
-    return render_template("sales.html", prediction=prediction)
+    elif case == "high":
+        example = high_sales()
+        example["name"] = "High Advertising"
+
+    return render_template("sales.html", example=example)
