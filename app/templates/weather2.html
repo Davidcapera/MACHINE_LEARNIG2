@@ -1,286 +1,264 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather forecast</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-</head>
+{% extends "base.html" %}
 
-<body class="bg-light mb-4">
+{% block title %}Weather Forecast — Machine Learning{% endblock %}
 
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <span class="navbar-brand fw-bold">Weather forecast — Machine Learning</span>
+{% block content %}
 
-            <div class="dropdown" data-bs-theme="light">
-                <button class="btn btn-primary dropdown-toggle" type="button"
-                        data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside">
-                    Menu
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/">Home</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
-                            Case use >
-                        </a>
-                        <div class="collapse" id="caseUseMenu">
-                            <ul class="list-unstyled ps-3">
-                                <li><a class="dropdown-item" href="/caseWeather">Weather</a></li>
-                                <li><a class="dropdown-item" href="/case2">Case use 2</a></li>
-                                <li><a class="dropdown-item" href="/case3">Case use 3</a></li>
-                                <li><a class="dropdown-item" href="/case4">Case use 4</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item" href="#regressionMenu" data-bs-toggle="collapse">
-                            Linear Regression >
-                        </a>
-                        <div class="collapse" id="regressionMenu">
-                            <ul class="list-unstyled ps-3">
-                                <li><a class="dropdown-item" href="/regression/definition">Definition</a></li>
-                                <li><a class="dropdown-item" href="/regression">Linear Regression</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+<div class="p-4 mb-4 rounded-3 bg-primary text-white">
+    <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-cloud-sun-fill" style="font-size: 2.8rem; opacity: 0.9;"></i>
+        <div>
+            <h3 class="fw-bold mb-1">Weather Forecast</h3>
+            <p class="mb-0 opacity-75">
+                Enter the weather conditions and the model will predict the weather.
+            </p>
         </div>
-    </nav>
+    </div>
+</div>
 
-    <div class="container mt-4">
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-journal-text fs-5"></i>
+        <span class="fw-bold fs-5">Case Use Overview</span>
+    </div>
+    <div class="card-body p-4">
 
-        <h3 class="text-primary fw-bold mb-1">Weather Forecast</h3>
-        <p class="text-muted mb-4">Enter the weather conditions and the model will predict the weather.</p>
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header bg-primary text-white d-flex align-items-center gap-2">
-                        <i class="bi bi-journal-text fs-5"></i>
-                        <span class="fw-bold fs-5">Case Use Overview</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-4">
-                            <h6 class="text-uppercase text-muted fw-semibold small mb-1">
-                                <i class="bi bi-bookmark-fill text-primary me-1"></i> Title
-                            </h6>
-                            <p class="mb-0 fw-semibold fs-5">Weather Condition Prediction Using a Decision Tree</p>
-                        </div>
-                        <hr>
-                        <div class="mb-4">
-                            <h6 class="text-uppercase text-muted fw-semibold small mb-2">
-                                <i class="bi bi-exclamation-circle-fill text-primary me-1"></i> Problem Description
-                            </h6>
-                            <p class="mb-0 text-secondary">
-                                Knowing the weather in advance is essential for planning daily activities,
-                                agriculture, transportation, and disaster prevention. Traditional forecasting
-                                systems require complex meteorological data and expensive infrastructure.
-                                This case demonstrates how a simple Machine Learning model can classify
-                                weather conditions Rainy, Sunny, Very Sunny, or Cloudy based
-                                on only two easily measurable variables: temperature and humidity.
+        <p class="text-uppercase text-primary fw-semibold small mb-1">
+            <i class="bi bi-bookmark-fill me-1"></i> Title
+        </p>
+        <p class="fw-semibold fs-5 mb-0">Weather Condition Prediction Using a Decision Tree</p>
+
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-exclamation-circle-fill me-1"></i> Problem Description
+        </p>
+        <p class="text-secondary mb-0">
+            Knowing the weather in advance is essential for planning daily activities,
+            agriculture, transportation, and disaster prevention. Traditional forecasting
+            systems require complex meteorological data and expensive infrastructure.
+            This case demonstrates how a simple Machine Learning model can classify
+            weather conditions — Rainy, Sunny, Very Sunny, or Cloudy — based
+            on only two easily measurable variables: temperature and humidity.
+        </p>
+
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-cpu-fill me-1"></i> Type of Machine Learning
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-0">
+            <span class="badge bg-primary fs-6 px-3 py-2">
+                <i class="bi bi-diagram-3 me-1"></i> Supervised Learning
+            </span>
+            <span class="badge bg-secondary fs-6 px-3 py-2">
+                <i class="bi bi-list-task me-1"></i> Classification
+            </span>
+            <span class="badge bg-info text-dark fs-6 px-3 py-2">
+                <i class="bi bi-tree me-1"></i> Decision Tree
+            </span>
+        </div>
+
+        <hr>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-arrow-right-circle-fill me-1"></i> Input Features
+                </p>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+                        <span class="badge bg-primary rounded-circle p-2 mt-1">1</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Temperature (°C)</p>
+                            <p class="text-muted small mb-0">
+                                Ambient temperature in Celsius. Training range: 14 °C – 40 °C.
                             </p>
                         </div>
-                        <hr>
-                        <div class="mb-4">
-                            <h6 class="text-uppercase text-muted fw-semibold small mb-2">
-                                <i class="bi bi-cpu-fill text-primary me-1"></i> Type of Machine Learning
-                            </h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-primary fs-6 px-3 py-2">
-                                    <i class="bi bi-diagram-3 me-1"></i> Supervised Learning
-                                </span>
-                                <span class="badge bg-secondary fs-6 px-3 py-2">
-                                    <i class="bi bi-list-task me-1"></i> Classification
-                                </span>
-                                <span class="badge bg-info text-dark fs-6 px-3 py-2">
-                                    <i class="bi bi-tree me-1"></i> Decision Tree
-                                </span>
-                            </div>
+                    </div>
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0">
+                        <span class="badge bg-primary rounded-circle p-2 mt-1">2</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Humidity (%)</p>
+                            <p class="text-muted small mb-0">
+                                Relative humidity in the atmosphere. Training range: 24 % – 44 %.
+                            </p>
                         </div>
-                        <hr>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-6">
-                                <h6 class="text-uppercase text-muted fw-semibold small mb-2">
-                                    <i class="bi bi-arrow-right-circle-fill text-primary me-1"></i> Input Features
-                                </h6>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex align-items-start gap-2 px-0">
-                                        <span class="badge bg-primary mt-1">1</span>
-                                        <div>
-                                            <strong>Temperature (°C)</strong>
-                                            <p class="mb-0 text-muted small">
-                                                Ambient temperature measured in Celsius degrees.
-                                                Range used in training: 14 °C and 40 °C.
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-start gap-2 px-0">
-                                        <span class="badge bg-primary mt-1">2</span>
-                                        <div>
-                                            <strong>Humidity (%)</strong>
-                                            <p class="mb-0 text-muted small">
-                                                Relative humidity percentage in the atmosphere.
-                                                Range used in training: 24 % and 44 %.
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h6 class="text-uppercase text-muted fw-semibold small mb-2">
-                                    <i class="bi bi-arrow-left-circle-fill text-success me-1"></i> Expected Output
-                                </h6>
-                                <p class="text-muted small mb-2">
-                                    The model returns one of the following weather condition labels:
-                                </p>
-                                <div class="d-flex flex-wrap gap-2">
-                                    <span class="badge bg-secondary px-3 py-2">
-                                        <i class="bi bi-cloud-fill me-1"></i> Cloudy
-                                    </span>
-                                    <span class="badge bg-info text-dark px-3 py-2">
-                                        <i class="bi bi-cloud-rain-fill me-1"></i> Rainy
-                                    </span>
-                                    <span class="badge bg-warning text-dark px-3 py-2">
-                                        <i class="bi bi-sun me-1"></i> Sunny
-                                    </span>
-                                    <span class="badge bg-danger px-3 py-2">
-                                        <i class="bi bi-brightness-high-fill me-1"></i> Very Sunny
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="mb-2">
-                            <h6 class="text-uppercase text-muted fw-semibold small mb-2">
-                                <i class="bi bi-globe-americas text-primary me-1"></i> Real-World Relevance
-                            </h6>
-                            <div class="alert alert-primary d-flex gap-2 mb-0" role="alert">
-                                <i class="bi bi-lightbulb-fill fs-5 mt-1 flex-shrink-0"></i>
-                                <p class="mb-0 text-secondary">
-                                    Accurate weather classification enables smarter decisions in sectors such as
-                                    <strong>agriculture</strong> (irrigation scheduling),
-                                    <strong>logistics</strong> (route planning),
-                                    <strong>tourism</strong> (activity recommendations), and
-                                    <strong>civil protection</strong> (early warnings).
-                                    This lightweight model proves that even a small, well-structured dataset
-                                    can produce actionable predictions, making it ideal for resource-constrained
-                                    environments or educational contexts.
-                                </p>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-arrow-left-circle-fill text-success me-1"></i> Expected Output
+                </p>
+                <p class="text-muted small mb-3">
+                    The model returns one of the following weather condition labels:
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge bg-secondary px-3 py-2">
+                        <i class="bi bi-cloud-fill me-1"></i> Cloudy
+                    </span>
+                    <span class="badge bg-info text-dark px-3 py-2">
+                        <i class="bi bi-cloud-rain-fill me-1"></i> Rainy
+                    </span>
+                    <span class="badge bg-warning text-dark px-3 py-2">
+                        <i class="bi bi-sun me-1"></i> Sunny
+                    </span>
+                    <span class="badge bg-danger px-3 py-2">
+                        <i class="bi bi-brightness-high-fill me-1"></i> Very Sunny
+                    </span>
+                </div>
+            </div>
+        </div>
 
-                    </div>
-                </div>
-            </div>
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-globe-americas me-1"></i> Real-World Relevance
+        </p>
+        <div class="alert alert-primary d-flex gap-3 mb-0" role="alert">
+            <i class="bi bi-lightbulb-fill fs-4 flex-shrink-0 mt-1"></i>
+            <p class="mb-0 text-secondary">
+                Accurate weather classification enables smarter decisions in
+                <strong>agriculture</strong> (irrigation scheduling),
+                <strong>logistics</strong> (route planning),
+                <strong>tourism</strong> (activity recommendations), and
+                <strong>civil protection</strong> (early warnings).
+                This lightweight model proves that even a small, well-structured dataset
+                can produce actionable predictions.
+            </p>
         </div>
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">Training Data</h5>
-                        <p class="mb-0 text-secondary">Records used to train the model.</p>
-                        <hr>
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th>City</th>
-                                    <th>Temperature (°C)</th>
-                                    <th>Humidity (%)</th>
-                                    <th>Weather</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in initialData %}
-                                <tr>
-                                    <td>{{ item.city }}</td>
-                                    <td>{{ item.temp }}</td>
-                                    <td>{{ item.humidity }}</td>
-                                    <td>{{ item.weather }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-table fs-5"></i>
+        <span class="fw-bold fs-5">Training Data</span>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-muted small mb-3">Records used to train the model.</p>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th><i class="bi bi-geo-alt me-1"></i> City</th>
+                        <th><i class="bi bi-thermometer-half me-1"></i> Temperature (°C)</th>
+                        <th><i class="bi bi-droplet-half me-1"></i> Humidity (%)</th>
+                        <th><i class="bi bi-cloud me-1"></i> Weather</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in initialData %}
+                    <tr>
+                        <td>{{ item.city }}</td>
+                        <td>{{ item.temp }}</td>
+                        <td>{{ item.humidity }}</td>
+                        <td>{{ item.weather }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title text-primary">Model: Decision Tree</h5>
-                        <p class="text-muted small">
-                            A Decision Tree splits data into branches based on feature values to make predictions.
-                        </p>
-                        <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*OLJWt9hD2zTS-x3gRhYuqg.png"
-                             alt="Decision tree machine learning"
-                             class="img-fluid">
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-diagram-3 fs-5"></i>
+        <span class="fw-bold fs-5">Model: Decision Tree</span>
+    </div>
+    <div class="card-body p-4 text-center">
+        <p class="text-muted small mb-3">
+            A Decision Tree splits data into branches based on feature values to make predictions.
+        </p>
+        <img src="/static/weather.png" alt="Decision Tree" class="img-fluid rounded shadow-sm">
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+                <i class="bi bi-sliders fs-5"></i>
+                <span class="fw-bold fs-5">Input Data</span>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-3 mb-3">
+                    <div class="col-6">
+                        <div class="bg-light rounded-3 p-3 text-center border">
+                            <i class="bi bi-thermometer-half text-primary fs-3 mb-1 d-block"></i>
+                            <p class="text-muted small mb-1">Temperature</p>
+                            <p class="fw-bold fs-4 text-primary mb-0">{{ data.temperature }} <small class="fs-6">°C</small></p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-light rounded-3 p-3 text-center border">
+                            <i class="bi bi-droplet-half text-primary fs-3 mb-1 d-block"></i>
+                            <p class="text-muted small mb-1">Humidity</p>
+                            <p class="fw-bold fs-4 text-primary mb-0">{{ data.humidity }} <small class="fs-6">%</small></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row g-4 mt-2">
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">Input Data</h5>
-                        <hr>
-                        <div class="mb-3">
-                            <label class="form-label">Temperature (°C)</label>
-                            <div class="form-control bg-light fw-semibold">
-                                {{data.temperature}}
-                            </div>
-                            <small class="text-muted">Fixed value used for prediction</small>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Humidity (%)</label>
-                            <div class="form-control bg-light fw-semibold">
-                                {{data.humidity}}
-                            </div>
-                            <small class="text-muted">Fixed value used for prediction</small>
-                        </div>
-                        <div class="alert alert-primary small mb-0" role="alert">
-                            <i class="bi bi-info-circle me-1"></i>
-                            These values are passed directly to the model to demonstrate how the prediction works.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 offset-md-1">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title text-primary">Prediction Result</h5>
-                        <hr>
-                        <p class="text-muted mt-3">The model predicts that the weather will be:</p>
-                        <h2 class="text-primary my-3">{{ result }}</h2>
-                        <hr>
-                        <p class="text-muted">
-                            Input temperature: <strong>{{ data.temperature }} °C</strong><br>
-                            Input humidity: <strong>{{ data.humidity }} %</strong>
-                        </p>
-                        {% if result == "Rainy" %}
-                            <img src="https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=600&fit=crop"
-                                 alt="Rainy day" class="img-fluid rounded">
-                        {% elif result == "Sunny" %}
-                            <img src="https://tse3.mm.bing.net/th/id/OIP.LVEFmFmewtEvbAlPaYoSugHaEo?w=700&h=438&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                 alt="Sunny day" class="img-fluid rounded">
-                        {% elif result == "Very Sunny" %}
-                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&fit=crop"
-                                 alt="Very sunny day" class="img-fluid rounded">
-                        {% else %}
-                            <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=600&fit=crop"
-                                 alt="Cloudy day" class="img-fluid rounded">
-                        {% endif %}
-                    </div>
+                <div class="alert alert-primary small mb-0 d-flex gap-2" role="alert">
+                    <i class="bi bi-info-circle flex-shrink-0 mt-1"></i>
+                    <span>These values are passed directly to the model to demonstrate how the prediction works.</span>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+    <div class="col-md-7">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+                <i class="bi bi-graph-up-arrow fs-5"></i>
+                <span class="fw-bold fs-5">Prediction Result</span>
+            </div>
+            <div class="card-body p-4 text-center">
+                <p class="text-muted mb-3">The model predicts that the weather will be:</p>
+
+                {% if result == "Rainy" %}
+                    <span class="badge bg-info text-dark fs-3 px-4 py-3 mb-3">
+                        <i class="bi bi-cloud-rain-fill me-2"></i>{{ result }}
+                    </span>
+                {% elif result == "Sunny" %}
+                    <span class="badge bg-warning text-dark fs-3 px-4 py-3 mb-3">
+                        <i class="bi bi-sun me-2"></i>{{ result }}
+                    </span>
+                {% elif result == "Very Sunny" %}
+                    <span class="badge bg-danger fs-3 px-4 py-3 mb-3">
+                        <i class="bi bi-brightness-high-fill me-2"></i>{{ result }}
+                    </span>
+                {% else %}
+                    <span class="badge bg-secondary fs-3 px-4 py-3 mb-3">
+                        <i class="bi bi-cloud-fill me-2"></i>{{ result }}
+                    </span>
+                {% endif %}
+
+                <div class="d-flex justify-content-center gap-4 text-muted small mb-4">
+                    <span><i class="bi bi-thermometer-half me-1 text-primary"></i> {{ data.temperature }} °C</span>
+                    <span><i class="bi bi-droplet-half me-1 text-primary"></i> {{ data.humidity }} %</span>
+                </div>
+
+                <hr>
+
+                {% if result == "Rainy" %}
+                    <img src="https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=600&fit=crop"
+                         alt="Rainy day" class="img-fluid rounded-3 shadow-sm">
+                {% elif result == "Sunny" %}
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.LVEFmFmewtEvbAlPaYoSugHaEo?w=700&h=438&rs=1&pid=ImgDetMain&o=7&rm=3"
+                         alt="Sunny day" class="img-fluid rounded-3 shadow-sm">
+                {% elif result == "Very Sunny" %}
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&fit=crop"
+                         alt="Very sunny day" class="img-fluid rounded-3 shadow-sm">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=600&fit=crop"
+                         alt="Cloudy day" class="img-fluid rounded-3 shadow-sm">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
