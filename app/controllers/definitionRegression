@@ -1,6 +1,0 @@
-from flask import render_template
-from app.controllers import app
-
-@app.route("/regression/definition")
-def definition():
-    return render_template("regressionDefinition.html")
