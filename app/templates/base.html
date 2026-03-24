@@ -1,0 +1,170 @@
+<!-- Base layout template used across the entire Flask application -->
+<!-- Provides global navigation bar and shared layout structure -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Dynamic page title -->
+    <title>{% block title %}Machine Learning{% endblock %}</title>
+</head>
+
+<body class="bg-light">
+
+    <!-- Global Navigation Bar -->
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+
+            <!-- Application title -->
+            <span class="navbar-brand fw-bold">
+                Machine Learning — Supervised Learning
+            </span>
+
+            <!-- Dropdown navigation menu -->
+            <div class="dropdown" data-bs-theme="light">
+
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside">
+                    Menu
+                </button>
+
+                <ul class="dropdown-menu">
+
+                    <!-- Home navigation -->
+                    <li>
+                        <a class="dropdown-item" href="/">Home</a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <!-- Machine Learning Use Cases -->
+                    <li>
+
+                        <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
+                            ML Use Cases >
+                        </a>
+
+                        <div class="collapse" id="caseUseMenu">
+                            <ul class="list-unstyled ps-3">
+
+                                <li>
+                                    <a class="dropdown-item" href="/caseWeather">Weather</a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="/sales">Sales Forecasting</a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="/case3">Use Case 3</a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="/case4">Use Case 4</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <!-- Supervised Machine Learning Section -->
+                    <li>
+
+                        <a class="dropdown-item" href="#regressionMenu" data-bs-toggle="collapse">
+                            Supervised Machine Learning >
+                        </a>
+
+                        <div class="collapse" id="regressionMenu">
+                            <ul class="list-unstyled ps-3">
+
+                                <li>
+                                    <a class="dropdown-item" href="/regression/definition">
+                                        Linear Regression — Basic Concepts
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="/regression">
+                                        Linear Regression — Application
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container-fluid mt-4 px-4">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="mt-5 py-4 bg-light border-top">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <h6 class="fw-bold mb-1">
+                        <i class="bi bi-robot me-2"></i>
+                        Machine Learning — Supervised Learning
+                    </h6>
+
+                    <p class="mb-0 small">
+                        Educational project demonstrating Machine Learning use cases
+                        and Linear Regression concepts.
+                    </p>
+                </div>
+
+                <div class="col-md-6 text-md-end">
+
+                    <p class="mb-1 small">
+                        <i class="bi bi-cpu me-1"></i>
+                        Models: Decision Tree · Linear Regression
+                    </p>
+
+                    <p class="mb-0 small">
+                        <i class="bi bi-stack me-1"></i>
+                        Built with Flask · Bootstrap 5 · Python
+                    </p>
+
+                </div>
+
+            </div>
+
+            <hr class="my-3">
+
+            <p class="text-center mb-0 small">
+                © 2025 Machine Learning Project — All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
