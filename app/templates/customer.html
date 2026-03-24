@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<title>Customer Spending Prediction</title>
+
+</head>
+
+<body class="bg-light mb-4">
+
+
+<nav class="navbar navbar-dark bg-primary">
+<div class="container">
+
+<span class="navbar-brand fw-bold">
+Customer Spending — Machine Learning
+</span>
+
+<a href="/" class="btn btn-light">
+Back
+</a>
+
+</div>
+</nav>
+
+
+
+<div class="container mt-4">
+
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+<h4>Customer Spending Prediction</h4>
+</div>
+
+
+<div class="card-body">
+
+
+<h5>Problem Description</h5>
+
+<p>
+Predict how much a customer will spend based on income,
+number of visits, and age.
+</p>
+
+<hr>
+
+
+<h5>Machine Learning Type</h5>
+
+<p>
+Supervised Learning — Linear Regression
+</p>
+
+<hr>
+
+
+<h5>Variables</h5>
+
+<ul>
+<li>Age</li>
+<li>Income</li>
+<li>Visits</li>
+<li>Spending</li>
+</ul>
+
+
+<hr>
+
+
+<h5>Regression Model</h5>
+
+<p class="fw-bold">
+
+Spending = 0.1 × Income + 2 × Visits − Age
+
+</p>
+
+
+<hr>
+
+
+<h5>Example Scenarios</h5>
+
+
+<a href="/caseCustomer?case=low" class="btn btn-success me-2">
+Low
+</a>
+
+<a href="/caseCustomer?case=medium" class="btn btn-warning me-2">
+Medium
+</a>
+
+<a href="/caseCustomer?case=high" class="btn btn-danger">
+High
+</a>
+
+
+
+{% if example %}
+
+<div class="alert alert-info mt-3">
+
+<strong>{{ example.name }} customer</strong>
+
+<ul>
+<li>Age: {{ example.age }}</li>
+<li>Income: {{ example.income }}</li>
+<li>Visits: {{ example.visits }}</li>
+<li>Predicted spending: {{ example.spending }}</li>
+</ul>
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+</div>
+
+</div>
+
+
+</body>
+</html>
