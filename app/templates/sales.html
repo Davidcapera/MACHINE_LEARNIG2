@@ -21,6 +21,50 @@
 
 <div class="card-body">
 
+<div class="alert alert-info">
+
+<h5>Sales Forecasting</h5>
+
+<p>
+This use case predicts product sales based on advertising budget and product price.
+Businesses can use this tool to estimate demand and optimize marketing strategies.
+</p>
+
+<hr>
+
+<h6>Problem Description</h6>
+<p>
+Companies need to estimate future sales based on marketing investment and product pricing.
+Machine Learning helps identify patterns between advertising, price, and sales.
+</p>
+
+<hr>
+
+<h6>Machine Learning Type</h6>
+<p>Supervised Learning — Linear Regression</p>
+
+<hr>
+
+<h6>Input Data</h6>
+<ul>
+<li>Advertising Budget</li>
+<li>Product Price</li>
+</ul>
+
+<hr>
+
+<h6>Expected Output</h6>
+<p>Predicted sales value</p>
+
+<hr>
+
+<h6>Real-world Relevance</h6>
+<p>
+Used in marketing analysis, demand forecasting, and business planning.
+</p>
+
+</div>
+
 <form method="POST">
 
 <div class="mb-3">
@@ -47,7 +91,7 @@ required
 >
 </div>
 
-<button class="btn btn-primary w-100">
+<button type="submit" class="btn btn-primary w-100">
 Predict Sales
 </button>
 
@@ -61,15 +105,8 @@ Predicted Sales: {{ prediction }}
 </div>
 {% endif %}
 
-<div class="alert alert-info">
-
-<h5>Sales Forecasting - Machine Learning</h5>
-
-<p>
-This tool predicts product sales using a trained Machine Learning model.
-The prediction is based on advertising budget and product price.
-Enter the values to estimate expected sales performance.
-</p>
+</div>
+</div>
 
 </div>
 
