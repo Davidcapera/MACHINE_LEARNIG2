@@ -2,184 +2,222 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>Sales Forecasting</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<title>Sales Forecasting</title>
 </head>
 
 <body class="bg-light">
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <span class="navbar-brand fw-bold">Machine Learning Use Cases</span>
+<nav class="navbar navbar-dark bg-primary">
+<div class="container">
+<span class="navbar-brand fw-bold">
+<i class="bi bi-graph-up"></i>
+Machine Learning Use Cases
+</span>
 
-            <a href="/" class="btn btn-light">Back</a>
-        </div>
-    </nav>
+<a href="/" class="btn btn-light">
+<i class="bi bi-arrow-left"></i>
+Back
+</a>
+</div>
+</nav>
 
-    <div class="container-fluid mt-4 px-5">
+<div class="container-fluid mt-4 px-5">
 
-        <div class="card shadow">
+<div class="card shadow">
 
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Sales Forecasting - Machine Learning</h4>
-            </div>
+<div class="card-header bg-primary text-white">
+<h4 class="mb-0">
+<i class="bi bi-bar-chart-line"></i>
+Sales Forecasting - Machine Learning
+</h4>
+</div>
 
-            <div class="card-body">
+<div class="card-body">
 
-                <h5>Problem Description</h5>
-                <p>
-                    Companies need to predict product sales based on marketing investment
-                    and product pricing. Machine learning helps identify relationships
-                    between advertising budget, product price, and expected sales.
-                </p>
+<h5>
+<i class="bi bi-info-circle"></i>
+Problem Description
+</h5>
 
-                <hr>
+<p>
+Companies need to predict product sales based on marketing investment
+and product pricing. Machine learning helps identify relationships
+between advertising budget, product price, and expected sales.
+</p>
 
-                <h5>Machine Learning Type</h5>
-                <p>
-                    Supervised Learning — Linear Regression
-                </p>
+<hr>
 
-                <hr>
+<h5>
+<i class="bi bi-cpu"></i>
+Machine Learning Type
+</h5>
 
-                <h5>Variables</h5>
+<p>
+Supervised Learning — Linear Regression
+</p>
 
-                <ul>
-                    <li>Advertising Budget (Independent Variable)</li>
-                    <li>Product Price (Independent Variable)</li>
-                    <li>Market Demand Index (Independent Variable)</li>
-                    <li>Sales (Dependent Variable)</li>
-                </ul>
+<hr>
 
-                <hr>
+<h5>
+<i class="bi bi-diagram-3"></i>
+Variables
+</h5>
 
-                <h5>Dataset Example</h5>
+<ul>
+<li>Advertising Budget (Independent Variable)</li>
+<li>Product Price (Independent Variable)</li>
+<li>Market Demand Index (Independent Variable)</li>
+<li>Sales (Dependent Variable)</li>
+</ul>
 
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Advertising</th>
-                        <th>Price</th>
-                        <th>Demand Index</th>
-                        <th>Sales</th>
-                    </tr>
+<hr>
 
-                    <tr>
-                        <td>1000</td>
-                        <td>50</td>
-                        <td>70</td>
-                        <td>200</td>
-                    </tr>
-                    <tr>
-                        <td>1500</td>
-                        <td>45</td>
-                        <td>80</td>
-                        <td>260</td>
-                    </tr>
-                    <tr>
-                        <td>2000</td>
-                        <td>40</td>
-                        <td>85</td>
-                        <td>320</td>
-                    </tr>
-                    <tr>
-                        <td>2500</td>
-                        <td>38</td>
-                        <td>90</td>
-                        <td>400</td>
-                    </tr>
+<h5>
+<i class="bi bi-table"></i>
+Dataset Example
+</h5>
 
-                </table>
+<table class="table table-bordered">
+<tr>
+<th>Advertising</th>
+<th>Price</th>
+<th>Demand Index</th>
+<th>Sales</th>
+</tr>
 
-                <hr>
+<tr><td>1000</td><td>50</td><td>70</td><td>200</td></tr>
+<tr><td>1500</td><td>45</td><td>80</td><td>260</td></tr>
+<tr><td>2000</td><td>40</td><td>85</td><td>320</td></tr>
+<tr><td>2500</td><td>38</td><td>90</td><td>400</td></tr>
 
-                <h5>Regression Model</h5>
+</table>
 
-                <p class="fw-bold text-center">
-                    Sales = b + m₁(Advertising) + m₂(Price) + m₃(Demand Index)
-                </p>
+<hr>
 
-                <hr>
+<h5>
+<i class="bi bi-calculator"></i>
+Regression Model
+</h5>
 
-                <h5>Interpretation</h5>
+<p class="fw-bold text-center">
+Sales = b + m₁(Advertising) + m₂(Price) + m₃(Demand Index)
+</p>
 
-                <p>
-                    The model estimates sales based on marketing investment, product pricing,
-                    and market demand. Increasing advertising and demand typically increases
-                    sales, while increasing price may reduce sales.
-                </p>
+<hr>
 
-                <hr>
+<h5>
+<i class="bi bi-lightbulb"></i>
+Interpretation
+</h5>
 
-                <h5>Example Scenarios</h5>
+<p>
+The model estimates sales based on marketing investment, product pricing,
+and market demand. Increasing advertising and demand typically increases
+sales, while increasing price may reduce sales.
+</p>
 
-                <div class="mb-3">
+<hr>
 
-                    <a href="/sales?case=low" class="btn btn-success me-2">Low Advertising</a>
-                    <a href="/sales?case=medium" class="btn btn-warning me-2">Medium Advertising</a>
-                    <a href="/sales?case=high" class="btn btn-danger">High Advertising</a>
+<h5>
+<i class="bi bi-sliders"></i>
+Example Scenarios
+</h5>
 
-                </div>
+<div class="mb-3">
 
-                {% if example %}
+<a href="/sales?case=low" class="btn btn-success me-2">
+<i class="bi bi-arrow-down"></i>
+Low Advertising
+</a>
 
-                <div class="alert alert-info">
+<a href="/sales?case=medium" class="btn btn-warning me-2">
+<i class="bi bi-dash"></i>
+Medium Advertising
+</a>
 
-                    <strong>Selected Scenario:</strong> {{ example.name }}
+<a href="/sales?case=high" class="btn btn-danger">
+<i class="bi bi-arrow-up"></i>
+High Advertising
+</a>
 
-                    <ul class="mt-2">
-                        <li>Advertising: {{ example.advertising }}</li>
-                        <li>Price: {{ example.price }}</li>
-                        <li>Demand Index: {{ example.demand }}</li>
-                        <li>Predicted Sales: {{ example.sales }}</li>
-                    </ul>
+</div>
 
-                </div>
+{% if example %}
 
-                {% endif %}
+<div class="alert alert-info">
 
-                <hr>
+<strong>Selected Scenario:</strong> {{ example.name }}
 
-                <h5>Visualization</h5>
+<ul class="mt-2">
+<li>Advertising: {{ example.advertising }}</li>
+<li>Price: {{ example.price }}</li>
+<li>Demand Index: {{ example.demand }}</li>
+<li>Predicted Sales: {{ example.sales }}</li>
+</ul>
 
-                <div class="row g-4">
+</div>
 
-                    <div class="col-md-4">
-                        <img src="{{ url_for('static', filename='sales1.png') }}"
-                            alt="Sales vs Advertising Budget visualization" class="img-fluid rounded shadow">
-                    </div>
+{% endif %}
 
-                    <div class="col-md-4">
-                        <img src="{{ url_for('static', filename='sales2.png') }}"
-                            alt="Sales vs Product Price visualization" class="img-fluid rounded shadow">
-                    </div>
+<hr>
 
-                    <div class="col-md-4">
-                        <img src="{{ url_for('static', filename='sales3.png') }}"
-                            alt="Sales vs Market Demand Index visualization" class="img-fluid rounded shadow">
-                    </div>
+<h5>
+<i class="bi bi-image"></i>
+Visualization
+</h5>
 
-                </div>
+<div class="row g-4">
 
-                <hr>
+<div class="col-md-4">
+<img 
+src="{{ url_for('static', filename='sales1.png') }}" 
+class="img-fluid rounded shadow"
+alt="Sales vs Advertising visualization"
+>
+</div>
 
-                <h5>Real-world Application</h5>
+<div class="col-md-4">
+<img 
+src="{{ url_for('static', filename='sales2.png') }}" 
+class="img-fluid rounded shadow"
+alt="Price impact on sales chart"
+>
+</div>
 
-                <p>
-                    This model can be used in business planning, marketing strategy,
-                    and demand forecasting to support decision-making.
-                </p>
+<div class="col-md-4">
+<img 
+src="{{ url_for('static', filename='sales3.png') }}" 
+class="img-fluid rounded shadow"
+alt="Demand index correlation graph"
+>
+</div>
 
-            </div>
+</div>
 
-        </div>
+<hr>
 
-    </div>
+<h5>
+<i class="bi bi-briefcase"></i>
+Real-world Application
+</h5>
+
+<p>
+This model can be used in business planning, marketing strategy,
+and demand forecasting to support decision-making.
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 </body>
-
 </html>
