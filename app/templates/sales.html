@@ -1,299 +1,296 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
+Sales Forecasting
+{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+{% block content %}
 
-    <title>Sales Forecasting</title>
-</head>
+<div class="container-fluid mt-4 px-5">
 
-<body class="bg-light">
+    <div class="card shadow">
 
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container">
-            <span class="navbar-brand fw-bold">
-                <i class="bi bi-graph-up"></i>
-                Machine Learning Use Cases
-            </span>
-
-            <a href="/" class="btn btn-light">
-                <i class="bi bi-arrow-left"></i>
-                Back
-            </a>
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-bar-chart-line"></i>
+                Sales Forecasting - Machine Learning
+            </h4>
         </div>
-    </nav>
 
-    <div class="container-fluid mt-4 px-5">
+        <div class="card-body">
 
-        <div class="card shadow">
+            <h5>
+                <i class="bi bi-info-circle"></i>
+                Problem Description
+            </h5>
 
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">
-                    <i class="bi bi-bar-chart-line"></i>
-                    Sales Forecasting - Machine Learning
-                </h4>
+            <p>
+                Companies need to predict product sales based on marketing investment
+                and product pricing. Machine learning helps identify relationships
+                between advertising budget, product price, and expected sales.
+            </p>
+
+            <hr>
+
+            <h5>
+                <i class="bi bi-cpu"></i>
+                Machine Learning Type
+            </h5>
+
+            <p>
+                Supervised Learning — Linear Regression
+            </p>
+
+            <hr>
+
+            <h5>
+                <i class="bi bi-diagram-3"></i>
+                Variables
+            </h5>
+
+            <ul>
+                <li>Advertising Budget (Independent Variable)</li>
+                <li>Product Price (Independent Variable)</li>
+                <li>Market Demand Index (Independent Variable)</li>
+                <li>Sales (Dependent Variable)</li>
+            </ul>
+
+            <hr>
+
+            <h5>
+                <i class="bi bi-database"></i>
+                Dataset Description
+            </h5>
+
+            <p>
+                This dataset represents simulated business data used for sales forecasting.
+                The model learns the relationship between advertising investment, product price,
+                market demand, and total sales.
+            </p>
+
+            <ul>
+                <li>Advertising Budget — Marketing investment amount</li>
+                <li>Product Price — Price per unit</li>
+                <li>Demand Index — Market demand indicator</li>
+                <li>Sales — Total units sold</li>
+            </ul>
+
+            <hr>
+
+            <h5>
+                <i class="bi bi-table"></i>
+                Dataset Example
+            </h5>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Advertising</th>
+                    <th>Price</th>
+                    <th>Demand Index</th>
+                    <th>Sales</th>
+                </tr>
+
+                <tr>
+                    <td>1000</td>
+                    <td>50</td>
+                    <td>70</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>1500</td>
+                    <td>45</td>
+                    <td>80</td>
+                    <td>260</td>
+                </tr>
+                <tr>
+                    <td>2000</td>
+                    <td>40</td>
+                    <td>85</td>
+                    <td>320</td>
+                </tr>
+                <tr>
+                    <td>2500</td>
+                    <td>38</td>
+                    <td>90</td>
+                    <td>400</td>
+                </tr>
+
+            </table>
+
+            <hr>
+
+            <h5>
+                <i class="bi bi-calculator"></i>
+                Regression Model
+            </h5>
+
+            <p class="fw-bold text-center">
+                Sales = b + m₁(Advertising) + m₂(Price) + m₃(Demand Index)
+            </p>
+
+            <hr>
+
+            <h5>
+                <i class="bi bi-diagram-2"></i>
+                Model Explanation
+            </h5>
+
+            <p>
+                This model uses Multiple Linear Regression to estimate sales.
+                The algorithm learns the relationship between advertising investment,
+                product price, and demand index to predict expected sales values.
+            </p>
+
+            <div class="text-center mt-3">
+
+                <img src="{{ url_for('static', filename='sales_model.png') }}"
+                    class="img-fluid rounded shadow model-image" alt="Sales regression model">
+
             </div>
 
-            <div class="card-body">
+            <p class="text-muted text-center mt-2">
+                Multiple Linear Regression model representation for sales prediction
+            </p>
 
-                <h5>
-                    <i class="bi bi-info-circle"></i>
-                    Problem Description
-                </h5>
+            <hr>
 
-                <p>
-                    Companies need to predict product sales based on marketing investment
-                    and product pricing. Machine learning helps identify relationships
-                    between advertising budget, product price, and expected sales.
-                </p>
+            <h5>
+                <i class="bi bi-lightbulb"></i>
+                Interpretation
+            </h5>
 
-                <hr>
+            <p>
+                The model estimates sales based on marketing investment, product pricing,
+                and market demand. Increasing advertising and demand typically increases
+                sales, while increasing price may reduce sales.
+            </p>
 
-                <h5>
-                    <i class="bi bi-cpu"></i>
-                    Machine Learning Type
-                </h5>
+            <hr>
 
-                <p>
-                    Supervised Learning — Linear Regression
-                </p>
+            <h5>
+                <i class="bi bi-sliders"></i>
+                Example Scenarios
+            </h5>
 
-                <hr>
+            <div class="mb-3">
 
-                <h5>
-                    <i class="bi bi-diagram-3"></i>
-                    Variables
-                </h5>
+                <a href="/sales?case=low" class="btn btn-success me-2">
+                    <i class="bi bi-arrow-down"></i>
+                    Low Advertising
+                </a>
 
-                <ul>
-                    <li>Advertising Budget (Independent Variable)</li>
-                    <li>Product Price (Independent Variable)</li>
-                    <li>Market Demand Index (Independent Variable)</li>
-                    <li>Sales (Dependent Variable)</li>
+                <a href="/sales?case=medium" class="btn btn-warning me-2">
+                    <i class="bi bi-dash"></i>
+                    Medium Advertising
+                </a>
+
+                <a href="/sales?case=high" class="btn btn-danger">
+                    <i class="bi bi-arrow-up"></i>
+                    High Advertising
+                </a>
+
+            </div>
+
+            {% if example %}
+
+            <div class="alert alert-info">
+
+                <strong>Selected Scenario:</strong> {{ example.name }}
+
+                <ul class="mt-2">
+                    <li>Advertising: {{ example.advertising }}</li>
+                    <li>Price: {{ example.price }}</li>
+                    <li>Demand Index: {{ example.demand }}</li>
+                    <li>Predicted Sales: {{ example.sales }}</li>
                 </ul>
 
-                <hr>
+            </div>
 
-                <h5>
-                    <i class="bi bi-table"></i>
-                    Dataset Example
-                </h5>
+            {% endif %}
 
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Advertising</th>
-                        <th>Price</th>
-                        <th>Demand Index</th>
-                        <th>Sales</th>
-                    </tr>
+            <hr>
 
-                    <tr>
-                        <td>1000</td>
-                        <td>50</td>
-                        <td>70</td>
-                        <td>200</td>
-                    </tr>
-                    <tr>
-                        <td>1500</td>
-                        <td>45</td>
-                        <td>80</td>
-                        <td>260</td>
-                    </tr>
-                    <tr>
-                        <td>2000</td>
-                        <td>40</td>
-                        <td>85</td>
-                        <td>320</td>
-                    </tr>
-                    <tr>
-                        <td>2500</td>
-                        <td>38</td>
-                        <td>90</td>
-                        <td>400</td>
-                    </tr>
+            <h5>
+                <i class="bi bi-image"></i>
+                Visualization
+            </h5>
 
-                </table>
+            <div class="row g-4">
 
-                <hr>
-
-                <h5>
-                    <i class="bi bi-calculator"></i>
-                    Regression Model
-                </h5>
-
-                <p class="fw-bold text-center">
-                    Sales = b + m₁(Advertising) + m₂(Price) + m₃(Demand Index)
-                </p>
-
-                <hr>
-
-                <h5>
-                    <i class="bi bi-diagram-2"></i>
-                    Model Explanation
-                </h5>
-
-                <p>
-                    This model uses Multiple Linear Regression to estimate sales.
-                    The algorithm learns the relationship between advertising investment,
-                    product price, and demand index to predict expected sales values.
-                </p>
-
-                <div class="text-center mt-3">
-
-                    <img src="{{ url_for('static', filename='sales_model.png') }}"
-                        class="img-fluid rounded shadow model-image" alt="Sales regression model">
-
+                <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='sales1.png') }}" class="img-fluid rounded shadow"
+                        alt="Sales visualization chart 1">
                 </div>
 
-                <p class="text-muted text-center mt-2">
-                    Multiple Linear Regression model representation for sales prediction
-                </p>
-
-                <hr>
-
-                <h5>
-                    <i class="bi bi-lightbulb"></i>
-                    Interpretation
-                </h5>
-
-                <p>
-                    The model estimates sales based on marketing investment, product pricing,
-                    and market demand. Increasing advertising and demand typically increases
-                    sales, while increasing price may reduce sales.
-                </p>
-
-                <hr>
-
-                <h5>
-                    <i class="bi bi-sliders"></i>
-                    Example Scenarios
-                </h5>
-
-                <div class="mb-3">
-
-                    <a href="/sales?case=low" class="btn btn-success me-2">
-                        <i class="bi bi-arrow-down"></i>
-                        Low Advertising
-                    </a>
-
-                    <a href="/sales?case=medium" class="btn btn-warning me-2">
-                        <i class="bi bi-dash"></i>
-                        Medium Advertising
-                    </a>
-
-                    <a href="/sales?case=high" class="btn btn-danger">
-                        <i class="bi bi-arrow-up"></i>
-                        High Advertising
-                    </a>
-
+                <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='sales2.png') }}" class="img-fluid rounded shadow"
+                        alt="Sales visualization chart 2">
                 </div>
 
-                {% if example %}
-
-                <div class="alert alert-info">
-
-                    <strong>Selected Scenario:</strong> {{ example.name }}
-
-                    <ul class="mt-2">
-                        <li>Advertising: {{ example.advertising }}</li>
-                        <li>Price: {{ example.price }}</li>
-                        <li>Demand Index: {{ example.demand }}</li>
-                        <li>Predicted Sales: {{ example.sales }}</li>
-                    </ul>
-
+                <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='sales3.png') }}" class="img-fluid rounded shadow"
+                        alt="Sales visualization chart 3">
                 </div>
-
-                {% endif %}
-
-                <hr>
-
-                <h5>
-                    <i class="bi bi-image"></i>
-                    Visualization
-                </h5>
-
-                <div class="row g-4">
-
-                    <div class="col-md-4">
-                        <img src="{{ url_for('static', filename='sales1.png') }}" class="img-fluid rounded shadow"
-                            alt="Sales visualization chart 1" title="Sales visualization chart 1">
-                    </div>
-
-                    <div class="col-md-4">
-                        <img src="{{ url_for('static', filename='sales2.png') }}" class="img-fluid rounded shadow"
-                            alt="Sales visualization chart 2" title="Sales visualization chart 2">
-                    </div>
-
-                    <div class="col-md-4">
-                        <img src="{{ url_for('static', filename='sales3.png') }}" class="img-fluid rounded shadow"
-                            alt="Sales visualization chart 3" title="Sales visualization chart 3">
-                    </div>
-
-                </div>
-
-                <hr>
-
-                <h5>
-                    <i class="bi bi-briefcase"></i>
-                    Real-world Application
-                </h5>
-
-                <p>
-                    This model can be used in business planning, marketing strategy,
-                    and demand forecasting to support decision-making.
-                </p>
 
             </div>
 
-            <footer class="mt-5 py-4 bg-light border-top">
-                <div class="container">
+            <hr>
 
-                    <div class="row align-items-center">
+            <h5>
+                <i class="bi bi-briefcase"></i>
+                Real-world Application
+            </h5>
 
-                        <div class="col-md-6 mb-3 mb-md-0">
-                            <h6 class="fw-bold mb-1">
-                                <i class="bi bi-robot me-2"></i>
-                                Machine Learning Use Cases
-                            </h6>
+            <p>
+                This model can be used in business planning, marketing strategy,
+                and demand forecasting to support decision-making.
+            </p>
 
-                            <p class="mb-0 small">
-                                Educational project demonstrating supervised learning models and real-world
-                                applications.
-                            </p>
-                        </div>
+        </div>
 
-                        <div class="col-md-6 text-md-end">
+        <footer class="mt-5 py-4 bg-light border-top">
+            <div class="container">
 
-                            <p class="mb-1 small">
-                                <i class="bi bi-cpu me-1"></i>
-                                Models: Decision Tree · Linear Regression
-                            </p>
+                <div class="row align-items-center">
 
-                            <p class="mb-0 small">
-                                <i class="bi bi-stack me-1"></i>
-                                Built with Flask · Bootstrap 5 · Python
-                            </p>
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <h6 class="fw-bold mb-1">
+                            <i class="bi bi-robot me-2"></i>
+                            Machine Learning Use Cases
+                        </h6>
 
-                        </div>
+                        <p class="mb-0 small">
+                            Educational project demonstrating supervised learning models.
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 text-md-end">
+
+                        <p class="mb-1 small">
+                            <i class="bi bi-cpu me-1"></i>
+                            Models: Decision Tree · Linear Regression
+                        </p>
+
+                        <p class="mb-0 small">
+                            <i class="bi bi-stack me-1"></i>
+                            Built with Flask · Bootstrap 5 · Python
+                        </p>
 
                     </div>
 
-                    <hr class="my-3">
-
-                    <p class="text-center mb-0 small">
-                        © 2025 Machine Learning Project — Academic Use Only
-                    </p>
-
                 </div>
-            </footer>
 
-        </div>
+                <hr class="my-3">
+
+                <p class="text-center mb-0 small">
+                    © 2025 Machine Learning Project — Academic Use Only
+                </p>
+
+            </div>
+        </footer>
+
     </div>
 
-</body>
+</div>
 
-</html>
+{% endblock %}
