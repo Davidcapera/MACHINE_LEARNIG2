@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light mb-4">
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <span class="navbar-brand fw-bold">Air Quality Prediction System</span>
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                Menu
+            </button>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/">Home</a></li>
+                <li><a class="dropdown-item" href="/caseWeather">Weather</a></li>
+                <li><a class="dropdown-item" href="/case2">Case use 2</a></li>
+                <li><a class="dropdown-item" href="/air-quality">Air Quality</a></li>
+                <li><a class="dropdown-item" href="/case4">Case use 4</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="container mt-4">
+
+    <!-- TITULO -->
+    <h3 class="text-primary fw-bold">Air Quality Prediction</h3>
+    <p class="text-muted">
+        This system predicts air quality levels based on pollution particles (PM2.5 and PM10).
+        It simulates a machine learning model using rule-based decision logic.
+    </p>
+
+    <!-- EXPLICACION -->
+    <div class="alert alert-info">
+        <strong>How it works:</strong><br>
+        The model evaluates pollution levels and classifies air quality into four categories:
+        <b>Good, Moderate, Unhealthy, and Hazardous</b>.
+    </div>
+
+    <!-- TABLA -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="card-title text-primary">Training Data</h5>
+                    <p class="text-muted small">Example values used by the system.</p>
+
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>PM2.5</th>
+                                <th>PM10</th>
+                                <th>Air Quality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in initialData %}
+                            <tr>
+                                <td>{{ data.pm25 }}</td>
+                                <td>{{ data.pm10 }}</td>
+                                <td>{{ data.quality }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODELO -->
+    <div class="card mb-4">
+        <div class="card-body text-center">
+
+            <h5 class="text-primary">Model: Rule-Based Decision Logic</h5>
+            <p class="text-muted small">
+                This model mimics a decision tree by applying thresholds to PM2.5 and PM10 values.
+                Higher values indicate worse air quality conditions.
+            </p>
+
+            <img src="https://i.postimg.cc/jdWrq8p2/desicionlogic.png"
+                 class="img-fluid">
+
+        </div>
+    </div>
+
+    <!-- FORM + RESULT -->
+    <div class="row g-4">
+
+        <!-- FORM -->
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="text-primary">Enter Pollution Data</h5>
+                    <p class="text-muted small">
+                        Input values must be between 0 and 500.
+                    </p>
+
+                    <form method="POST" action="/air-quality">
+
+                        <div class="mb-3">
+                            <label class="form-label">PM2.5 (Fine particles)</label>
+                            <input type="number"
+                                   class="form-control"
+                                   name="pm25"
+                                   min="0" max="500"
+                                   placeholder="0 - 500"
+                                   value="{{ data.get('pm25', '') }}"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">PM10 (Coarse particles)</label>
+                            <input type="number"
+                                   class="form-control"
+                                   name="pm10"
+                                   min="0" max="500"
+                                   placeholder="0 - 500"
+                                   value="{{ data.get('pm10', '') }}"
+                                   required>
+                        </div>
+
+                        <button class="btn btn-primary w-100">
+                            Predict Air Quality
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div class="col-md-6 offset-md-1">
+            <div class="card h-100">
+                <div class="card-body text-center">
+
+                    <h5 class="text-primary">Prediction Result</h5>
+
+                    {% if result %}
+                        <h2 class="text-primary my-3">{{ result }}</h2>
+
+                        <p class="text-muted">
+                            PM2.5: {{ data.pm25 }}<br>
+                            PM10: {{ data.pm10 }}
+                        </p>
+
+                        {% if result == "Good" %}
+                            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=600&fit=crop"
+                                 class="img-fluid rounded">
+
+                        {% elif result == "Moderate" %}
+                            <img src="https://i.postimg.cc/0jMmHdhd/moderado.png"
+                                 class="img-fluid rounded">
+
+                        {% elif result == "Unhealthy" %}
+                            <img src="https://i.postimg.cc/136BzPCT/airemalo.jpg"
+                                 class="img-fluid rounded">
+
+                        {% elif result == "Hazardous" %}
+                            <img src="https://i.postimg.cc/mZtn7PmT/invibible.png"
+                                 class="img-fluid rounded">
+                        {% endif %}
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
