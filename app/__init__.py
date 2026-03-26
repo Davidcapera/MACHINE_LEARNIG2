@@ -11,7 +11,7 @@ def create_app():
     app.register_blueprint(weather_bp)
     app.register_blueprint(regression_bp)
     app.register_blueprint(index_bp)
-     app.register_blueprint(air_bp) 
+    app.register_blueprint(air_bp) 
     app.register_blueprint(sales_bp)
 
     return app
