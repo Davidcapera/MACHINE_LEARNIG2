@@ -3,13 +3,11 @@ from app.models.weatherModel import predict, initial_data
 
 weather_bp = Blueprint("weather", __name__)
 
-@weather_bp.route("/caseWeather", methods=["GET", "POST"])
+@weather_bp.route("/caseWeather", methods=["GET"])
 def home():
-    result, data = None, {}
-    if request.method == "POST":
-        temperature = int(request.form["temperature"])
-        humidity    = int(request.form["humidity"])
-        data   = {"temperature": temperature, "humidity": humidity}
-        result = predict(temperature, humidity)
-    return render_template("weather.html", result=result,
+    temperature = 20
+    humidity    = 34
+    data   = {"temperature": temperature, "humidity": humidity}
+    result = predict(temperature, humidity)
+    return render_template("weather2.html", result=result,
                            data=data, initialData=initial_data)
