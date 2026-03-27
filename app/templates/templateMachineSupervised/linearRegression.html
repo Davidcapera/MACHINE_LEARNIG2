@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear Regression — Advertising</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <style>
+    /* ── Colour tokens ── */
+    :root {
+      --dark:    #0f1117;
+      --card:    #1a1d27;
+      --card2:   #1e2130;
+      --border:  #2a2d3e;
+      --accent:  #6c63ff;
+      --green:   #43d9ad;
+      --pink:    #ff6584;
+      --yellow:  #ffd166;
+      --text:    #e2e8f0;
+      --muted:   #8892a4;
+    }
+
+    html  { scroll-behavior: smooth; }
+    body  { background: var(--dark); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; }
+
+    .ws-section { padding-top: 1.5rem; margin-bottom: 2.5rem; }
+
+    .ws-section-title {
+      display: flex; align-items: center; gap: .55rem;
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      padding-bottom: .6rem; margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ws-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    .ws-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .ws-card-header {
+      background: var(--card2);
+      border-bottom: 1px solid var(--border);
+      border-radius: 12px 12px 0 0;
+      padding: .7rem 1.2rem;
+      font-size: .82rem; font-weight: 600; color: var(--muted);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .ws-card-body { padding: 1.2rem; }
+    .ws-stat {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .75rem 1rem;
+      text-align: center;
+    }
+    .ws-stat .ws-lbl { font-size: .67rem; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; margin-bottom: .2rem; }
+    .ws-stat .ws-val { font-size: 1.25rem; font-weight: 700; }
+    .ws-input {
+      background: var(--card2) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text) !important;
+      border-radius: 8px;
+    }
+    .ws-input:focus {
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 3px rgba(108,99,255,.2) !important;
+    }
+    .ws-input::placeholder { color: var(--muted) !important; }
+    .ws-btn {
+      background: linear-gradient(135deg, var(--accent), #8b83ff);
+      color: #fff; border: none; border-radius: 8px;
+      font-weight: 600; padding: .65rem 1.4rem;
+      transition: opacity .2s, transform .15s; cursor: pointer;
+    }
+    .ws-btn:hover { opacity: .85; transform: translateY(-1px); color: #fff; }
+    .ws-result {
+      background: linear-gradient(135deg, rgba(108,99,255,.12), rgba(67,217,173,.08));
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.4rem;
+      animation: fadeUp .35s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .ws-table { color: var(--muted); font-size: .84rem; }
+    .ws-table thead th { color: var(--text); border-color: var(--border); font-weight: 600; }
+    .ws-table tbody td, .ws-table tbody th { border-color: var(--border); }
+    .ws-eq {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 8px; padding: .6rem 1rem;
+      color: var(--green); font-size: .87rem; font-family: monospace;
+      display: block; word-break: break-all;
+    }
+    .navbar { border-bottom: 1px solid var(--border); }
+    .dropdown-menu { background: var(--card2); border: 1px solid var(--border); }
+    .dropdown-item { color: var(--muted); font-size: .87rem; }
+    .dropdown-item:hover { background: rgba(108,99,255,.1); color: var(--text); }
+    .dropdown-divider { border-color: var(--border); }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-primary sticky-top">
+  <div class="container-fluid px-4">
+    <span class="navbar-brand fw-bold">
+      <i class="bi bi-graph-up-arrow me-2"></i>Linear Regression — Machine Learning
+    </span>
+
+    <div class="dropdown" data-bs-theme="light">
+      <button class="btn btn-primary dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" data-bs-auto-close="outside">
+        Menu
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="/">Home</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
+            Case use &rsaquo;
+          </a>
+          <div class="collapse" id="caseUseMenu">
+            <ul class="list-unstyled ps-3">
+              <li><a class="dropdown-item" href="/caseWeather">Weather</a></li>
+              <li><a class="dropdown-item" href="/case2">Case use 2</a></li>
+              <li><a class="dropdown-item" href="/case3">Case use 3</a></li>
+              <li><a class="dropdown-item" href="/case4">Case use 4</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item" href="#regressionMenu" data-bs-toggle="collapse">
+            Linear Regression &rsaquo;
+          </a>
+          <div class="collapse" id="regressionMenu">
+            <ul class="list-unstyled ps-3">
+              <li><a class="dropdown-item" href="/regression/definition">Definition</a></li>
+              <li><a class="dropdown-item" href="/regression">Linear Regression</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid px-4 py-3" style="max-width:1280px">
+  <div class="text-center py-4 mb-2">
+    <span class="badge rounded-pill px-3 py-2 mb-3"
+          style="background:rgba(108,99,255,.15);color:var(--accent);font-size:.72rem;letter-spacing:.08em">
+      MACHINE LEARNING WORKSHOP
+    </span>
+    <h1 class="fw-bold mb-2" style="font-size:1.9rem">
+      Linear Regression
+      <span style="color:var(--accent)">·</span>
+      <span style="color:var(--green)">Advertising Dataset</span>
+    </h1>
+    <p style="color:var(--muted);max-width:580px;margin:auto;font-size:.9rem">
+      Predicting product sales from TV, Radio and Newspaper advertising budgets
+      using Ordinary Least Squares Multiple Linear Regression.
+    </p>
+  </div>
+  <div class="ws-section" id="problem">
+    <div class="ws-section-title">
+      <div class="ws-dot" style="background:var(--accent)"></div>
+      <i class="bi bi-info-circle" style="color:var(--accent)"></i>
+      1 · Problem Description
+    </div>
+
+    <div class="ws-card">
+      <div class="ws-card-body" style="font-size:.9rem;color:var(--muted);line-height:1.8">
+        <p>
+          A company wants to understand
+          <strong style="color:var(--text)">which advertising channels drive the most sales</strong>
+          and by how much, so the marketing team can allocate budgets efficiently
+          and forecast revenue.
+        </p>
+        <p class="mb-0">
+          We apply <strong style="color:var(--text)">Multiple Linear Regression</strong>
+          to model the relationship between advertising spend (in thousands of dollars)
+          across three media channels — TV, Radio and Newspaper — and the resulting
+          sales volume (thousands of units). The learned equation allows predictions
+          for any combination of budget inputs.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="ws-section" id="dataset">
+    <div class="ws-section-title">
+      <div class="ws-dot" style="background:var(--green)"></div>
+      <i class="bi bi-table" style="color:var(--green)"></i>
+      2 · Dataset Explanation
+    </div>
+
+    <div class="ws-card">
+      <div class="ws-card-body" style="font-size:.9rem;color:var(--muted);line-height:1.8">
+        <p>
+          The <strong style="color:var(--text)">Advertising dataset</strong>
+          (James, Witten, Hastie &amp; Tibshirani — ISLR) contains
+          <strong style="color:var(--text)">200 market observations</strong>.
+          Each row represents one market, recording how much was invested in three
+          advertising channels and the resulting product sales.
+          The dataset contains <strong style="color:var(--text)">no missing values</strong>.
+        </p>
+        <div class="row g-3 mt-1">
+          <div class="col-4 col-md-3">
+            <div class="ws-stat">
+              <div class="ws-lbl">Total rows</div>
+              <div class="ws-val" style="color:var(--accent)">{{ stats.total_samples }}</div>
+            </div>
+          </div>
+          <div class="col-4 col-md-3">
+            <div class="ws-stat">
+              <div class="ws-lbl">Training (80%)</div>
+              <div class="ws-val" style="color:var(--green)">{{ stats.train_samples }}</div>
+            </div>
+          </div>
+          <div class="col-4 col-md-3">
+            <div class="ws-stat">
+              <div class="ws-lbl">Test (20%)</div>
+              <div class="ws-val" style="color:var(--pink)">{{ stats.test_samples }}</div>
+            </div>
+          </div>
+          <div class="col-4 col-md-3">
+            <div class="ws-stat">
+              <div class="ws-lbl">Features</div>
+              <div class="ws-val" style="color:var(--yellow)">3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ws-section" id="variables">
+    <div class="ws-section-title">
+      <div class="ws-dot" style="background:var(--pink)"></div>
+      <i class="bi bi-list-columns" style="color:var(--pink)"></i>
+      3 · Variables Used
+    </div>
+
+    <div class="ws-card">
+      <div class="ws-card-body p-0">
+        <table class="table ws-table mb-0">
+          <thead>
+            <tr>
+              <th class="ps-4">Column</th>
+              <th>Role</th>
+              <th>Unit</th>
+              <th>Range</th>
+              <th class="pe-4">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ps-4"><code style="color:#6c63ff">TV</code></td>
+              <td><span class="badge" style="background:rgba(108,99,255,.2);color:#6c63ff">Feature X₁</span></td>
+              <td>$ K</td><td>0.7 – 296.4</td>
+              <td class="pe-4">TV advertising budget per market</td>
+            </tr>
+            <tr>
+              <td class="ps-4"><code style="color:#ff6584">radio</code></td>
+              <td><span class="badge" style="background:rgba(255,101,132,.2);color:#ff6584">Feature X₂</span></td>
+              <td>$ K</td><td>0.0 – 49.6</td>
+              <td class="pe-4">Radio advertising budget per market</td>
+            </tr>
+            <tr>
+              <td class="ps-4"><code style="color:#43d9ad">newspaper</code></td>
+              <td><span class="badge" style="background:rgba(67,217,173,.2);color:#43d9ad">Feature X₃</span></td>
+              <td>$ K</td><td>0.3 – 114.0</td>
+              <td class="pe-4">Newspaper advertising budget per market</td>
+            </tr>
+            <tr>
+              <td class="ps-4"><code style="color:#ffd166">sales</code></td>
+              <td><span class="badge" style="background:rgba(255,209,102,.2);color:#ffd166">Target y</span></td>
+              <td>K units</td><td>1.6 – 27.0</td>
+              <td class="pe-4">Units sold — response variable</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="ws-section" id="preparation">
+    <div class="ws-section-title">
+      <div class="ws-dot" style="background:var(--yellow)"></div>
+      <i class="bi bi-scissors" style="color:var(--yellow)"></i>
+      4 · Data Preparation
+    </div>
+
+    <div class="row g-3">
+
+      <div class="col-lg-7">
+        <div class="ws-card h-100">
+          <div class="ws-card-header">
+            <i class="bi bi-list-check"></i> Preparation Pipeline
+          </div>
+          <div class="ws-card-body" style="font-size:.87rem;color:var(--muted);line-height:1.85">
+
+
+            <div class="d-flex gap-3 mb-3">
+              <span class="rounded-circle d-flex align-items-center justify-content-center fw-bold flex-shrink-0"
+                    style="width:26px;height:26px;background:var(--accent);color:#fff;font-size:.72rem;margin-top:1px">1</span>
+              <div>
+                <strong style="color:var(--text)">Load CSV</strong> —
+                Read <code style="color:var(--green)">advertising.csv</code> with Pandas.
+                No missing values; no imputation needed.
+              </div>
+            </div>
+
+
+            <div class="d-flex gap-3 mb-3">
+              <span class="rounded-circle d-flex align-items-center justify-content-center fw-bold flex-shrink-0"
+                    style="width:26px;height:26px;background:var(--green);color:#0f1117;font-size:.72rem;margin-top:1px">2</span>
+              <div>
+                <strong style="color:var(--text)">Define X and y</strong> —
+                Feature matrix <code style="color:var(--accent)">X = [TV, radio, newspaper]</code>,
+                target vector <code style="color:var(--yellow)">y = sales</code>.
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 mb-3">
+              <span class="rounded-circle d-flex align-items-center justify-content-center fw-bold flex-shrink-0"
+                    style="width:26px;height:26px;background:var(--pink);color:#fff;font-size:.72rem;margin-top:1px">3</span>
+              <div>
+                <strong style="color:var(--text)">Train / Test Split — 80 % / 20 %</strong><br />
+                <code style="color:var(--green)">train_test_split(test_size=0.20, random_state=42)</code><br />
+                The model is trained <em>exclusively</em> on 80% of the data.
+                The remaining 20% is held out to evaluate real-world performance.
+              </div>
+            </div>
+
+
+            <div class="d-flex gap-3">
+              <span class="rounded-circle d-flex align-items-center justify-content-center fw-bold flex-shrink-0"
+                    style="width:26px;height:26px;background:var(--yellow);color:#0f1117;font-size:.72rem;margin-top:1px">4</span>
+              <div>
+                <strong style="color:var(--text)">Fit &amp; Evaluate</strong> —
+                <code style="color:var(--green)">LinearRegression().fit(X_train, y_train)</code>.
+                Metrics (R², MAE, RMSE) are computed on the test set.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-5">
+        <div class="ws-card h-100">
+          <div class="ws-card-header">
+            <i class="bi bi-pie-chart"></i> Dataset Split
+          </div>
+          <div class="ws-card-body">
+            <div class="row g-2 mb-3">
+              <div class="col-4">
+                <div class="ws-stat">
+                  <div class="ws-lbl">Total</div>
+                  <div class="ws-val" style="color:var(--accent)">{{ stats.total_samples }}</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="ws-stat">
+                  <div class="ws-lbl">Train 80%</div>
+                  <div class="ws-val" style="color:var(--green)">{{ stats.train_samples }}</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="ws-stat">
+                  <div class="ws-lbl">Test 20%</div>
+                  <div class="ws-val" style="color:var(--pink)">{{ stats.test_samples }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1"
+                   style="font-size:.74rem;color:var(--muted)">
+                <span>Training set (80%)</span><span>Test set (20%)</span>
+              </div>
+              <div class="progress" style="height:10px;background:var(--card2);border-radius:8px">
+                <div class="progress-bar" style="width:80%;background:var(--accent);border-radius:8px 0 0 8px"></div>
+                <div class="progress-bar" style="width:20%;background:var(--pink);border-radius:0 8px 8px 0"></div>
+              </div>
+            </div>
+
+            <p style="font-size:.82rem;color:var(--muted)" class="mb-0">
+              Fixed <code style="color:var(--green)">random_state=42</code> ensures
+              reproducibility across runs. The test set simulates unseen market data.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ws-section" id="graphs">
+    <div class="ws-section-title">
+      <div class="ws-dot" style="background:var(--accent)"></div>
+      <i class="bi bi-graph-up" style="color:var(--accent)"></i>
+      5 · Regression Graphs
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12">
+        <div class="ws-card">
+          <div class="ws-card-header">
+            <i class="bi bi-scatter-chart"></i> Feature vs Sales — Regression Lines
+          </div>
+          <div class="ws-card-body p-2">
+            <img src="data:image/png;base64,{{ imaGraph }}"
+                 alt="Regression plots per feature"
+                 class="img-fluid w-100 rounded"
+                 style="border:1px solid var(--border);border-radius:8px" />
+            <p class="mt-2 mb-0 px-1"
+               style="font-size:.79rem;color:var(--muted)">
+              Each subplot varies one feature while holding the others at their mean.
+              The white line is the model's regression prediction.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col-md-5">
+        <div class="ws-card h-100">
+          <div class="ws-card-header">
+            <i class="bi bi-crosshair"></i> Current vs. Predicted (Test Set)
+          </div>
+          <div class="ws-card-body p-2 text-center">
+            <img src="data:image/png;base64,{{ TrainGraph }}"
+                 alt="Current vs Predicted"
+                 class="img-fluid rounded"
+                 style="max-height:300px;border:1px solid var(--border);border-radius:8px" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div class="ws-card h-100">
+          <div class="ws-card-header">
+            <i class="bi bi-book"></i> Reading the Graphs
+          </div>
+          <div class="ws-card-body" style="font-size:.87rem;color:var(--muted);line-height:1.8">
+            <p>
+              <strong style="color:var(--text)">Feature plots:</strong>
+              Each scatter shows real market observations. The regression line
+              captures the linear trend for that channel.
+              A tighter scatter around the line signals a stronger linear relationship.
+              <span style="color:#ff6584">Radio</span> shows the steepest slope
+              — it has the highest marginal effect on sales.
+            </p>
+            <p class="mb-0">
+              <strong style="color:var(--text)">Current vs Predicted:</strong>
+              Points along the <span style="color:var(--green)">dashed diagonal</span>
+              represent perfect predictions. Vertical distance from the diagonal is
+              the prediction error. A well-calibrated model shows no systematic
+              over- or under-prediction across the entire sales range.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ws-section" id="interpretation">
+    <div class="ws-section-title">
+      <div class="ws-dot" style="background:var(--pink)"></div>
+      <i class="bi bi-chat-text" style="color:var(--pink)"></i>
+      6 · Interpretation of Results
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-md-2">
+        <div class="ws-stat">
+          <div class="ws-lbl">R² Train</div>
+          <div class="ws-val" style="color:var(--accent)">{{ stats.r2_train }}</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="ws-stat">
+          <div class="ws-lbl">R² Test</div>
+          <div class="ws-val" style="color:var(--green)">{{ stats.r2_test }}</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="ws-stat">
+          <div class="ws-lbl">MAE</div>
+          <div class="ws-val" style="color:var(--pink)">{{ stats.mae }}</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="ws-stat">
+          <div class="ws-lbl">MSE</div>
+          <div class="ws-val" style="color:var(--muted)">{{ stats.mse }}</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="ws-stat">
+          <div class="ws-lbl">RMSE</div>
+          <div class="ws-val" style="color:var(--yellow)">{{ stats.rmse }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ws-card">
+      <div class="ws-card-body">
+
+        <code class="ws-eq mb-3">
+          y (Sales) = {{ stats.intercept }}
+                    + {{ stats.coef_tv }} × TV
+                    + {{ stats.coef_radio }} × Radio
+                    + {{ stats.coef_newspaper }} × Newspaper
+        </code>
+
+        <table class="table ws-table mb-3">
+          <thead>
+            <tr>
+              <th style="width:120px">Metric</th>
+              <th style="width:90px">Value</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code style="color:var(--accent)">R² Train</code></td>
+              <td>{{ stats.r2_train }}</td>
+              <td>{{ (stats.r2_train * 100)|round(1) }}% of variance explained on training data.</td>
+            </tr>
+            <tr>
+              <td><code style="color:var(--green)">R² Test</code></td>
+              <td>{{ stats.r2_test }}</td>
+              <td>{{ (stats.r2_test * 100)|round(1) }}% of variance explained on unseen data. Closer to 1 is better.</td>
+            </tr>
+            <tr>
+              <td><code style="color:var(--pink)">MAE</code></td>
+              <td>{{ stats.mae }}</td>
+              <td>On average, predictions deviate {{ stats.mae }} K units from curret sales.</td>
+            </tr>
+            <tr>
+              <td><code style="color:var(--yellow)">RMSE</code></td>
+              <td>{{ stats.rmse }}</td>
+              <td>Prediction error = {{ stats.rmse }} K units (penalises large errors more).</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size:.87rem;color:var(--muted);line-height:1.85">
+          <p>
+            <span style="color:#6c63ff;font-weight:600">TV (B_1 = {{ stats.coef_tv }}):</span>
+            Each extra $1 000 in TV spend adds
+            <strong style="color:var(--text)">{{ stats.coef_tv }} K units</strong> to sales
+            (other channels held constant).
+          </p>
+          <p>
+            <span style="color:#ff6584;font-weight:600">Radio (B_2 = {{ stats.coef_radio }}):</span>
+            Radio shows the <strong style="color:var(--text)">highest marginal effect</strong>.
+            Every $1 000 invested adds -{{ stats.coef_radio }} K units.
+          </p>
+          <p>
+            <span style="color:#43d9ad;font-weight:600">Newspaper (B_3 = {{ stats.coef_newspaper }}):</span>
+            Newspaper contributes a minor effect ({{ stats.coef_newspaper }} per $1 K).
+            Once TV and Radio are accounted for, its incremental value is limited.
+          </p>
+          <p class="mb-0">
+            {% if (stats.r2_train - stats.r2_test) < 0.03 %}
+              <i class="bi bi-check-circle-fill" style="color:var(--green)"></i>
+              <strong style="color:var(--text)">No overfitting detected.</strong>
+              R^2 Train and R^2 Test are very close ({{ stats.r2_train }} vs {{ stats.r2_test }}),
+              meaning the model generalises well to unseen data.
+            {% else %}
+              <i class="bi bi-exclamation-triangle-fill" style="color:var(--yellow)"></i>
+              <strong style="color:var(--text)">Mild overfitting.</strong>
+              There is a noticeable gap between R² Train ({{ stats.r2_train }})
+              and R² Test ({{ stats.r2_test }}).
+            {% endif %}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="ws-section" id="predict">
+    <div class="ws-section-title">
+      <div class="ws-dot" style="background:var(--accent)"></div>
+      <i class="bi bi-lightning-charge" style="color:var(--accent)"></i>
+      7 · Prediction Form
+    </div>
+
+    <div class="row g-3 justify-content-center">
+
+      <div class="col-md-5">
+        <div class="ws-card h-100">
+          <div class="ws-card-header">
+            <i class="bi bi-sliders"></i>
+            Enter advertising budgets ($ thousands)
+          </div>
+          <div class="ws-card-body">
+
+            <p style="font-size:.84rem;color:var(--muted)" class="mb-3">
+              Enter the estimated advertising budget for each channel to predict
+              the expected sales volume.
+            </p>
+
+            <form action="/regression" method="POST">
+
+             
+              <div class="mb-3">
+                <label class="form-label fw-semibold" style="font-size:.85rem;color:#6c63ff">
+                  <i class="bi bi-display me-1"></i>Investment in TV
+                </label>
+                <input type="number" class="form-control ws-input"
+                       name="tv" step="0.5" min="0"
+                       placeholder="e.g. 150.0"
+                       value="{{ request.form.tv if request.method == 'POST' else '' }}"
+                       required />
+                <div class="form-text" style="color:var(--muted);font-size:.77rem">
+                  Dataset range: 0.7  296.4 $K
+                </div>
+              </div>
+
+              
+              <div class="mb-3">
+                <label class="form-label fw-semibold" style="font-size:.85rem;color:#ff6584">
+                  <i class="bi bi-broadcast me-1"></i>Investment in Radio
+                </label>
+                <input type="number" class="form-control ws-input"
+                       name="radio" step="0.5" min="0"
+                       placeholder="e.g. 30.0"
+                       value="{{ request.form.radio if request.method == 'POST' else '' }}"
+                       required />
+                <div class="form-text" style="color:var(--muted);font-size:.77rem">
+                  Dataset range: 0.0  49.6 $K
+                </div>
+              </div>
+
+              
+              <div class="mb-3">
+                <label class="form-label fw-semibold" style="font-size:.85rem;color:#43d9ad">
+                  <i class="bi bi-newspaper me-1"></i>Investment in Newspaper
+                </label>
+                <input type="number" class="form-control ws-input"
+                       name="newspaper" step="0.5" min="0"
+                       placeholder="e.g. 20.0"
+                       value="{{ request.form.newspaper if request.method == 'POST' else '' }}"
+                       required />
+                <div class="form-text" style="color:var(--muted);font-size:.77rem">
+                  Dataset range: 0.3  114.0 $K
+                </div>
+              </div>
+
+              <button type="submit" class="btn ws-btn w-100">
+                <i class="bi bi-lightning-charge-fill me-1"></i>Predict Sales
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="col-md-5">
+        <div class="ws-card h-100">
+          <div class="ws-card-header">
+            <i class="bi bi-activity"></i> Prediction Result
+          </div>
+          <div class="ws-card-body d-flex flex-column justify-content-center"
+               style="min-height:260px">
+
+            
+            {% if fail %}
+            <div class="alert d-flex align-items-center gap-2 mb-0"
+                 style="background:rgba(255,101,132,.1);border:1px solid rgba(255,101,132,.3);color:#ff8fa3;border-radius:10px;font-size:.87rem">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              {{ fail }}
+            </div>
+
+            
+            {% elif resultFinal is none %}
+            <div class="text-center py-4" style="color:var(--muted)">
+              <i class="bi bi-graph-up-arrow" style="font-size:2.8rem;opacity:.25"></i>
+              <p class="mt-3 mb-0" style="font-size:.88rem">
+                Fill in the form and click
+                <em>Predict Sales</em> to see the result here.
+              </p>
+            </div>
+
+            
+            {% else %}
+            <div class="ws-result">
+
+              
+              <div class="text-center mb-3">
+                <div style="font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">
+                  Predicted Sales
+                </div>
+                <div class="mt-1 fw-bold" style="font-size:3rem;color:var(--green);line-height:1.1">
+                  {{ resultFinal }}
+                  <span style="font-size:1rem;color:var(--muted)">K units</span>
+                </div>
+                <div style="font-size:.82rem;color:var(--muted)">
+                  = {{ "{:,.0f}".format(resultFinal * 1000) }} units sold
+                </div>
+              </div>
+
+              <hr style="border-color:var(--border)" />
+
+              
+              <div class="row g-2 text-center mb-3" style="font-size:.83rem">
+                <div class="col-4">
+                  <div style="color:#6c63ff;font-weight:600;font-size:.75rem">TV</div>
+                  <div>${{ request.form.tv }}K</div>
+                </div>
+                <div class="col-4">
+                  <div style="color:#ff6584;font-weight:600;font-size:.75rem">Radio</div>
+                  <div>${{ request.form.radio }}K</div>
+                </div>
+                <div class="col-4">
+                  <div style="color:#43d9ad;font-weight:600;font-size:.75rem">Newspaper</div>
+                  <div>${{ request.form.newspaper }}K</div>
+                </div>
+              </div>
+
+              
+              {% if resultFinal >= 20 %}
+              <div class="alert alert-success text-center py-2 mb-0"
+                   style="background:rgba(67,217,173,.12);border:1px solid rgba(67,217,173,.3);color:var(--green);border-radius:8px;font-size:.84rem">
+                <i class="bi bi-rocket-takeoff me-1"></i>
+                <strong>Excellent</strong> — top tier predicted sales.
+              </div>
+              {% elif resultFinal >= 14 %}
+              <div class="alert alert-warning text-center py-2 mb-0"
+                   style="background:rgba(255,209,102,.12);border:1px solid rgba(255,209,102,.3);color:var(--yellow);border-radius:8px;font-size:.84rem">
+                <i class="bi bi-bar-chart me-1"></i>
+                <strong>Good</strong> — above average performance.
+              </div>
+              {% elif resultFinal >= 8 %}
+              <div class="alert text-center py-2 mb-0"
+                   style="background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.3);color:var(--accent);border-radius:8px;font-size:.84rem">
+                <i class="bi bi-graph-up me-1"></i>
+                <strong>Moderate</strong> — consider increasing Radio budget for better ROI.
+              </div>
+              {% else %}
+              <div class="alert alert-danger text-center py-2 mb-0"
+                   style="background:rgba(255,101,132,.12);border:1px solid rgba(255,101,132,.3);color:var(--pink);border-radius:8px;font-size:.84rem">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                <strong>Low</strong> — budgets are below average. Consider reallocating spend.
+              </div>
+              {% endif %}
+
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  
+  <div class="text-center py-3 mt-2"
+       style="font-size:.8rem;color:var(--muted);border-top:1px solid var(--border)">
+    Linear Regression Workshop &nbsp;·&nbsp; Advertising Dataset &nbsp;·&nbsp;
+    Flask + scikit-learn + Bootstrap 5
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
