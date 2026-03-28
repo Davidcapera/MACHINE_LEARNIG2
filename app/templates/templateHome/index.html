@@ -1,56 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body class="bg-light mb-4">
-    <nav class="navbar navbar-dark bg-primary">
-    <div class="container">
-        <span class="navbar-brand fw-bold">Weather forecast — Machine Learning</span>
+{% extends "base.html" %}
 
-        <div class="dropdown" data-bs-theme="light">
-        <button class="btn btn-primary dropdown-toggle" type="button"
-                data-bs-toggle="dropdown"
-                data-bs-auto-close="outside">
-            Menu
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/">Home</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-            <a class="dropdown-item" href="#caseUseMenu"
-                data-bs-toggle="collapse">
-                Case use >
-            </a>
-            <div class="collapse" id="caseUseMenu">
-                <ul class="list-unstyled ps-3">
-                <li><a class="dropdown-item" href="/caseWeather">Weather</a></li>
-                <li><a class="dropdown-item" href="/case2">Case use 2</a></li>
-                <li><a class="dropdown-item" href="/case3">Case use 3</a></li>
-                <li><a class="dropdown-item" href="/case4">Case use 4</a></li>
-                </ul>
-            </div>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-            <a class="dropdown-item" href="#regressionMenu"
-                data-bs-toggle="collapse">
-                Linear Regression >
-            </a>
-            <div class="collapse" id="regressionMenu">
-                <ul class="list-unstyled ps-3">
-                <li><a class="dropdown-item" href="/regression/definition">Definition</a></li>
-                <li><a class="dropdown-item" href="/regression">Linear Regression</a></li>
-                </ul>
-            </div>
-            </li>
-        </ul>
+{% block title %}Home — Machine Learning{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 rounded-3 bg-primary text-white text-center"
+     style="min-height: 340px; display: flex; align-items: center; justify-content: center;">
+    <div>
+        <i class="bi bi-cpu-fill d-block mb-3" style="font-size: 4rem; opacity: 0.85;"></i>
+        <h1 class="fw-bold mb-2" style="font-size: 2.8rem;">Machine Learning</h1>
+        <p class="fs-5 opacity-75 mb-4" style="max-width: 520px; margin: auto;">
+            Supervised Learning Workshop — discover how machines learn from data
+            to classify and predict real-world outcomes.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <span class="badge bg-white text-primary fs-6 px-3 py-2">
+                <i class="bi bi-diagram-3 me-1"></i> Supervised Learning
+            </span>
+            <span class="badge bg-white text-primary fs-6 px-3 py-2">
+                <i class="bi bi-tree me-1"></i> Decision Tree
+            </span>
+            <span class="badge bg-white text-primary fs-6 px-3 py-2">
+                <i class="bi bi-graph-up me-1"></i> Linear Regression
+            </span>
+            <span class="badge bg-white text-primary fs-6 px-3 py-2">
+                <i class="bi bi-filetype-py me-1"></i> Python · scikit-learn
+            </span>
         </div>
     </div>
-    </nav>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 text-center p-4">
+            <i class="bi bi-grid-fill text-primary mb-2" style="font-size: 2.5rem;"></i>
+            <h2 class="fw-bold text-primary">4</h2>
+            <p class="text-muted mb-0">Use Cases explored with Decision Tree classification</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 text-center p-4">
+            <i class="bi bi-graph-up-arrow text-success mb-2" style="font-size: 2.5rem;"></i>
+            <h2 class="fw-bold text-success">1</h2>
+            <p class="text-muted mb-0">Linear Regression application with live prediction</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 text-center p-4">
+            <i class="bi bi-filetype-py text-warning mb-2" style="font-size: 2.5rem;"></i>
+            <h2 class="fw-bold text-warning">100%</h2>
+            <p class="text-muted mb-0">Built with Python, Flask, scikit-learn & Bootstrap 5</p>
+        </div>
+    </div>
+</div>
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-compass-fill fs-5"></i>
+        <span class="fw-bold fs-5">What you will explore</span>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="rounded-3 bg-primary bg-opacity-10 p-3 flex-shrink-0">
+                        <i class="bi bi-tree text-primary fs-4"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">ML Use Cases — Classification</h6>
+                        <p class="text-muted small mb-0">
+                            Real problems solved with a Decision Tree: weather prediction,
+                            sales classification, air quality, and more.
+                            Each case walks through the data, the model, and the result.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="rounded-3 bg-success bg-opacity-10 p-3 flex-shrink-0">
+                        <i class="bi bi-graph-up text-success fs-4"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Linear Regression — Application</h6>
+                        <p class="text-muted small mb-0">
+                            Full analysis of the Advertising dataset — problem description,
+                            variables, regression graphs, model metrics R², MAE, RMSE,
+                            and a live sales predictor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="rounded-3 bg-warning bg-opacity-10 p-3 flex-shrink-0">
+                        <i class="bi bi-book-fill text-warning fs-4"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Linear Regression — Basic Concepts</h6>
+                        <p class="text-muted small mb-0">
+                            Theory behind the algorithm — what the equation means,
+                            how coefficients are interpreted, and how to evaluate a model.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="rounded-3 bg-danger bg-opacity-10 p-3 flex-shrink-0">
+                        <i class="bi bi-lightning-charge-fill text-danger fs-4"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Live Predictions</h6>
+                        <p class="text-muted small mb-0">
+                            Every section includes an interactive form where you can
+                            enter real values and get an instant prediction from
+                            the trained model.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="alert alert-primary d-flex align-items-center gap-3 mb-4" role="alert">
+    <i class="bi bi-arrow-right-circle-fill fs-3 flex-shrink-0"></i>
+    <p class="mb-0">
+        <strong>Ready to start?</strong>
+        Use the <strong>Menu</strong> in the top navigation bar to explore
+        the ML Use Cases or jump straight into the Linear Regression application.
+    </p>
+</div>
+
+{% endblock %}

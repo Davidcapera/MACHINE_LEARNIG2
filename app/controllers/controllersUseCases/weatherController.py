@@ -9,5 +9,5 @@ def home():
     humidity    = 34
     data   = {"temperature": temperature, "humidity": humidity}
     result = predict(temperature, humidity)
-    return render_template("weather2.html", result=result,
+    return render_template("templateUseCases/weather2.html", result=result,
                            data=data, initialData=initial_data)
