@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from app.models.airModel import predict, initial_data, generate_tree
+from app.models.modelUseCases.airModel import predict, initial_data, generate_tree
 
 air_bp = Blueprint('air', __name__)
 
@@ -16,7 +16,7 @@ def air_quality():
     result = predict(data['pm25'], data['pm10'])
 
     return render_template(
-        'air.html',
+        'templateUseCases/air.html',
         result=result,
         data=data,
         initialData=initial_data

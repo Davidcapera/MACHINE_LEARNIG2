@@ -3,11 +3,11 @@ from flask import Flask
 def create_app():
     app = Flask(__name__)
 
-    from app.controllers.weatherController import weather_bp
-    from app.controllers.regressionController import regression_bp
-    from app.controllers.indexController import index_bp
-    from app.controllers.airController import air_bp 
-    from app.controllers.salesController import sales_bp
+    from app.controllers.controllersUseCases.weatherController import weather_bp
+    from app.controllers.controllerMachineSupervised.regressionController import regression_bp
+    from app.controllers.controllerIndex.indexController import index_bp
+    from app.controllers.controllersUseCases.airController import air_bp 
+    from app.controllers.controllersUseCases.salesController import sales_bp
     app.register_blueprint(weather_bp)
     app.register_blueprint(regression_bp)
     app.register_blueprint(index_bp)
