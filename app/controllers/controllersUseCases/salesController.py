@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from app.models.salesModel import low_sales, medium_sales, high_sales
+from app.models.modelUseCases.salesModel import low_sales, medium_sales, high_sales
 
 sales_bp = Blueprint("sales", __name__)
 
@@ -21,4 +21,4 @@ def sales():
         example = high_sales()
         example["name"] = "High Advertising"
 
-    return render_template("sales.html", example=example)
+    return render_template("templateUseCases/sales.html", example=example)
