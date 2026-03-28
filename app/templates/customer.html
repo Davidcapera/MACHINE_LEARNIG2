@@ -2,133 +2,411 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer spending</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<title>Customer Spending Prediction</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body class="bg-light mb-4">
 
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
 
-<nav class="navbar navbar-dark bg-primary">
-<div class="container">
+            <span class="navbar-brand fw-bold">
+                Customer spending — Machine Learning
+            </span>
 
-<span class="navbar-brand fw-bold">
-Customer Spending — Machine Learning
-</span>
+            <div class="dropdown" data-bs-theme="light">
 
-<a href="/" class="btn btn-light">
-Back
-</a>
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside">
 
-</div>
-</nav>
+                    Menu
 
+                </button>
 
+                <ul class="dropdown-menu">
 
-<div class="container mt-4">
+                    <li><a class="dropdown-item" href="/">Home</a></li>
 
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
-<div class="card shadow">
+                    <li>
+                        <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
+                            Case use >
+                        </a>
 
-<div class="card-header bg-primary text-white">
-<h4>Customer Spending Prediction</h4>
-</div>
+                        <div class="collapse" id="caseUseMenu">
 
+                            <ul class="list-unstyled ps-3">
 
-<div class="card-body">
+                                <li><a class="dropdown-item" href="/caseWeather">Weather</a></li>
+                                <li><a class="dropdown-item" href="/case2">Case use 2</a></li>
+                                <li><a class="dropdown-item" href="/case3">Case use 3</a></li>
+                                <li><a class="dropdown-item" href="/caseCustomer">Customer</a></li>
 
+                            </ul>
 
-<h5>Problem Description</h5>
+                        </div>
 
-<p>
-Predict how much a customer will spend based on income,
-number of visits, and age.
-</p>
+                    </li>
 
-<hr>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
+                    <li>
+                        <a class="dropdown-item" href="#regressionMenu" data-bs-toggle="collapse">
+                            Linear Regression >
+                        </a>
 
-<h5>Machine Learning Type</h5>
+                        <div class="collapse" id="regressionMenu">
 
-<p>
-Supervised Learning — Linear Regression
-</p>
+                            <ul class="list-unstyled ps-3">
 
-<hr>
+                                <li><a class="dropdown-item" href="/regression/definition">Definition</a></li>
+                                <li><a class="dropdown-item" href="/regression">Linear Regression</a></li>
 
+                            </ul>
 
-<h5>Variables</h5>
+                        </div>
 
-<ul>
-<li>Age</li>
-<li>Income</li>
-<li>Visits</li>
-<li>Spending</li>
-</ul>
+                    </li>
 
+                </ul>
 
-<hr>
+            </div>
 
-
-<h5>Regression Model</h5>
-
-<p class="fw-bold">
-
-Spending = 0.1 × Income + 2 × Visits − Age
-
-</p>
-
-
-<hr>
-
-
-<h5>Example Scenarios</h5>
+        </div>
+    </nav>
 
 
-<a href="/caseCustomer?case=low" class="btn btn-success me-2">
-Low
-</a>
+    <div class="container mt-4">
 
-<a href="/caseCustomer?case=medium" class="btn btn-warning me-2">
-Medium
-</a>
+        <h3 class="text-primary fw-bold mb-1">
+            Customer Spending Prediction
+        </h3>
 
-<a href="/caseCustomer?case=high" class="btn btn-danger">
-High
-</a>
+        <p class="text-muted mb-4">
+            Prediction of customer spending using a simple regression model.
+        </p>
 
 
+        <div class="row mb-4">
 
-{% if example %}
+            <div class="col-12">
 
-<div class="alert alert-info mt-3">
+                <div class="card">
 
-<strong>{{ example.name }} customer</strong>
+                    <div class="card-header bg-primary text-white">
+                        Case Use Overview
+                    </div>
 
-<ul>
-<li>Age: {{ example.age }}</li>
-<li>Income: {{ example.income }}</li>
-<li>Visits: {{ example.visits }}</li>
-<li>Predicted spending: {{ example.spending }}</li>
-</ul>
-
-</div>
-
-{% endif %}
+                    <div class="card-body">
 
 
-</div>
+                        <h5>Customer Spending Prediction</h5>
 
-</div>
+                        <p>
+                            Customer spending prediction using a linear formula.
+                        </p>
 
-</div>
+                        <p>
+                            Machine learning allows companies to analyze customer data
+                            and estimate future behavior using mathematical models.
+                            This type of prediction is very important in business analytics.
+                        </p>
 
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" class="img-fluid mb-3">
+
+                        <hr>
+
+
+                        <h5>Problem Description</h5>
+
+                        <p>
+
+                            Companies need to estimate how much a customer will spend.
+                            This helps marketing, sales, and customer segmentation.
+
+                            The model uses age, income, and number of visits to predict spending.
+
+                        </p>
+
+                        <p>
+                            Predictive models are widely used in modern companies.
+                            They help identify valuable customers, improve marketing campaigns,
+                            and reduce financial risk.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f" class="img-fluid mb-3">
+
+                        <hr>
+
+
+                        <h5>Type of Machine Learning</h5>
+
+                        <span class="badge bg-primary">
+                            Supervised Learning
+                        </span>
+
+                        <span class="badge bg-secondary">
+                            Regression
+                        </span>
+
+                        <p>
+                            Supervised learning means that the model is trained with
+                            known input and output values.
+                            Regression is used when the result is numeric.
+                        </p>
+
+                        <p>
+                            Linear regression is one of the most common algorithms
+                            used in academic projects and real business applications.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1534759846116-5799c33ce22a" class="img-fluid mb-3">
+
+
+                        <hr>
+
+
+                        <h5>Input Features</h5>
+
+                        <ul>
+
+                            <li>Age</li>
+                            <li>Income</li>
+                            <li>Visits</li>
+
+                        </ul>
+
+                        <p>
+                            These variables are used by the model to calculate the prediction.
+                            In real applications more variables can be added.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72" class="img-fluid mb-3">
+
+
+                        <hr>
+
+
+                        <h5>Expected Output</h5>
+
+                        <p>
+                            Predicted customer spending value
+                        </p>
+
+                        <p>
+                            The output is a numeric value that represents the expected
+                            amount of money that a customer will spend.
+                        </p>
+
+
+                        <hr>
+
+
+                        <h5>Real world relevance</h5>
+
+                        <p>
+
+                            Used in marketing analysis, customer behavior prediction,
+                            and business intelligence.
+
+                        </p>
+
+                        <p>
+                            Many companies use prediction models to improve decision making.
+                            Online stores, banks, supermarkets and streaming platforms
+                            use machine learning to understand customer behavior.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf" class="img-fluid mb-3">
+
+                        <p>
+                            This example shows how regression can be used to estimate
+                            customer spending using simple variables.
+                        </p>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row mb-4">
+
+            <div class="col-12">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h5>Training Data</h5>
+
+                        <p>
+                            Training data is used to teach the model.
+                            Each row represents an example.
+                        </p>
+
+                        <p>
+                            The model analyzes the data and finds a mathematical
+                            relationship between the variables.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72" class="img-fluid mb-3">
+
+                        <table class="table table-bordered">
+
+                            <tr>
+                                <th>Age</th>
+                                <th>Income</th>
+                                <th>Visits</th>
+                                <th>Spending</th>
+                            </tr>
+
+                            <tr>
+                                <td>20</td>
+                                <td>1000</td>
+                                <td>2</td>
+                                <td>84</td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td>2000</td>
+                                <td>5</td>
+                                <td>170</td>
+                            </tr>
+                            <tr>
+                                <td>40</td>
+                                <td>4000</td>
+                                <td>10</td>
+                                <td>360</td>
+                            </tr>
+
+                        </table>
+
+                        <p>
+                            More data usually produces better predictions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row mb-4">
+
+            <div class="col-12">
+
+                <div class="card">
+
+                    <div class="card-body text-center">
+
+                        <h5>Model Formula</h5>
+
+                        <p>
+
+                            Spending = 0.1 * Income + 2 * Visits − Age
+
+                        </p>
+
+                        <p>
+                            This is a simple linear regression formula.
+                            Each variable has a coefficient.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1509228627152-72ae9ae6848d" class="img-fluid mb-3">
+
+                        <p>
+                            Linear regression is easy to understand
+                            and very useful in many applications.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="row mb-4">
+
+            <div class="col-12">
+
+                <div class="card">
+
+                    <div class="card-body text-center">
+
+                        <h5>Prediction result</h5>
+
+                        {% if example %}
+
+                        <ul>
+
+                            <li>Age: {{ example.age }}</li>
+                            <li>Income: {{ example.income }}</li>
+                            <li>Visits: {{ example.visits }}</li>
+                            <li>Spending: {{ example.spending }}</li>
+
+                        </ul>
+
+                        {% endif %}
+
+                        <p>
+                            Use the buttons to test different cases.
+                        </p>
+
+                        <a href="/caseCustomer?case=low" class="btn btn-success">
+                            Low
+                        </a>
+
+                        <a href="/caseCustomer?case=medium" class="btn btn-warning">
+                            Medium
+                        </a>
+
+                        <a href="/caseCustomer?case=high" class="btn btn-danger">
+                            High
+                        </a>
+
+                        <br><br>
+
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf" class="img-fluid">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
