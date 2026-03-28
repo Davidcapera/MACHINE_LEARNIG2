@@ -1,0 +1,659 @@
+{% extends "base.html" %}
+
+{% block title %}Linear Regression — Advertising{% endblock %}
+
+{% block content %}
+<div class="p-4 mb-4 rounded-3 bg-primary text-white">
+    <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-graph-up-arrow" style="font-size: 2.8rem; opacity: 0.9;"></i>
+        <div>
+            <h3 class="fw-bold mb-1">Linear Regression — Advertising</h3>
+            <p class="mb-0 opacity-75">
+                Predicting product sales from TV, Radio and Newspaper advertising budgets
+                using Multiple Linear Regression.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-info-circle-fill fs-5"></i>
+        <span class="fw-bold fs-5">1 · Problem Description</span>
+    </div>
+    <div class="card-body p-4">g
+        <p class="text-uppercase text-primary fw-semibold small mb-1">
+            <i class="bi bi-bookmark-fill me-1"></i> Title
+        </p>
+        <p class="fw-semibold fs-5 mb-0">Sales Prediction from Advertising Investment</p>
+
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-exclamation-circle-fill me-1"></i> Problem Description
+        </p>
+        <p class="text-secondary mb-0">
+            A company wants to understand <strong>which advertising channels drive the most sales</strong>
+            so the marketing team can allocate budgets efficiently and forecast revenue.
+            We apply <strong>Multiple Linear Regression</strong> to model the relationship between
+            advertising spend in thousands of dollars across TV, Radio and Newspaper,
+            and the resulting sales volume in thousands of units.
+            The learned equation allows predictions for any combination of budget inputs.
+        </p>
+
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-cpu-fill me-1"></i> Type of Machine Learning
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-0">
+            <span class="badge bg-primary fs-6 px-3 py-2">
+                <i class="bi bi-diagram-3 me-1"></i> Supervised Learning
+            </span>
+            <span class="badge bg-secondary fs-6 px-3 py-2">
+                <i class="bi bi-list-task me-1"></i> Regression
+            </span>
+            <span class="badge bg-info text-dark fs-6 px-3 py-2">
+                <i class="bi bi-graph-up me-1"></i> Linear Regression
+            </span>
+        </div>
+
+        <hr>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-arrow-right-circle-fill me-1"></i> Input Features
+                </p>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+                        <span class="badge bg-primary rounded-circle p-2 mt-1">1</span>
+                        <div>
+                            <p class="fw-semibold mb-1">TV ($K)</p>
+                            <p class="text-muted small mb-0">TV advertising budget per market. Range: 0.7 – 296.4 $K</p>
+                        </div>
+                    </div>
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+                        <span class="badge bg-primary rounded-circle p-2 mt-1">2</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Radio ($K)</p>
+                            <p class="text-muted small mb-0">Radio advertising budget per market. Range: 0.0 – 49.6 $K</p>
+                        </div>
+                    </div>
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0">
+                        <span class="badge bg-primary rounded-circle p-2 mt-1">3</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Newspaper ($K)</p>
+                            <p class="text-muted small mb-0">Newspaper advertising budget per market. Range: 0.3 – 114.0 $K</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-arrow-left-circle-fill text-success me-1"></i> Expected Output
+                </p>
+                <p class="text-muted small mb-3">
+                    The model returns a continuous numeric value representing predicted sales:
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge bg-danger px-3 py-2">
+                        <i class="bi bi-graph-down me-1"></i> Low — below 8K units
+                    </span>
+                    <span class="badge bg-info text-dark px-3 py-2">
+                        <i class="bi bi-graph-up me-1"></i> Moderate — 8–14K units
+                    </span>
+                    <span class="badge bg-warning text-dark px-3 py-2">
+                        <i class="bi bi-bar-chart me-1"></i> Good — 14–20K units
+                    </span>
+                    <span class="badge bg-success px-3 py-2">
+                        <i class="bi bi-rocket-takeoff me-1"></i> Excellent — 20K+ units
+                    </span>
+                </div>
+
+                <hr>
+
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-globe-americas me-1"></i> Real-World Relevance
+                </p>
+                <div class="alert alert-primary d-flex gap-3 mb-0" role="alert">
+                    <i class="bi bi-lightbulb-fill fs-4 flex-shrink-0 mt-1"></i>
+                    <p class="mb-0 text-secondary">
+                        This model enables smarter decisions in <strong>marketing budget allocation</strong>,
+                        <strong>sales forecasting</strong>, and <strong>ROI optimization</strong> across
+                        advertising channels.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-table fs-5"></i>
+        <span class="fw-bold fs-5">2 · Dataset Explanation</span>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-secondary mb-4">
+            The <strong>Advertising dataset</strong> contains market observations.
+            Each row represents one market, recording how much was invested in each
+            advertising channel and the resulting product sales.
+        </p>
+        <div class="row g-3">
+            <div class="col-6 col-md-3">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-database-fill text-primary fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Total rows</p>
+                    <p class="fw-bold fs-4 text-primary mb-0">{{ stats.total_samples }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-mortarboard-fill text-success fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Training 80%</p>
+                    <p class="fw-bold fs-4 text-success mb-0">{{ stats.train_samples }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-clipboard-check-fill text-danger fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Test 20%</p>
+                    <p class="fw-bold fs-4 text-danger mb-0">{{ stats.test_samples }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-list-columns-reverse text-warning fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Features</p>
+                    <p class="fw-bold fs-4 text-warning mb-0">3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-list-columns fs-5"></i>
+        <span class="fw-bold fs-5">3 · Variables Used</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th class="ps-4">Column</th>
+                        <th>Role</th>
+                        <th>Unit</th>
+                        <th>Range</th>
+                        <th class="pe-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ps-4"><code class="text-primary">TV</code></td>
+                        <td><span class="badge bg-primary bg-opacity-25 text-primary">Feature X₁</span></td>
+                        <td>$ K</td>
+                        <td>0.7 – 296.4</td>
+                        <td class="pe-4">TV advertising budget per market</td>
+                    </tr>
+                    <tr>
+                        <td class="ps-4"><code class="text-danger">radio</code></td>
+                        <td><span class="badge bg-danger bg-opacity-25 text-danger">Feature X₂</span></td>
+                        <td>$ K</td>
+                        <td>0.0 – 49.6</td>
+                        <td class="pe-4">Radio advertising budget per market</td>
+                    </tr>
+                    <tr>
+                        <td class="ps-4"><code class="text-success">newspaper</code></td>
+                        <td><span class="badge bg-success bg-opacity-25 text-success">Feature X₃</span></td>
+                        <td>$ K</td>
+                        <td>0.3 – 114.0</td>
+                        <td class="pe-4">Newspaper advertising budget per market</td>
+                    </tr>
+                    <tr>
+                        <td class="ps-4"><code class="text-warning">sales</code></td>
+                        <td><span class="badge bg-warning bg-opacity-25 text-warning">Target y</span></td>
+                        <td>K units</td>
+                        <td>1.6 – 27.0</td>
+                        <td class="pe-4">Units sold — response variable</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-gear-fill fs-5"></i>
+        <span class="fw-bold fs-5">4 · Data Preparation</span>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-4">
+            <div class="col-md-7">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-list-check me-1"></i> Preparation Pipeline
+                </p>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+                        <span class="badge bg-primary rounded-circle p-2 mt-1">1</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Load CSV</p>
+                            <p class="text-muted small mb-0">
+                                Read <code>advertising.csv</code> with Pandas. No missing values; no imputation needed.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+                        <span class="badge bg-success rounded-circle p-2 mt-1">2</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Define X and y</p>
+                            <p class="text-muted small mb-0">
+                                Feature matrix <code>X = [TV, radio, newspaper]</code>, target vector <code>y = sales</code>.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+                        <span class="badge bg-danger rounded-circle p-2 mt-1">3</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Train / Test Split — 80% / 20%</p>
+                            <p class="text-muted small mb-0">
+                                <code>train_test_split(test_size=0.20, random_state=42)</code> —
+                                model trains exclusively on 80% of the data.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0">
+                        <span class="badge bg-warning rounded-circle p-2 mt-1">4</span>
+                        <div>
+                            <p class="fw-semibold mb-1">Fit & Evaluate</p>
+                            <p class="text-muted small mb-0">
+                                <code>LinearRegression().fit(X_train, y_train)</code> —
+                                metrics (R², MAE, RMSE) computed on the test set.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-pie-chart-fill me-1"></i> Dataset Split
+                </p>
+                <div class="row g-2 mb-3">
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-2 text-center border">
+                            <p class="text-muted small mb-1">Total</p>
+                            <p class="fw-bold text-primary mb-0">{{ stats.total_samples }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-2 text-center border">
+                            <p class="text-muted small mb-1">Train</p>
+                            <p class="fw-bold text-success mb-0">{{ stats.train_samples }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-2 text-center border">
+                            <p class="text-muted small mb-1">Test</p>
+                            <p class="fw-bold text-danger mb-0">{{ stats.test_samples }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small text-muted">
+                    <span>Training (80%)</span><span>Test (20%)</span>
+                </div>
+                <div class="progress mb-3" style="height:10px;">
+                    <div class="progress-bar bg-primary" style="width:80%"></div>
+                    <div class="progress-bar bg-danger" style="width:20%"></div>
+                </div>
+                <div class="alert alert-primary d-flex gap-2 mb-0 small" role="alert">
+                    <i class="bi bi-info-circle-fill flex-shrink-0 mt-1"></i>
+                    Fixed <code>random_state=42</code> ensures reproducibility across runs.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-graph-up fs-5"></i>
+        <span class="fw-bold fs-5">5 · Regression Graphs</span>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-muted small mb-3">
+            Each subplot shows the relationship between one advertising channel and sales.
+            The line captures the linear trend learned by the model.
+        </p>
+        <img src="data:image/png;base64,{{ imaGraph }}"
+             alt="Regression plots" class="img-fluid w-100 rounded shadow-sm mb-4">
+
+        <div class="row g-4">
+            <div class="col-md-5">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-crosshair me-1"></i> Actual vs. Predicted (Test Set)
+                </p>
+                <img src="data:image/png;base64,{{ TrainGraph }}"
+                     alt="Actual vs Predicted"
+                     class="img-fluid rounded shadow-sm" style="max-height:300px;">
+            </div>
+            <div class="col-md-7">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-book-fill me-1"></i> Reading the Graphs
+                </p>
+                <p class="text-secondary mb-3">
+                    <strong>Feature plots:</strong>
+                    Each scatter shows real market observations. The regression line captures
+                    the linear trend for that channel. A tighter scatter around the line
+                    signals a stronger linear relationship.
+                </p>
+                <p class="text-secondary mb-0">
+                    <strong>Actual vs Predicted:</strong>
+                    Points along the dashed diagonal represent perfect predictions.
+                    Vertical distance from the diagonal is the prediction error.
+                    A well-calibrated model shows no systematic over- or under-prediction.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-clipboard-data-fill fs-5"></i>
+        <span class="fw-bold fs-5">6 · Interpretation of Results</span>
+    </div>
+    <div class="card-body p-4">
+
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-bullseye text-primary fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">R² Train</p>
+                    <p class="fw-bold fs-4 text-primary mb-0">{{ stats.r2_train }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-check-circle-fill text-success fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">R² Test</p>
+                    <p class="fw-bold fs-4 text-success mb-0">{{ stats.r2_test }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-arrows-collapse text-danger fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">MAE</p>
+                    <p class="fw-bold fs-4 text-danger mb-0">{{ stats.mae }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-calculator text-secondary fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">MSE</p>
+                    <p class="fw-bold fs-4 text-secondary mb-0">{{ stats.mse }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-activity text-warning fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">RMSE</p>
+                    <p class="fw-bold fs-4 text-warning mb-0">{{ stats.rmse }}</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-function me-1"></i> Model Equation
+        </p>
+        <code class="d-block bg-light p-3 rounded mb-4">
+            y (Sales) = {{ stats.intercept }}
+            + {{ stats.coef_tv }} × TV
+            + {{ stats.coef_radio }} × Radio
+            + {{ stats.coef_newspaper }} × Newspaper
+        </code>
+
+        <div class="table-responsive mb-4">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code class="text-primary">R² Train</code></td>
+                        <td>{{ stats.r2_train }}</td>
+                        <td class="text-muted">{{ (stats.r2_train * 100)|round(1) }}% of variance explained on training data.</td>
+                    </tr>
+                    <tr>
+                        <td><code class="text-success">R² Test</code></td>
+                        <td>{{ stats.r2_test }}</td>
+                        <td class="text-muted">{{ (stats.r2_test * 100)|round(1) }}% of variance explained on unseen data.</td>
+                    </tr>
+                    <tr>
+                        <td><code class="text-danger">MAE</code></td>
+                        <td>{{ stats.mae }}</td>
+                        <td class="text-muted">On average, predictions deviate {{ stats.mae }} K units from actual sales.</td>
+                    </tr>
+                    <tr>
+                        <td><code class="text-warning">RMSE</code></td>
+                        <td>{{ stats.rmse }}</td>
+                        <td class="text-muted">Prediction error = {{ stats.rmse }} K units (penalises large errors more).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="list-group list-group-flush">
+            <div class="list-group-item px-0 border-0 pb-2">
+                <strong class="text-primary">TV (β₁ = {{ stats.coef_tv }}):</strong>
+                <span class="text-muted"> Each extra $1,000 in TV spend adds <strong class="text-dark">{{ stats.coef_tv }} K units</strong> to sales.</span>
+            </div>
+            <div class="list-group-item px-0 border-0 pb-2">
+                <strong class="text-danger">Radio (β₂ = {{ stats.coef_radio }}):</strong>
+                <span class="text-muted"> Radio shows the <strong class="text-dark">highest marginal effect</strong>. Every $1,000 adds {{ stats.coef_radio }} K units.</span>
+            </div>
+            <div class="list-group-item px-0 border-0 pb-2">
+                <strong class="text-success">Newspaper (β₃ = {{ stats.coef_newspaper }}):</strong>
+                <span class="text-muted"> Minor effect ({{ stats.coef_newspaper }} per $1K). Limited incremental value once TV and Radio are accounted for.</span>
+            </div>
+        </div>
+
+        <hr>
+
+        {% if (stats.r2_train - stats.r2_test) < 0.03 %}
+        <div class="alert alert-success d-flex gap-3 mb-0" role="alert">
+            <i class="bi bi-check-circle-fill fs-4 flex-shrink-0 mt-1"></i>
+            <p class="mb-0">
+                <strong>No overfitting detected.</strong>
+                R² Train and R² Test are very close ({{ stats.r2_train }} vs {{ stats.r2_test }}),
+                meaning the model generalises well to unseen data.
+            </p>
+        </div>
+        {% else %}
+        <div class="alert alert-warning d-flex gap-3 mb-0" role="alert">
+            <i class="bi bi-exclamation-triangle-fill fs-4 flex-shrink-0 mt-1"></i>
+            <p class="mb-0">
+                <strong>Mild overfitting.</strong>
+                There is a noticeable gap between R² Train ({{ stats.r2_train }})
+                and R² Test ({{ stats.r2_test }}).
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+                <i class="bi bi-sliders fs-5"></i>
+                <span class="fw-bold fs-5">7 · Prediction Form</span>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-3 mb-3">
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-3 text-center border">
+                            <i class="bi bi-display text-primary fs-3 mb-1 d-block"></i>
+                            <p class="text-muted small mb-1">TV</p>
+                            <p class="fw-bold fs-5 text-primary mb-0">
+                                {{ request.form.tv if request.method == 'POST' else '—' }}
+                                <small class="fs-6 text-muted">$K</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-3 text-center border">
+                            <i class="bi bi-broadcast text-danger fs-3 mb-1 d-block"></i>
+                            <p class="text-muted small mb-1">Radio</p>
+                            <p class="fw-bold fs-5 text-danger mb-0">
+                                {{ request.form.radio if request.method == 'POST' else '—' }}
+                                <small class="fs-6 text-muted">$K</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-3 text-center border">
+                            <i class="bi bi-newspaper text-success fs-3 mb-1 d-block"></i>
+                            <p class="text-muted small mb-1">Newspaper</p>
+                            <p class="fw-bold fs-5 text-success mb-0">
+                                {{ request.form.newspaper if request.method == 'POST' else '—' }}
+                                <small class="fs-6 text-muted">$K</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/regression" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold text-primary">
+                            <i class="bi bi-display me-1"></i>Investment in TV ($K)
+                        </label>
+                        <input type="number" class="form-control" name="tv"
+                               step="0.5" min="0" placeholder="e.g. 150.0"
+                               value="{{ request.form.tv if request.method == 'POST' else '' }}"
+                               required>
+                        <div class="form-text">Dataset range: 0.7 – 296.4 $K</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold text-danger">
+                            <i class="bi bi-broadcast me-1"></i>Investment in Radio ($K)
+                        </label>
+                        <input type="number" class="form-control" name="radio"
+                               step="0.5" min="0" placeholder="e.g. 30.0"
+                               value="{{ request.form.radio if request.method == 'POST' else '' }}"
+                               required>
+                        <div class="form-text">Dataset range: 0.0 – 49.6 $K</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold text-success">
+                            <i class="bi bi-newspaper me-1"></i>Investment in Newspaper ($K)
+                        </label>
+                        <input type="number" class="form-control" name="newspaper"
+                               step="0.5" min="0" placeholder="e.g. 20.0"
+                               value="{{ request.form.newspaper if request.method == 'POST' else '' }}"
+                               required>
+                        <div class="form-text">Dataset range: 0.3 – 114.0 $K</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-semibold">
+                        <i class="bi bi-lightning-charge-fill me-1"></i>Predict Sales
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-md-7">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+                <i class="bi bi-graph-up-arrow fs-5"></i>
+                <span class="fw-bold fs-5">Prediction Result</span>
+            </div>
+            <div class="card-body p-4 d-flex flex-column justify-content-center" style="min-height:260px">
+
+                {% if fail %}
+                    <div class="alert alert-danger d-flex gap-2" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mt-1"></i>
+                        {{ fail }}
+                    </div>
+
+                {% elif resultFinal is none %}
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-graph-up-arrow fs-1 opacity-25 d-block mb-3"></i>
+                        <p class="small mb-0">Fill in the form and click <em>Predict Sales</em> to see the result here.</p>
+                    </div>
+
+                {% else %}
+                    <p class="text-muted mb-3 text-center">The model predicts that the sales will be:</p>
+
+                    {% if resultFinal >= 20 %}
+                        <div class="text-center mb-3">
+                            <span class="badge bg-success fs-3 px-4 py-3">
+                                <i class="bi bi-rocket-takeoff me-2"></i>{{ resultFinal }} K units
+                            </span>
+                        </div>
+                    {% elif resultFinal >= 14 %}
+                        <div class="text-center mb-3">
+                            <span class="badge bg-warning text-dark fs-3 px-4 py-3">
+                                <i class="bi bi-bar-chart me-2"></i>{{ resultFinal }} K units
+                            </span>
+                        </div>
+                    {% elif resultFinal >= 8 %}
+                        <div class="text-center mb-3">
+                            <span class="badge bg-info text-dark fs-3 px-4 py-3">
+                                <i class="bi bi-graph-up me-2"></i>{{ resultFinal }} K units
+                            </span>
+                        </div>
+                    {% else %}
+                        <div class="text-center mb-3">
+                            <span class="badge bg-danger fs-3 px-4 py-3">
+                                <i class="bi bi-graph-down me-2"></i>{{ resultFinal }} K units
+                            </span>
+                        </div>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-center gap-4 text-muted small mb-4">
+                        <span><i class="bi bi-display me-1 text-primary"></i> ${{ request.form.tv }}K TV</span>
+                        <span><i class="bi bi-broadcast me-1 text-danger"></i> ${{ request.form.radio }}K Radio</span>
+                        <span><i class="bi bi-newspaper me-1 text-success"></i> ${{ request.form.newspaper }}K Newspaper</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="text-center text-muted small">
+                        = {{ "{:,.0f}".format(resultFinal * 1000) }} units sold
+                    </div>
+
+                    <hr>
+
+                    {% if resultFinal >= 20 %}
+                        <div class="alert alert-success d-flex gap-2 mb-0 small" role="alert">
+                            <i class="bi bi-rocket-takeoff-fill flex-shrink-0 mt-1"></i>
+                            <strong>Excellent</strong> — Top tier predicted sales. Your advertising strategy is highly effective.
+                        </div>
+                    {% elif resultFinal >= 14 %}
+                        <div class="alert alert-warning d-flex gap-2 mb-0 small" role="alert">
+                            <i class="bi bi-bar-chart-fill flex-shrink-0 mt-1"></i>
+                            <strong>Good</strong> — Above average performance. Consider increasing Radio budget for better ROI.
+                        </div>
+                    {% elif resultFinal >= 8 %}
+                        <div class="alert alert-info d-flex gap-2 mb-0 small" role="alert">
+                            <i class="bi bi-graph-up flex-shrink-0 mt-1"></i>
+                            <strong>Moderate</strong> — There is room for improvement. Reallocate budget toward TV and Radio.
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger d-flex gap-2 mb-0 small" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mt-1"></i>
+                            <strong>Low</strong> — Budgets are below average. Consider significantly increasing advertising spend.
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
