@@ -38,3 +38,4 @@ def index():
 @regression_bp.route("/regression/definition")
 def regression_definition():
     return render_template("templateMachineSupervised/linearRegressionDefinition.html")
+
