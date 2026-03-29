@@ -8,10 +8,12 @@ def create_app():
     from app.controllers.controllerIndex.indexController import index_bp
     from app.controllers.controllersUseCases.airController import air_bp 
     from app.controllers.controllersUseCases.salesController import sales_bp
+    from app.controllers.controllersUseCases.customerController import customer_bp
+
     app.register_blueprint(weather_bp)
     app.register_blueprint(regression_bp)
     app.register_blueprint(index_bp)
     app.register_blueprint(air_bp) 
     app.register_blueprint(sales_bp)
-
+    app.register_blueprint(customer_bp)
     return app

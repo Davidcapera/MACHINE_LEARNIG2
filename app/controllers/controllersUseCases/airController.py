@@ -11,8 +11,6 @@ def air_quality():
         'pm25': 120,
         'pm10': 150
     }
-
-    # predicción
     result = predict(data['pm25'], data['pm10'])
 
     return render_template(
