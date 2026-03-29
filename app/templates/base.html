@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +19,8 @@
                 Machine Learning — Supervised Learning
             </span>
             <div class="dropdown" data-bs-theme="light">
-                <button class="btn btn-primary dropdown-toggle" type="button"
-                    data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside">
                     <i class="bi bi-list me-1"></i> Menu
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -28,29 +29,103 @@
                             <i class="bi bi-house me-2"></i>Home
                         </a>
                     </li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li>
                         <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
                             <i class="bi bi-grid me-2"></i>ML Use Cases <i class="bi bi-chevron-right ms-1"></i>
                         </a>
                         <div class="collapse" id="caseUseMenu">
                             <ul class="list-unstyled ps-3">
-                                <li><a class="dropdown-item" href="/caseWeather"><i class="bi bi-cloud-sun me-2"></i>Weather</a></li>
-                                <li><a class="dropdown-item" href="/sales"><i class="bi bi-graph-up me-2"></i>Sales Forecasting</a></li>
-                                <li><a class="dropdown-item" href="/air-quality"><i class="bi bi-wind me-2"></i>Air Quality</a></li>
-                                <li><a class="dropdown-item" href="/customer"><i class="bi bi-box me-2"></i>custumer</a></li>
+                                <li><a class="dropdown-item" href="/caseWeather"><i
+                                            class="bi bi-cloud-sun me-2"></i>Weather</a></li>
+                                <li><a class="dropdown-item" href="/sales"><i class="bi bi-graph-up me-2"></i>Sales
+                                        Forecasting</a></li>
+                                <li><a class="dropdown-item" href="/air-quality"><i class="bi bi-wind me-2"></i>Air
+                                        Quality</a></li>
+                                <li><a class="dropdown-item" href="/customer"><i class="bi bi-box me-2"></i>custumer</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
-                    <li><hr class="dropdown-divider"></li>
                     <li>
-                        <a class="dropdown-item" href="#regressionMenu" data-bs-toggle="collapse">
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#supervisedMenu" data-bs-toggle="collapse">
                             <i class="bi bi-diagram-3 me-2"></i>Supervised ML <i class="bi bi-chevron-right ms-1"></i>
                         </a>
-                        <div class="collapse" id="regressionMenu">
+
+                        <div class="collapse" id="supervisedMenu">
                             <ul class="list-unstyled ps-3">
-                                <li><a class="dropdown-item" href="/regression/definition"><i class="bi bi-book me-2"></i>Linear Regression — Basic Concepts</a></li>
-                                <li><a class="dropdown-item" href="/regression"><i class="bi bi-activity me-2"></i>Linear Regression — Application</a></li>
+
+                                <!-- Linear Regression -->
+                                <li>
+                                    <a class="dropdown-item" href="#linearMenu" data-bs-toggle="collapse">
+                                        <i class="bi bi-graph-up me-2"></i>Linear Regression
+                                    </a>
+
+                                    <div class="collapse" id="linearMenu">
+                                        <ul class="list-unstyled ps-3">
+                                            <li>
+                                                <a class="dropdown-item" href="/regression/definition">
+                                                    <i class="bi bi-book me-2"></i>Basic Concepts
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="/regression">
+                                                    <i class="bi bi-activity me-2"></i>Application
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <!-- Logistic Regression -->
+                                <li>
+                                    <a class="dropdown-item" href="#logisticMenu" data-bs-toggle="collapse">
+                                        <i class="bi bi-diagram-2 me-2"></i>Logistic Regression
+                                    </a>
+
+                                    <div class="collapse" id="logisticMenu">
+                                        <ul class="list-unstyled ps-3">
+                                            <li>
+                                                <a class="dropdown-item" href="/logistic/definition">
+                                                    <i class="bi bi-book me-2"></i>Basic Concepts
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="/logistic">
+                                                    <i class="bi bi-activity me-2"></i>Application
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <!-- Classification Model -->
+                                <li>
+                                    <a class="dropdown-item" href="#classificationMenu" data-bs-toggle="collapse">
+                                        <i class="bi bi-diagram-3 me-2"></i>Classification Model
+                                    </a>
+
+                                    <div class="collapse" id="classificationMenu">
+                                        <ul class="list-unstyled ps-3">
+                                            <li>
+                                                <a class="dropdown-item" href="/classification/definition">
+                                                    <i class="bi bi-book me-2"></i>Basic Concepts
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="/classification">
+                                                    <i class="bi bi-activity me-2"></i>Application
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
                             </ul>
                         </div>
                     </li>
@@ -97,4 +172,5 @@
     {% block extra_js %}{% endblock %}
 
 </body>
+
 </html>
