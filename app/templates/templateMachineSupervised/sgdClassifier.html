@@ -5,13 +5,46 @@
 
 <div class="p-4 mb-4 rounded-3 bg-gradient bg-success text-white shadow-lg text-center">
     <h2>🌧️ SGD Classifier — Rain Prediction</h2>
-    <p class="mb-0">Advanced classification model with real metrics and visual analytics</p>
+    <p class="mb-0">Supervised Machine Learning model for binary classification with performance analysis</p>
+</div>
+
+<div class="card shadow p-4 mb-4">
+    <h4> Model Explanation</h4>
+    <p>
+        The <strong>SGDClassifier</strong> (Stochastic Gradient Descent Classifier) is a supervised machine learning algorithm 
+        used for classification problems. It works by iteratively updating model parameters using small subsets of data, 
+        making it efficient for large-scale datasets.
+    </p>
+
+    <p>
+        In this application, the model is used to perform a <strong>binary classification task</strong>, predicting whether 
+        rain is expected or not based on environmental variables such as temperature, humidity, wind speed, and pressure.
+    </p>
+</div>
+
+<div class="card shadow p-4 mb-4">
+    <h4> Dataset Description</h4>
+    <p>
+        The dataset used is the <strong>Iris dataset</strong>, obtained from the Scikit-learn library.
+    </p>
+
+    <p>
+        Source:
+        <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html" target="_blank">
+            Scikit-learn Iris Dataset
+        </a>
+    </p>
+
+    <p>
+        The dataset contains measurements of iris flowers and was adapted into a binary classification problem to simulate 
+        a rain prediction scenario.
+    </p>
 </div>
 
 <div class="row mb-4">
     <div class="col-12">
         <div class="card shadow p-3 text-center">
-            <h5 class="mb-3">Model Explanation</h5>
+            <h5 class="mb-3">Model Visualization</h5>
             <img src="https://i.postimg.cc/pXzHvndc/prediccionlluvia.png" 
                  class="img-fluid rounded shadow"
                  style="max-height:400px; object-fit:contain;">
@@ -24,21 +57,19 @@
 <div class="col-md-4">
 <div class="card shadow p-4">
 
-<h5 class="mb-3">Prediction Form</h5>
+<h5>Prediction Form</h5>
 
 <form method="POST">
+<input class="form-control mb-3" name="f1" placeholder="Temperature" required>
+<input class="form-control mb-3" name="f2" placeholder="Humidity" required>
+<input class="form-control mb-3" name="f3" placeholder="Wind Speed" required>
+<input class="form-control mb-3" name="f4" placeholder="Pressure" required>
 
-<input class="form-control mb-3" name="f1" placeholder="🌡️ Temperature" required>
-<input class="form-control mb-3" name="f2" placeholder="💧 Humidity" required>
-<input class="form-control mb-3" name="f3" placeholder="🌬️ Wind Speed" required>
-<input class="form-control mb-3" name="f4" placeholder="ضغط Pressure" required>
-
-<button class="btn btn-success w-100 fw-bold">Predict</button>
-
+<button class="btn btn-success w-100">Predict</button>
 </form>
 
 {% if result %}
-<div class="alert alert-success mt-3 text-center fs-5 fw-bold shadow">
+<div class="alert alert-success mt-3 text-center fs-5 fw-bold">
 {{ result }}
 </div>
 {% endif %}
@@ -49,29 +80,25 @@
 <div class="col-md-8">
 <div class="card shadow p-4">
 
-<h5 class="mb-3">📊 Model Performance Dashboard</h5>
+<h5> Model Metrics</h5>
 
-<div class="row text-center mb-3">
-    <div class="col">
-        <div class="card p-2 bg-light">
-            <strong>Accuracy</strong><br>{{ metrics.accuracy }}
-        </div>
-    </div>
-    <div class="col">
-        <div class="card p-2 bg-light">
-            <strong>Precision</strong><br>{{ metrics.precision }}
-        </div>
-    </div>
-    <div class="col">
-        <div class="card p-2 bg-light">
-            <strong>Recall</strong><br>{{ metrics.recall }}
-        </div>
-    </div>
-    <div class="col">
-        <div class="card p-2 bg-light">
-            <strong>F1</strong><br>{{ metrics.f1 }}
-        </div>
-    </div>
+<ul class="list-group mb-3">
+<li class="list-group-item"><strong>Accuracy:</strong> {{ metrics.accuracy }}</li>
+<li class="list-group-item"><strong>Precision:</strong> {{ metrics.precision }}</li>
+<li class="list-group-item"><strong>Recall:</strong> {{ metrics.recall }}</li>
+<li class="list-group-item"><strong>F1 Score:</strong> {{ metrics.f1 }}</li>
+<li class="list-group-item"><strong>AUC:</strong> {{ metrics.auc }}</li>
+</ul>
+
+<div class="card p-3 mb-3 bg-light">
+    <h6> Metrics Explanation</h6>
+    <ul>
+        <li><strong>Accuracy:</strong> Percentage of correct predictions.</li>
+        <li><strong>Precision:</strong> How many predicted positives are correct.</li>
+        <li><strong>Recall:</strong> How many actual positives are detected.</li>
+        <li><strong>F1 Score:</strong> Balance between precision and recall.</li>
+        <li><strong>AUC:</strong> Measures model performance across all thresholds.</li>
+    </ul>
 </div>
 
 <div class="alert alert-info">
@@ -80,17 +107,17 @@
 
 <hr>
 
-<h6>🔥 Confusion Matrix</h6>
+<h6>Confusion Matrix</h6>
 <canvas id="confMatrixChart"></canvas>
 
 <hr>
 
-<h6>📊 Metrics Comparison</h6>
+<h6>Metrics Visualization</h6>
 <canvas id="metricsChart"></canvas>
 
 <hr>
 
-<h6>📈 ROC Curve (Real)</h6>
+<h6>ROC Curve</h6>
 <canvas id="rocChart"></canvas>
 
 </div>
@@ -105,7 +132,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-
 const metrics = {{ metrics | tojson }};
 
 new Chart(document.getElementById('metricsChart'), {
@@ -113,20 +139,8 @@ new Chart(document.getElementById('metricsChart'), {
     data: {
         labels: ['Accuracy','Precision','Recall','F1'],
         datasets: [{
-            label: 'Performance',
-            data: [
-                metrics.accuracy,
-                metrics.precision,
-                metrics.recall,
-                metrics.f1
-            ],
-            backgroundColor: ['#198754','#0d6efd','#ffc107','#dc3545']
+            data: [metrics.accuracy, metrics.precision, metrics.recall, metrics.f1]
         }]
-    },
-    options: {
-        scales: {
-            y: { beginAtZero: true, max: 1 }
-        }
     }
 });
 
@@ -135,14 +149,12 @@ new Chart(document.getElementById('confMatrixChart'), {
     data: {
         labels: ['TP','FP','FN','TN'],
         datasets: [{
-            label: 'Confusion Matrix',
             data: [
                 metrics.confusion[1][1],
                 metrics.confusion[0][1],
                 metrics.confusion[1][0],
                 metrics.confusion[0][0]
-            ],
-            backgroundColor: ['#198754','#dc3545','#ffc107','#0d6efd']
+            ]
         }]
     }
 });
@@ -152,25 +164,10 @@ new Chart(document.getElementById('rocChart'), {
     data: {
         labels: metrics.fpr,
         datasets: [{
-            label: 'ROC Curve (AUC = ' + metrics.auc + ')',
-            data: metrics.tpr,
-            borderColor: '#198754',
-            borderWidth: 3,
-            tension: 0.4
+            data: metrics.tpr
         }]
-    },
-    options: {
-        scales: {
-            x: {
-                title: { display: true, text: 'False Positive Rate' }
-            },
-            y: {
-                title: { display: true, text: 'True Positive Rate' }
-            }
-        }
     }
 });
-
 </script>
 
 {% endblock %}
