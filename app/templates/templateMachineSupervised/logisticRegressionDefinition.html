@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}Logistic Regression Concepts{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mt-4 px-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-diagram-3"></i>
+                Logistic Regression — Basic Concepts
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Definition -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-info-circle"></i>
+                    What is Logistic Regression?
+                </h5>
+
+                <p>
+                    Logistic Regression is a supervised machine learning algorithm used for
+                    classification problems. Unlike linear regression, logistic regression
+                    predicts categorical outcomes by estimating probabilities using the
+                    sigmoid function.
+                </p>
+
+                <p>
+                    The model outputs values between 0 and 1, which represent the probability
+                    of belonging to a specific class.
+                </p>
+
+                <div class="text-center mt-3">
+                    <img src="{{ url_for('static', filename='logistic_intro.png') }}" class="img-fluid rounded shadow"
+                        alt="Logistic regression concept diagram" title="Logistic regression concept diagram">
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Binary Classification -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-diagram-3"></i>
+                    Binary Classification
+                </h5>
+
+                <p>
+                    Logistic regression is primarily used for binary classification tasks
+                    where the output variable has two possible categories.
+                </p>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Spam / Not Spam</li>
+                            <li>Fraud / Not Fraud</li>
+                            <li>Pass / Fail</li>
+                            <li>Yes / No</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Customer / Not Customer</li>
+                            <li>Disease / Not Disease</li>
+                            <li>Approved / Rejected</li>
+                            <li>Click / Not Click</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Sigmoid Function -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-graph-up"></i>
+                    Sigmoid Function
+                </h5>
+
+                <p>
+                    Logistic regression uses the sigmoid function to convert linear
+                    predictions into probabilities between 0 and 1.
+                </p>
+
+                <div class="alert alert-light text-center fw-bold">
+                    P(Y=1) = 1 / (1 + e^-x)
+                </div>
+
+                <p>
+                    If the probability is greater than 0.5, the model predicts class 1.
+                    Otherwise, it predicts class 0.
+                </p>
+
+                <div class="text-center mt-3">
+                    <img src="{{ url_for('static', filename='sigmoid_curve.png') }}" class="img-fluid rounded shadow"
+                        alt="Sigmoid function curve" title="Sigmoid function curve">
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Variables -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-cpu"></i>
+                    Independent and Dependent Variables
+                </h5>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <h6 class="fw-bold">Independent Variables (X)</h6>
+
+                        <ul>
+                            <li>Age</li>
+                            <li>Income</li>
+                            <li>Temperature</li>
+                            <li>Study Hours</li>
+                            <li>Marketing Budget</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <h6 class="fw-bold">Dependent Variable (Y)</h6>
+
+                        <ul>
+                            <li>0 → Negative Class</li>
+                            <li>1 → Positive Class</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Decision Boundary -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-slash-circle"></i>
+                    Decision Boundary
+                </h5>
+
+                <p>
+                    Logistic regression creates a decision boundary that separates
+                    different classes based on probability values.
+                </p>
+
+                <p>
+                    The threshold is typically 0.5, but it can be adjusted depending
+                    on the problem.
+                </p>
+
+            </div>
+
+            <hr>
+
+            <!-- Example -->
+            <div>
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-lightbulb"></i>
+                    Example Application
+                </h5>
+
+                <p>
+                    Logistic regression can predict whether a student will pass
+                    based on study hours. The model calculates the probability
+                    of passing and assigns a class.
+                </p>
+
+                <div class="text-center mt-3">
+                    <img src="{{ url_for('static', filename='logistic_example.png') }}" class="img-fluid rounded shadow"
+                        alt="Logistic regression example" title="Linear regression application example">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

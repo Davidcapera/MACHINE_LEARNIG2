@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}Classification Model Concepts{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mt-4 px-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-diagram-2"></i>
+                Classification Model — Basic Concepts
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Definition -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-info-circle"></i>
+                    What is a Classification Model?
+                </h5>
+
+                <p>
+                    A classification model is a supervised machine learning algorithm
+                    used to categorize input data into predefined classes.
+                </p>
+
+                <p>
+                    The model learns patterns from labeled training data and assigns
+                    new observations to the most probable category.
+                </p>
+
+                <div class="text-center mt-3">
+                    <img src="{{ url_for('static', filename='classification_intro.png') }}"
+                        class="img-fluid rounded shadow" alt="Classification model diagram"
+                        title="Classification model diagram">
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Types -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-diagram-3"></i>
+                    Classification Types
+                </h5>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <h6 class="fw-bold">Binary Classification</h6>
+                        <p>Two possible classes</p>
+
+                        <ul>
+                            <li>Yes / No</li>
+                            <li>Spam / Not Spam</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <h6 class="fw-bold">Multi-class Classification</h6>
+
+                        <ul>
+                            <li>Sunny</li>
+                            <li>Rainy</li>
+                            <li>Cloudy</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <h6 class="fw-bold">Multi-label Classification</h6>
+
+                        <ul>
+                            <li>Multiple outputs</li>
+                            <li>Image tagging</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Variables -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-cpu"></i>
+                    Input Variables
+                </h5>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Temperature</li>
+                            <li>Humidity</li>
+                            <li>Wind Speed</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Age</li>
+                            <li>Income</li>
+                            <li>Pressure</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Output -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-bullseye"></i>
+                    Output Classes
+                </h5>
+
+                <p>
+                    The classification model assigns input data to predefined categories.
+                </p>
+
+                <ul>
+                    <li>Sunny</li>
+                    <li>Rainy</li>
+                    <li>Cloudy</li>
+                </ul>
+
+            </div>
+
+            <hr>
+
+            <!-- Decision Boundary -->
+            <div class="mb-5">
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-diagram-2"></i>
+                    Decision Boundary
+                </h5>
+
+                <p>
+                    Classification models separate data into regions using decision boundaries.
+                    These boundaries divide the feature space into class regions.
+                </p>
+
+                <div class="text-center mt-3">
+                    <img src="{{ url_for('static', filename='decision_boundary.png') }}"
+                        class="img-fluid rounded shadow" alt="Decision boundary diagram"
+                        title="Decision boundary diagram">
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Example -->
+            <div>
+
+                <h5 class="fw-bold">
+                    <i class="bi bi-lightbulb"></i>
+                    Example Application
+                </h5>
+
+                <p>
+                    A classification model can predict weather conditions based on
+                    temperature and humidity.
+                </p>
+
+                <div class="text-center mt-3">
+                    <img src="{{ url_for('static', filename='classification_example.png') }}"
+                        class="img-fluid rounded shadow" alt="Classification example" title="Classification example">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
