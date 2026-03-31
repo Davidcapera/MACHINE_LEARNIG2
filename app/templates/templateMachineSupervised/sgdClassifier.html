@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}SGD Classifier — Rain Prediction{% endblock %}
+
+{% block content %}
+
+<div class="p-4 mb-4 rounded-3 bg-gradient bg-success text-white shadow-lg text-center">
+    <h2>🌧️ SGD Classifier — Rain Prediction</h2>
+    <p class="mb-0">Advanced classification model with real metrics and visual analytics</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow p-3 text-center">
+            <h5 class="mb-3">Model Explanation</h5>
+            <img src="https://i.postimg.cc/pXzHvndc/prediccionlluvia.png" 
+                 class="img-fluid rounded shadow"
+                 style="max-height:400px; object-fit:contain;">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+<div class="col-md-4">
+<div class="card shadow p-4">
+
+<h5 class="mb-3">Prediction Form</h5>
+
+<form method="POST">
+
+<input class="form-control mb-3" name="f1" placeholder="🌡️ Temperature" required>
+<input class="form-control mb-3" name="f2" placeholder="💧 Humidity" required>
+<input class="form-control mb-3" name="f3" placeholder="🌬️ Wind Speed" required>
+<input class="form-control mb-3" name="f4" placeholder="ضغط Pressure" required>
+
+<button class="btn btn-success w-100 fw-bold">Predict</button>
+
+</form>
+
+{% if result %}
+<div class="alert alert-success mt-3 text-center fs-5 fw-bold shadow">
+{{ result }}
+</div>
+{% endif %}
+
+</div>
+</div>
+
+<div class="col-md-8">
+<div class="card shadow p-4">
+
+<h5 class="mb-3">📊 Model Performance Dashboard</h5>
+
+<div class="row text-center mb-3">
+    <div class="col">
+        <div class="card p-2 bg-light">
+            <strong>Accuracy</strong><br>{{ metrics.accuracy }}
+        </div>
+    </div>
+    <div class="col">
+        <div class="card p-2 bg-light">
+            <strong>Precision</strong><br>{{ metrics.precision }}
+        </div>
+    </div>
+    <div class="col">
+        <div class="card p-2 bg-light">
+            <strong>Recall</strong><br>{{ metrics.recall }}
+        </div>
+    </div>
+    <div class="col">
+        <div class="card p-2 bg-light">
+            <strong>F1</strong><br>{{ metrics.f1 }}
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-info">
+<strong>Interpretation:</strong> {{ interpretation }}
+</div>
+
+<hr>
+
+<h6>🔥 Confusion Matrix</h6>
+<canvas id="confMatrixChart"></canvas>
+
+<hr>
+
+<h6>📊 Metrics Comparison</h6>
+<canvas id="metricsChart"></canvas>
+
+<hr>
+
+<h6>📈 ROC Curve (Real)</h6>
+<canvas id="rocChart"></canvas>
+
+</div>
+</div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const metrics = {{ metrics | tojson }};
+
+new Chart(document.getElementById('metricsChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Accuracy','Precision','Recall','F1'],
+        datasets: [{
+            label: 'Performance',
+            data: [
+                metrics.accuracy,
+                metrics.precision,
+                metrics.recall,
+                metrics.f1
+            ],
+            backgroundColor: ['#198754','#0d6efd','#ffc107','#dc3545']
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true, max: 1 }
+        }
+    }
+});
+
+new Chart(document.getElementById('confMatrixChart'), {
+    type: 'bar',
+    data: {
+        labels: ['TP','FP','FN','TN'],
+        datasets: [{
+            label: 'Confusion Matrix',
+            data: [
+                metrics.confusion[1][1],
+                metrics.confusion[0][1],
+                metrics.confusion[1][0],
+                metrics.confusion[0][0]
+            ],
+            backgroundColor: ['#198754','#dc3545','#ffc107','#0d6efd']
+        }]
+    }
+});
+
+new Chart(document.getElementById('rocChart'), {
+    type: 'line',
+    data: {
+        labels: metrics.fpr,
+        datasets: [{
+            label: 'ROC Curve (AUC = ' + metrics.auc + ')',
+            data: metrics.tpr,
+            borderColor: '#198754',
+            borderWidth: 3,
+            tension: 0.4
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                title: { display: true, text: 'False Positive Rate' }
+            },
+            y: {
+                title: { display: true, text: 'True Positive Rate' }
+            }
+        }
+    }
+});
+
+</script>
+
+{% endblock %}

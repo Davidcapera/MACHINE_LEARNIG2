@@ -1,100 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <title>{% block title %}Machine Learning{% endblock %}</title>
-    {% block extra_css %}{% endblock %}
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+        <title>{% block title %}Machine Learning{% endblock %}</title>
+        {% block extra_css %}{% endblock %}
+    </head>
 
-<body class="bg-light">
+    <body class="bg-light">
 
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid px-4">
-            <span class="navbar-brand fw-bold">
-                <i class="bi bi-robot me-2"></i>
-                Machine Learning — Supervised Learning
-            </span>
-            <div class="dropdown" data-bs-theme="light">
-                <button class="btn btn-primary dropdown-toggle" type="button"
-                    data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                    <i class="bi bi-list me-1"></i> Menu
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="/">
-                            <i class="bi bi-house me-2"></i>Home
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
-                            <i class="bi bi-grid me-2"></i>ML Use Cases <i class="bi bi-chevron-right ms-1"></i>
-                        </a>
-                        <div class="collapse" id="caseUseMenu">
-                            <ul class="list-unstyled ps-3">
-                                <li><a class="dropdown-item" href="/caseWeather"><i class="bi bi-cloud-sun me-2"></i>Weather</a></li>
-                                <li><a class="dropdown-item" href="/sales"><i class="bi bi-graph-up me-2"></i>Sales Forecasting</a></li>
-                                <li><a class="dropdown-item" href="/air-quality"><i class="bi bi-wind me-2"></i>Air Quality</a></li>
-                                <li><a class="dropdown-item" href="/customer"><i class="bi bi-box me-2"></i>custumer</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item" href="#regressionMenu" data-bs-toggle="collapse">
-                            <i class="bi bi-diagram-3 me-2"></i>Supervised ML <i class="bi bi-chevron-right ms-1"></i>
-                        </a>
-                        <div class="collapse" id="regressionMenu">
-                            <ul class="list-unstyled ps-3">
-                                <li><a class="dropdown-item" href="/regression/definition"><i class="bi bi-book me-2"></i>Linear Regression — Basic Concepts</a></li>
-                                <li><a class="dropdown-item" href="/regression"><i class="bi bi-activity me-2"></i>Linear Regression — Application</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container-fluid px-4">
+                <span class="navbar-brand fw-bold">
+                    <i class="bi bi-robot me-2"></i>
+                    Machine Learning — Supervised Learning
+                </span>
+                <div class="dropdown" data-bs-theme="light">
+                    <button class="btn btn-primary dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                        <i class="bi bi-list me-1"></i> Menu
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="/">
+                                <i class="bi bi-house me-2"></i>Home
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
+                                <i class="bi bi-grid me-2"></i>ML Use Cases <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                            <div class="collapse" id="caseUseMenu">
+                                <ul class="list-unstyled ps-3">
+                                    <li><a class="dropdown-item" href="/caseWeather"><i class="bi bi-cloud-sun me-2"></i>Weather</a></li>
+                                    <li><a class="dropdown-item" href="/sales"><i class="bi bi-graph-up me-2"></i>Sales Forecasting</a></li>
+                                    <li><a class="dropdown-item" href="/air-quality"><i class="bi bi-wind me-2"></i>Air Quality</a></li>
+                                    <li><a class="dropdown-item" href="/customer"><i class="bi bi-box me-2"></i>custumer</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="#regressionMenu" data-bs-toggle="collapse">
+                                <i class="bi bi-diagram-3 me-2"></i>Supervised ML <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                            <div class="collapse" id="regressionMenu">
+                                <ul class="list-unstyled ps-3">
+                                    <li><a class="dropdown-item" href="/regression/definition"><i class="bi bi-book me-2"></i>Linear Regression — Basic Concepts</a></li>
+                                    <li><a class="dropdown-item" href="/regression"><i class="bi bi-activity me-2"></i>Linear Regression — Application</a></li>
+                                </ul>
+                            </div>
+                            <li><hr class="dropdown-divider"></li>
 
-    <main class="container-fluid mt-4 px-4">
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer class="mt-5 py-4 bg-primary text-white">
-        <div class="container-fluid px-4">
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-3 mb-md-0">
-                    <h6 class="fw-bold mb-1">
-                        <i class="bi bi-robot me-2"></i>
-                        Machine Learning — Supervised Learning
-                    </h6>
-                    <p class="mb-0 small text-white-50">
-                        Educational project demonstrating Machine Learning use cases and Linear Regression concepts.
-                    </p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="mb-1 small text-white-50">
-                        <i class="bi bi-cpu me-1"></i>
-                        Models: Decision Tree · Linear Regression
-                    </p>
-                    <p class="mb-0 small text-white-50">
-                        <i class="bi bi-stack me-1"></i>
-                        Built with Flask · Bootstrap 5 · Python
-                    </p>
+                            <li>
+                                <a class="dropdown-item" href="/sgdClassifier">
+                                    <i class="bi bi-cpu me-2"></i>SGD Classifier — Rain Prediction
+                                </a>
+                            </li>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <hr class="my-3 border-white opacity-25">
-            <p class="text-center mb-0 small text-white-50">
-                © 2026 Machine Learning Project — All rights reserved.
-            </p>
-        </div>
-    </footer>
+        </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {% block extra_js %}{% endblock %}
+        <main class="container-fluid mt-4 px-4">
+            {% block content %}{% endblock %}
+        </main>
 
-</body>
-</html>
+        <footer class="mt-5 py-4 bg-primary text-white">
+            <div class="container-fluid px-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <h6 class="fw-bold mb-1">
+                            <i class="bi bi-robot me-2"></i>
+                            Machine Learning — Supervised Learning
+                        </h6>
+                        <p class="mb-0 small text-white-50">
+                            Educational project demonstrating Machine Learning use cases and Linear Regression concepts.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-1 small text-white-50">
+                            <i class="bi bi-cpu me-1"></i>
+                            Models: Decision Tree · Linear Regression
+                        </p>
+                        <p class="mb-0 small text-white-50">
+                            <i class="bi bi-stack me-1"></i>
+                            Built with Flask · Bootstrap 5 · Python
+                        </p>
+                    </div>
+                </div>
+                <hr class="my-3 border-white opacity-25">
+                <p class="text-center mb-0 small text-white-50">
+                    © 2026 Machine Learning Project — All rights reserved.
+                </p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        {% block extra_js %}{% endblock %}
+
+    </body>
+    </html>
