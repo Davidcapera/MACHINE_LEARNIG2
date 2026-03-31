@@ -1,0 +1,559 @@
+{% extends "base.html" %}
+
+{% block title %}Rain Prediction — Logistic Regression{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ── -->
+<div class="p-4 mb-4 rounded-3 bg-primary text-white">
+    <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-cloud-rain-fill" style="font-size: 2.8rem; opacity: 0.9;"></i>
+        <div>
+            <h3 class="fw-bold mb-1">Rain Prediction — Logistic Regression</h3>
+            <p class="mb-0 opacity-75">
+                Predicting whether it will rain based on weather conditions
+                using Binary Logistic Regression.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ── 1. Problem Description ── -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-info-circle-fill fs-5"></i>
+        <span class="fw-bold fs-5">1 · Problem Description</span>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-uppercase text-primary fw-semibold small mb-1">
+            <i class="bi bi-bookmark-fill me-1"></i> Title
+        </p>
+        <p class="fw-semibold fs-5 mb-0">Weather-based Rain Classification</p>
+        <hr>
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-exclamation-circle-fill me-1"></i> Problem Description
+        </p>
+        <p class="text-secondary mb-0">
+            Knowing whether it will rain is critical for agriculture, logistics and daily planning.
+            This case applies <strong>Binary Logistic Regression</strong> to classify weather
+            observations as <strong>rain</strong> or <strong>no rain</strong> based on five
+            atmospheric variables: Temperature, Humidity, Wind Speed, Cloud Cover and Pressure.
+            The model outputs both a class prediction and a <strong>probability of rain</strong>.
+        </p>
+        <hr>
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-cpu-fill me-1"></i> Type of Machine Learning
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-0">
+            <span class="badge bg-primary fs-6 px-3 py-2">
+                <i class="bi bi-diagram-3 me-1"></i> Supervised Learning
+            </span>
+            <span class="badge bg-secondary fs-6 px-3 py-2">
+                <i class="bi bi-list-task me-1"></i> Binary Classification
+            </span>
+            <span class="badge bg-info text-dark fs-6 px-3 py-2">
+                <i class="bi bi-graph-up me-1"></i> Logistic Regression
+            </span>
+        </div>
+        <hr>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-arrow-right-circle-fill me-1"></i> Input Features
+                </p>
+                <div class="list-group list-group-flush">
+                    {% for i, feat, desc in [
+                        (1, 'Temperature (°C)',  'Ambient temperature. Range: 10 – 35 °C'),
+                        (2, 'Humidity (%)',       'Relative humidity. Range: 30 – 100 %'),
+                        (3, 'Wind Speed (km/h)',  'Wind speed. Range: 0 – 20 km/h'),
+                        (4, 'Cloud Cover (%)',    'Sky cloud coverage. Range: 0 – 100 %'),
+                        (5, 'Pressure (hPa)',     'Atmospheric pressure. Range: 980 – 1050 hPa'),
+                    ] %}
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-2">
+                        <span class="badge bg-primary rounded-circle p-2 mt-1">{{ i }}</span>
+                        <div>
+                            <p class="fw-semibold mb-0">{{ feat }}</p>
+                            <p class="text-muted small mb-0">{{ desc }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-arrow-left-circle-fill text-success me-1"></i> Expected Output
+                </p>
+                <p class="text-muted small mb-3">The model returns one of two classes:</p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <span class="badge bg-info text-dark px-3 py-2 fs-6">
+                        <i class="bi bi-cloud-rain-fill me-1"></i> Rain
+                    </span>
+                    <span class="badge bg-warning text-dark px-3 py-2 fs-6">
+                        <i class="bi bi-sun-fill me-1"></i> No Rain
+                    </span>
+                </div>
+                <hr>
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-globe-americas me-1"></i> Real-World Relevance
+                </p>
+                <div class="alert alert-primary d-flex gap-3 mb-0" role="alert">
+                    <i class="bi bi-lightbulb-fill fs-4 flex-shrink-0 mt-1"></i>
+                    <p class="mb-0 text-secondary">
+                        Rain prediction supports smarter decisions in
+                        <strong>agriculture</strong> (irrigation planning),
+                        <strong>logistics</strong> (route optimization) and
+                        <strong>civil protection</strong> (flood early warnings).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── 2. Dataset Explanation ── -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-table fs-5"></i>
+        <span class="fw-bold fs-5">2 · Dataset Explanation</span>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-secondary mb-4">
+            The <strong>Weather Conditions dataset</strong> contains 2,500 atmospheric observations.
+            Each row records five weather variables and whether it rained or not.
+        </p>
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-database-fill text-primary fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Total rows</p>
+                    <p class="fw-bold fs-4 text-primary mb-0">{{ stats.total_samples }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-mortarboard-fill text-success fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Training 80%</p>
+                    <p class="fw-bold fs-4 text-success mb-0">{{ stats.train_samples }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-clipboard-check-fill text-danger fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Test 20%</p>
+                    <p class="fw-bold fs-4 text-danger mb-0">{{ stats.test_samples }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-cloud-rain-fill text-info fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">Rain cases</p>
+                    <p class="fw-bold fs-4 text-info mb-0">{{ stats.rain_count }}</p>
+                </div>
+            </div>
+            <div class="col-6 col-md">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi bi-sun-fill text-warning fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">No Rain cases</p>
+                    <p class="fw-bold fs-4 text-warning mb-0">{{ stats.no_rain_count }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- class imbalance alert -->
+        <div class="alert alert-warning d-flex gap-3 mb-0" role="alert">
+            <i class="bi bi-exclamation-triangle-fill fs-4 flex-shrink-0 mt-1"></i>
+            <p class="mb-0 text-secondary">
+                <strong>Class imbalance detected.</strong>
+                Rain cases represent only
+                <strong>{{ ((stats.rain_count / stats.total_samples) * 100) | round(1) }}%</strong>
+                of the dataset. The model uses
+                <strong>StandardScaler</strong> and is evaluated with Precision, Recall
+                and AUC — not just accuracy — to account for this imbalance.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ── 3. Variables Used ── -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-list-columns fs-5"></i>
+        <span class="fw-bold fs-5">3 · Variables Used</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th class="ps-4">Column</th>
+                        <th>Role</th>
+                        <th>Unit</th>
+                        <th>Range</th>
+                        <th class="pe-4">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for col, role, badge, unit, rng, desc in [
+                        ('Temperature', 'Feature X₁', 'primary', '°C',  '10 – 35',      'Ambient air temperature'),
+                        ('Humidity',    'Feature X₂', 'danger',  '%',   '30 – 100',     'Relative atmospheric humidity'),
+                        ('Wind_Speed',  'Feature X₃', 'success', 'km/h','0 – 20',       'Wind speed at ground level'),
+                        ('Cloud_Cover', 'Feature X₄', 'warning', '%',   '0 – 100',      'Percentage of sky covered by clouds'),
+                        ('Pressure',    'Feature X₅', 'info',    'hPa', '980 – 1050',   'Atmospheric pressure'),
+                        ('Rain',        'Target y',   'secondary','—',  'rain/no rain', 'Whether it rained or not'),
+                    ] %}
+                    <tr>
+                        <td class="ps-4"><code class="text-{{ badge }}">{{ col }}</code></td>
+                        <td><span class="badge bg-{{ badge }} bg-opacity-25 text-{{ badge }}">{{ role }}</span></td>
+                        <td>{{ unit }}</td>
+                        <td>{{ rng }}</td>
+                        <td class="pe-4">{{ desc }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ── 4. Data Preparation ── -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-gear-fill fs-5"></i>
+        <span class="fw-bold fs-5">4 · Data Preparation</span>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-4">
+            <div class="col-md-7">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-list-check me-1"></i> Preparation Pipeline
+                </p>
+                <div class="list-group list-group-flush">
+                    {% for badge, title, desc in [
+                        ('primary', 'Load CSV', 'Read weatherconditions.csv with Pandas. 2,500 records, no missing values.'),
+                        ('success', 'Encode target', 'Convert Rain column: "rain" → 1, "no rain" → 0 for binary classification.'),
+                        ('danger',  'Train / Test Split — 80% / 20%', 'train_test_split(test_size=0.20, random_state=42). Stratified split to preserve class ratio.'),
+                        ('warning', 'StandardScaler', 'Logistic Regression is sensitive to feature scale. Fit scaler on train set only, then transform both sets.'),
+                        ('info',    'Fit & Evaluate', 'LogisticRegression().fit(X_train, y_train). Evaluated with Accuracy, Precision, Recall, F1 and AUC-ROC.'),
+                    ] %}
+                    <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+                        <span class="badge bg-{{ badge }} rounded-circle p-2 mt-1">{{ loop.index }}</span>
+                        <div>
+                            <p class="fw-semibold mb-0">{{ title }}</p>
+                            <p class="text-muted small mb-0">{{ desc }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-5">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-pie-chart-fill me-1"></i> Dataset Split
+                </p>
+                <div class="row g-2 mb-3">
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-2 text-center border">
+                            <p class="text-muted small mb-1">Total</p>
+                            <p class="fw-bold text-primary mb-0">{{ stats.total_samples }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-2 text-center border">
+                            <p class="text-muted small mb-1">Train</p>
+                            <p class="fw-bold text-success mb-0">{{ stats.train_samples }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="bg-light rounded-3 p-2 text-center border">
+                            <p class="text-muted small mb-1">Test</p>
+                            <p class="fw-bold text-danger mb-0">{{ stats.test_samples }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-1 small text-muted">
+                    <span>Training (80%)</span><span>Test (20%)</span>
+                </div>
+                <div class="progress mb-3" style="height:10px;">
+                    <div class="progress-bar bg-primary" style="width:80%"></div>
+                    <div class="progress-bar bg-danger" style="width:20%"></div>
+                </div>
+                <div class="alert alert-primary d-flex gap-2 mb-0 small" role="alert">
+                    <i class="bi bi-info-circle-fill flex-shrink-0 mt-1"></i>
+                    Fixed <code>random_state=42</code> ensures reproducibility across runs.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── 5. Graphs ── -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-graph-up fs-5"></i>
+        <span class="fw-bold fs-5">5 · Regression Graphs</span>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-muted small mb-3">
+            Distribution of each feature split by class — shows which variables
+            separate rain from no-rain observations.
+        </p>
+        <img src="data:image/png;base64,{{ featureGraph }}"
+             alt="Feature distributions" class="img-fluid w-100 rounded shadow-sm mb-4">
+
+        <div class="row g-4">
+            <div class="col-md-5">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-crosshair me-1"></i> Confusion Matrix (Test Set)
+                </p>
+                <img src="data:image/png;base64,{{ cmGraph }}"
+                     alt="Confusion Matrix"
+                     class="img-fluid rounded shadow-sm" style="max-height:300px;">
+            </div>
+            <div class="col-md-7">
+                <p class="text-uppercase text-primary fw-semibold small mb-2">
+                    <i class="bi bi-activity me-1"></i> ROC Curve (Test Set)
+                </p>
+                <img src="data:image/png;base64,{{ rocGraph }}"
+                     alt="ROC Curve"
+                     class="img-fluid rounded shadow-sm" style="max-height:300px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── 6. Interpretation ── -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-clipboard-data-fill fs-5"></i>
+        <span class="fw-bold fs-5">6 · Interpretation of Results</span>
+    </div>
+    <div class="card-body p-4">
+
+        <div class="row g-3 mb-4">
+            {% for icon, color, label, val in [
+                ('bi-bullseye',            'primary', 'Accuracy Train', stats.accuracy_train),
+                ('bi-check-circle-fill',   'success', 'Accuracy Test',  stats.accuracy_test),
+                ('bi-crosshair',           'danger',  'Precision Rain', stats.precision_rain),
+                ('bi-arrow-repeat',        'warning', 'Recall Rain',    stats.recall_rain),
+                ('bi-graph-up-arrow',      'info',    'F1 Rain',        stats.f1_rain),
+                ('bi-pie-chart-fill',      'secondary','AUC-ROC',       stats.auc),
+            ] %}
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="bg-light rounded-3 p-3 text-center border">
+                    <i class="bi {{ icon }} text-{{ color }} fs-3 mb-1 d-block"></i>
+                    <p class="text-muted small mb-1">{{ label }}</p>
+                    <p class="fw-bold fs-5 text-{{ color }} mb-0">{{ val }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+            <i class="bi bi-function me-1"></i> Model Coefficients
+        </p>
+        <div class="table-responsive mb-4">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Feature</th>
+                        <th>Coefficient</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for feat, interp in [
+                        ('Temperature', 'Higher temperature slightly reduces rain probability.'),
+                        ('Humidity',    'Higher humidity strongly increases rain probability.'),
+                        ('Wind_Speed',  'Wind speed has a moderate effect on rain.'),
+                        ('Cloud_Cover', 'More cloud cover increases rain probability.'),
+                        ('Pressure',    'Higher pressure is associated with less rain.'),
+                    ] %}
+                    <tr>
+                        <td><code>{{ feat }}</code></td>
+                        <td>
+                            <span class="fw-bold {{ 'text-danger' if stats.coefficients[feat] < 0 else 'text-success' }}">
+                                {{ stats.coefficients[feat] }}
+                            </span>
+                        </td>
+                        <td class="text-muted">{{ interp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive mb-4">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code class="text-primary">Accuracy Test</code></td>
+                        <td>{{ stats.accuracy_test }}</td>
+                        <td class="text-muted">{{ (stats.accuracy_test * 100)|round(1) }}% of test observations correctly classified.</td>
+                    </tr>
+                    <tr>
+                        <td><code class="text-danger">Precision Rain</code></td>
+                        <td>{{ stats.precision_rain }}</td>
+                        <td class="text-muted">Of all predicted rain cases, {{ (stats.precision_rain * 100)|round(1) }}% were actually rain.</td>
+                    </tr>
+                    <tr>
+                        <td><code class="text-warning">Recall Rain</code></td>
+                        <td>{{ stats.recall_rain }}</td>
+                        <td class="text-muted">The model detected {{ (stats.recall_rain * 100)|round(1) }}% of all real rain cases.</td>
+                    </tr>
+                    <tr>
+                        <td><code class="text-info">AUC-ROC</code></td>
+                        <td>{{ stats.auc }}</td>
+                        <td class="text-muted">{{ (stats.auc * 100)|round(1) }}% probability the model ranks a rain case above a no-rain case.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        {% if (stats.accuracy_train - stats.accuracy_test) < 0.03 %}
+        <div class="alert alert-success d-flex gap-3 mb-0" role="alert">
+            <i class="bi bi-check-circle-fill fs-4 flex-shrink-0 mt-1"></i>
+            <p class="mb-0">
+                <strong>No overfitting detected.</strong>
+                Accuracy Train and Test are very close
+                ({{ stats.accuracy_train }} vs {{ stats.accuracy_test }}).
+            </p>
+        </div>
+        {% else %}
+        <div class="alert alert-warning d-flex gap-3 mb-0" role="alert">
+            <i class="bi bi-exclamation-triangle-fill fs-4 flex-shrink-0 mt-1"></i>
+            <p class="mb-0">
+                <strong>Mild overfitting.</strong>
+                Gap between Accuracy Train ({{ stats.accuracy_train }})
+                and Test ({{ stats.accuracy_test }}).
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- ── 7. Prediction Form ── -->
+<div class="row g-4 mb-4">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+                <i class="bi bi-sliders fs-5"></i>
+                <span class="fw-bold fs-5">7 · Prediction Form</span>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted small mb-3">
+                    Enter current weather conditions to predict whether it will rain.
+                </p>
+                <form action="/rain-prediction" method="POST">
+                    {% for name, label, color, icon, placeholder, hint in [
+                        ('temperature', 'Temperature', 'primary', 'thermometer-half', '22.5', '10 – 35 °C'),
+                        ('humidity',    'Humidity',    'danger',  'droplet-half',     '75.0', '30 – 100 %'),
+                        ('wind_speed',  'Wind Speed',  'success', 'wind',             '8.5',  '0 – 20 km/h'),
+                        ('cloud_cover', 'Cloud Cover', 'warning', 'clouds-fill',      '60.0', '0 – 100 %'),
+                        ('pressure',    'Pressure',    'info',    'speedometer',      '1010', '980 – 1050 hPa'),
+                    ] %}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold text-{{ color }}">
+                            <i class="bi bi-{{ icon }} me-1"></i>{{ label }}
+                        </label>
+                        <input type="number" class="form-control" name="{{ name }}"
+                               step="0.1" min="0" placeholder="e.g. {{ placeholder }}"
+                               value="{{ request.form[name] if request.method == 'POST' else '' }}"
+                               required>
+                        <div class="form-text">Range: {{ hint }}</div>
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary w-100 fw-semibold">
+                        <i class="bi bi-lightning-charge-fill me-1"></i>Predict Rain
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Result ── -->
+    <div class="col-md-7">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+                <i class="bi bi-graph-up-arrow fs-5"></i>
+                <span class="fw-bold fs-5">Prediction Result</span>
+            </div>
+            <div class="card-body p-4 d-flex flex-column justify-content-center" style="min-height:300px">
+
+                {% if fail %}
+                    <div class="alert alert-danger d-flex gap-2" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mt-1"></i>
+                        {{ fail }}
+                    </div>
+
+                {% elif result is none %}
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-cloud-question fs-1 opacity-25 d-block mb-3"></i>
+                        <p class="small mb-0">Fill in the form and click <em>Predict Rain</em> to see the result here.</p>
+                    </div>
+
+                {% else %}
+                    <p class="text-muted mb-3 text-center">The model predicts that the weather will be:</p>
+
+                    {% if result == "rain" %}
+                        <div class="text-center mb-3">
+                            <span class="badge bg-info text-dark fs-3 px-4 py-3">
+                                <i class="bi bi-cloud-rain-fill me-2"></i>Rain
+                            </span>
+                        </div>
+                    {% else %}
+                        <div class="text-center mb-3">
+                            <span class="badge bg-warning text-dark fs-3 px-4 py-3">
+                                <i class="bi bi-sun-fill me-2"></i>No Rain
+                            </span>
+                        </div>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-center gap-4 text-muted small mb-3">
+                        <span><i class="bi bi-thermometer-half me-1 text-primary"></i>{{ request.form.temperature }} °C</span>
+                        <span><i class="bi bi-droplet-half me-1 text-danger"></i>{{ request.form.humidity }} %</span>
+                        <span><i class="bi bi-wind me-1 text-success"></i>{{ request.form.wind_speed }} km/h</span>
+                        <span><i class="bi bi-clouds-fill me-1 text-warning"></i>{{ request.form.cloud_cover }} %</span>
+                        <span><i class="bi bi-speedometer me-1 text-info"></i>{{ request.form.pressure }} hPa</span>
+                    </div>
+
+                    <hr>
+
+                    <!-- Probability bar -->
+                    <p class="text-muted small text-center mb-1">Rain probability</p>
+                    <div class="progress mb-2" style="height: 22px;">
+                        <div class="progress-bar {{ 'bg-info' if result == 'rain' else 'bg-warning' }}"
+                             style="width: {{ rain_prob }}%;">
+                            <span class="fw-bold">{{ rain_prob }}%</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between small text-muted mb-3">
+                        <span>0% — No Rain</span><span>100% — Rain</span>
+                    </div>
+
+                    <hr>
+
+                    {% if result == "rain" %}
+                        <div class="alert alert-info d-flex gap-2 mb-0 small" role="alert">
+                            <i class="bi bi-cloud-rain-fill flex-shrink-0 mt-1"></i>
+                            <strong>Rain expected.</strong> High probability of precipitation — consider planning accordingly.
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning d-flex gap-2 mb-0 small" role="alert">
+                            <i class="bi bi-sun-fill flex-shrink-0 mt-1"></i>
+                            <strong>No rain expected.</strong> Conditions suggest dry weather — low precipitation risk.
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
