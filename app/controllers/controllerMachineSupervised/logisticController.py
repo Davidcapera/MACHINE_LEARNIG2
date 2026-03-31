@@ -36,3 +36,10 @@ def rain_prediction():
         rain_prob    = rain_prob,
         fail         = fail,
     )
+
+
+@logistic_bp.route("/logistic/definition")
+def logistic_definition():
+    return render_template(
+        "templateMachineSupervised/logisticRegressionDefinition.html"
+    )

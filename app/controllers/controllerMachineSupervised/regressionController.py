@@ -39,8 +39,6 @@ def index():
         stats=stats
     )
 
-
-# Linear Regression Definition
 @regression_bp.route("/regression/definition")
 def regression_definition():
     return render_template(
@@ -48,23 +46,6 @@ def regression_definition():
     )
 
 
-# Logistic Regression Definition
-@regression_bp.route("/logistic/definition")
-def logistic_definition():
-    return render_template(
-        "templateMachineSupervised/logisticRegressionDefinition.html"
-    )
-
-
-# Logistic Regression Application
-@regression_bp.route("/logistic")
-def logistic_app():
-    return render_template(
-        "templateMachineSupervised/logisticRegression.html"
-    )
-
-
-# Classification Definition
 @regression_bp.route("/classification/definition")
 def classification_definition():
     return render_template(
@@ -72,7 +53,6 @@ def classification_definition():
     )
 
 
-# Classification Application
 @regression_bp.route("/classification")
 def classification_app():
     return render_template(
