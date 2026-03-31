@@ -1,0 +1,403 @@
+{% extends "base.html" %}
+{% block title %}Rain Prediction — SGDClassifier{% endblock %}
+{% block content %}
+
+<div class="p-4 mb-4 rounded-3 bg-primary text-white">
+    <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-graph-up" style="font-size: 2.8rem;"></i>
+        <div>
+            <h3 class="fw-bold mb-1">Rain Prediction — SGDClassifier</h3>
+            <p class="mb-0 opacity-75">
+                Binary classification using Stochastic Gradient Descent
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 1 PROBLEM DESCRIPTION -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-info-circle-fill"></i>
+        1 · Problem Description
+    </div>
+
+    <div class="card-body">
+
+        <p class="text-secondary">
+            This model predicts whether it will rain tomorrow using the
+            <strong>SGDClassifier</strong> algorithm. The classifier learns
+            a linear decision boundary using Stochastic Gradient Descent.
+        </p>
+
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small">
+            Type of Machine Learning
+        </p>
+
+        <div class="d-flex gap-2 mb-3">
+            <span class="badge bg-primary">Supervised Learning</span>
+            <span class="badge bg-secondary">Binary Classification</span>
+            <span class="badge bg-info text-dark">SGDClassifier</span>
+        </div>
+
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small">
+            Input Features
+        </p>
+
+        <ul>
+            <li>Min Temperature (°C)</li>
+            <li>Max Temperature (°C)</li>
+            <li>Rainfall (mm)</li>
+            <li>Humidity (%)</li>
+        </ul>
+
+        <hr>
+
+        <p class="text-uppercase text-primary fw-semibold small">
+            Expected Output
+        </p>
+
+        <span class="badge bg-info text-dark px-3 py-2">Rain</span>
+        <span class="badge bg-warning text-dark px-3 py-2">No Rain</span>
+
+        <hr>
+
+        <div class="alert alert-primary">
+            Rain prediction supports decision-making in agriculture,
+            logistics and weather planning.
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- 2 DATASET -->
+{% if stats %}
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-table"></i>
+        2 · Dataset Explanation
+    </div>
+
+    <div class="card-body">
+
+        <p class="text-secondary">
+            The dataset contains weather observations used to train the SGD model.
+        </p>
+
+        <div class="row g-3">
+
+            <div class="col-md">
+                <div class="bg-light p-3 text-center rounded border">
+                    <p class="small text-muted mb-1">Total rows</p>
+                    <h4>{{ stats.total_samples }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-light p-3 text-center rounded border">
+                    <p class="small text-muted mb-1">Train</p>
+                    <h4>{{ stats.train_samples }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="bg-light p-3 text-center rounded border">
+                    <p class="small text-muted mb-1">Test</p>
+                    <h4>{{ stats.test_samples }}</h4>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endif %}
+
+
+
+<!-- 3 VARIABLES -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-list-columns"></i>
+        3 · Variables Used
+    </div>
+
+    <div class="card-body p-0">
+
+        <table class="table table-bordered table-hover mb-0">
+            <thead class="table-primary">
+                <tr>
+                    <th>Variable</th>
+                    <th>Role</th>
+                    <th>Unit</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>MinTemp</td>
+                    <td>Feature X1</td>
+                    <td>°C</td>
+                    <td>Minimum daily temperature</td>
+                </tr>
+
+                <tr>
+                    <td>MaxTemp</td>
+                    <td>Feature X2</td>
+                    <td>°C</td>
+                    <td>Maximum daily temperature</td>
+                </tr>
+
+                <tr>
+                    <td>Rainfall</td>
+                    <td>Feature X3</td>
+                    <td>mm</td>
+                    <td>Daily rainfall amount</td>
+                </tr>
+
+                <tr>
+                    <td>Humidity</td>
+                    <td>Feature X4</td>
+                    <td>%</td>
+                    <td>Relative humidity</td>
+                </tr>
+
+                <tr>
+                    <td>RainTomorrow</td>
+                    <td>Target y</td>
+                    <td>-</td>
+                    <td>Rain / No Rain</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+<!-- 4 DATA PREPARATION -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-gear-fill"></i>
+        4 · Data Preparation
+    </div>
+
+    <div class="card-body">
+
+        <ul>
+            <li>Load CSV dataset</li>
+            <li>Select feature columns</li>
+            <li>Encode target variable</li>
+            <li>Split dataset (80% train / 20% test)</li>
+            <li>Scale features using StandardScaler</li>
+            <li>Train SGDClassifier model</li>
+            <li>Evaluate performance metrics</li>
+        </ul>
+
+    </div>
+</div>
+
+
+
+<!-- 5 GRAPHS -->
+{% if metrics %}
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-graph-up"></i>
+        5 · Model Graphs
+    </div>
+
+    <div class="card-body">
+
+        <div class="row g-4">
+
+            <div class="col-md-6 text-center">
+                <h6 class="fw-bold">Confusion Matrix</h6>
+                <img src="{{ url_for('static', filename='generated/sgd_confusion.png') }}" title="SGD Confussion"
+                    class="img-fluid rounded shadow-sm">
+            </div>
+
+            <div class="col-md-6 text-center">
+                <h6 class="fw-bold">ROC Curve</h6>
+                <img src="{{ url_for('static', filename='generated/sgd_roc.png') }}" title="SGD ROC Curve"
+                    class="img-fluid rounded shadow-sm">
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endif %}
+
+
+
+<!-- 6 METRICS -->
+{% if metrics %}
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-clipboard-data-fill"></i>
+        6 · Interpretation of Results
+    </div>
+
+    <div class="card-body">
+
+        <div class="row text-center">
+
+            <div class="col-md">
+                <div class="card p-3 shadow-sm">
+                    <h6>Accuracy</h6>
+                    <h4 class="text-primary">{{ metrics.accuracy }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="card p-3 shadow-sm">
+                    <h6>Precision</h6>
+                    <h4 class="text-success">{{ metrics.precision }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="card p-3 shadow-sm">
+                    <h6>Recall</h6>
+                    <h4 class="text-warning">{{ metrics.recall }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="card p-3 shadow-sm">
+                    <h6>F1</h6>
+                    <h4 class="text-info">{{ metrics.f1 }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="card p-3 shadow-sm">
+                    <h6>AUC</h6>
+                    <h4 class="text-danger">{{ metrics.auc }}</h4>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <ul>
+            <li><b>Accuracy:</b> {{ interpretation.accuracy }}</li>
+            <li><b>Precision:</b> {{ interpretation.precision }}</li>
+            <li><b>Recall:</b> {{ interpretation.recall }}</li>
+            <li><b>F1:</b> {{ interpretation.f1 }}</li>
+            <li><b>AUC:</b> {{ interpretation.auc }}</li>
+        </ul>
+
+    </div>
+</div>
+{% endif %}
+
+
+
+<!-- 7 PREDICTION -->
+<div class="row g-4 mb-4">
+
+    <div class="col-md-5">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-header bg-primary text-white">
+                7 · Prediction Form
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST" action="/sgd-classifier">
+
+                    <div class="mb-3">
+                        <label class="form-label">Min Temperature</label>
+                        <input type="number" step="any" name="f1" class="form-control" placeholder="15.2" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Max Temperature</label>
+                        <input type="number" step="any" name="f2" class="form-control" placeholder="28.4" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Rainfall</label>
+                        <input type="number" step="any" name="f3" class="form-control" placeholder="3.1" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Humidity</label>
+                        <input type="number" step="any" name="f4" class="form-control" placeholder="65" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Predict Rain
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-7">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-header bg-primary text-white">
+                Prediction Result
+            </div>
+
+            <div class="card-body d-flex align-items-center justify-content-center">
+
+                {% if result %}
+
+                {% if "Rain" in result %}
+
+                <div class="text-center">
+                    <span class="badge bg-info fs-3 px-4 py-3">
+                        🌧️ Rain Expected
+                    </span>
+                </div>
+
+                {% else %}
+
+                <div class="text-center">
+                    <span class="badge bg-warning text-dark fs-3 px-4 py-3">
+                        ☀️ No Rain
+                    </span>
+                </div>
+
+                {% endif %}
+
+                {% else %}
+
+                <div class="text-muted text-center">
+                    Fill the form and click Predict Rain
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
