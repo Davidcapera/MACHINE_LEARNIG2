@@ -46,15 +46,3 @@ def regression_definition():
     )
 
 
-@regression_bp.route("/classification/definition")
-def classification_definition():
-    return render_template(
-        "templateMachineSupervised/classificationModelDefinition.html"
-    )
-
-
-@regression_bp.route("/classification", methods=["GET", "POST"])
-def classification_app():
-    return render_template(
-        "templateMachineSupervised/classificationModel.html"
-    )

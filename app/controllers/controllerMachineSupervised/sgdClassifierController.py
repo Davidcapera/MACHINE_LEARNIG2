@@ -30,7 +30,7 @@ def sgdClassifier():
 
         prediction = predict(X)
 
-        result = "🌧️ Rain Expected" if prediction == 1 else "☀️ No Rain"
+        result = " Rain Expected" if prediction == 1 else " No Rain"
 
     metrics = get_metrics()
     interpretation = interpret_metrics(metrics)
@@ -45,8 +45,15 @@ def sgdClassifier():
     )
 
 
-@sgdClassifier_bp.route("/sgd-classifier-definition")
-def sgdClassifierDefinition():
+@sgdClassifier_bp.route("/classification/definition")
+def classification_definition():
     return render_template(
-        "templateMachineSupervised/sgdClassifierDefinition.html"
+        "templateMachineSupervised/classificationModelDefinition.html"
+    )
+
+
+@sgdClassifier_bp.route("/classification", methods=["GET", "POST"])
+def classification_app():
+    return render_template(
+        "templateMachineSupervised/classificationModel.html"
     )
