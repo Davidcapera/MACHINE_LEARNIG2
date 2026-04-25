@@ -11,9 +11,8 @@ def create_app():
     from app.controllers.controllersUseCases.customerController import customer_bp
     from app.controllers.controllerMachineSupervised.logisticController import logistic_bp
     from app.controllers.controllerMachineSupervised.sgdClassifierController import sgdClassifier_bp
-    from app.controllers.controllerMachineUnsupervised.kmeansController import kmeans_bp
+    from app.controllers.controllerUnsupervised.kmeansController import kmeans_bp
 
-    app.register_blueprint(kmeans_bp)
     app.register_blueprint(weather_bp)
     app.register_blueprint(regression_bp)
     app.register_blueprint(index_bp)
@@ -22,6 +21,7 @@ def create_app():
     app.register_blueprint(customer_bp)
     app.register_blueprint(logistic_bp)
     app.register_blueprint(sgdClassifier_bp)
+    app.register_blueprint(kmeans_bp)
     
     
     return app

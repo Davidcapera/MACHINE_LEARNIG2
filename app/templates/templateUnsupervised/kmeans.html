@@ -1,0 +1,376 @@
+{% extends "base.html" %}
+
+{% block title %}K-Means Clustering{% endblock %}
+
+{% block content %}
+
+<div class="p-4 mb-4 rounded-3 bg-primary text-white">
+  <div class="d-flex align-items-center gap-3">
+    <i class="bi bi-diagram-3-fill" style="font-size:2.8rem; opacity:.9;"></i>
+    <div>
+      <h3 class="fw-bold mb-1">K-Means Clustering — Age & Income</h3>
+      <p class="mb-0 opacity-75">
+        Unsupervised clustering with k=3 over 100 synthetic records.
+        3 manual iterations with Euclidean distance calculation.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+    <i class="bi bi-info-circle-fill fs-5"></i>
+    <span class="fw-bold fs-5">1 · Problem Description</span>
+  </div>
+  <div class="card-body p-4">
+    <p class="text-uppercase text-primary fw-semibold small mb-1">
+      <i class="bi bi-bookmark-fill me-1"></i> Title
+    </p>
+    <p class="fw-semibold fs-5 mb-0">Customer Segmentation by Age and Income</p>
+    <hr>
+    <p class="text-uppercase text-primary fw-semibold small mb-2">
+      <i class="bi bi-exclamation-circle-fill me-1"></i> Problem Description
+    </p>
+    <p class="text-secondary mb-0">
+      <strong>K-Means</strong> is applied to group 100 individuals by their
+      <strong>age</strong> and <strong>monthly income</strong>.
+      The algorithm selects 3 initial centroids manually and runs 3 complete iterations:
+      Euclidean distance calculation, cluster assignment, and centroid recalculation.
+      The <strong>variance</strong> is measured at each iteration to verify convergence.
+    </p>
+    <hr>
+    <p class="text-uppercase text-primary fw-semibold small mb-2">
+      <i class="bi bi-cpu-fill me-1"></i> Type of Machine Learning
+    </p>
+    <div class="d-flex flex-wrap gap-2">
+      <span class="badge bg-secondary fs-6 px-3 py-2">
+        <i class="bi bi-shuffle me-1"></i> Unsupervised Learning
+      </span>
+      <span class="badge bg-primary fs-6 px-3 py-2">
+        <i class="bi bi-diagram-3 me-1"></i> Clustering
+      </span>
+      <span class="badge bg-info text-dark fs-6 px-3 py-2">
+        <i class="bi bi-bullseye me-1"></i> K-Means (k=3)
+      </span>
+    </div>
+    <hr>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+          <i class="bi bi-arrow-right-circle-fill me-1"></i> Input Features
+        </p>
+        <div class="list-group list-group-flush">
+          {% for i, feat, desc in [
+            (1, 'Age (years)',  'Range: 20 - 65 years'),
+            (2, 'Income ($)',   'Range: $1,000 - $8,000 per month'),
+          ] %}
+          <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-2">
+            <span class="badge bg-primary rounded-circle p-2 mt-1">{{ i }}</span>
+            <div>
+              <p class="fw-semibold mb-0">{{ feat }}</p>
+              <p class="text-muted small mb-0">{{ desc }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+          <i class="bi bi-arrow-left-circle-fill text-success me-1"></i> Expected Output
+        </p>
+        <p class="text-muted small mb-3">Each point is assigned to one of 3 clusters:</p>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <span class="badge bg-primary fs-6 px-3 py-2">Cluster A</span>
+          <span class="badge bg-danger fs-6 px-3 py-2">Cluster B</span>
+          <span class="badge bg-success fs-6 px-3 py-2">Cluster C</span>
+        </div>
+        <div class="alert alert-primary d-flex gap-3 mb-0" role="alert">
+          <i class="bi bi-lightbulb-fill fs-4 flex-shrink-0 mt-1"></i>
+          <p class="mb-0 text-secondary">
+            Useful for <strong>market segmentation</strong>,
+            personalized offers and differentiated commercial strategies per group.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+    <i class="bi bi-table fs-5"></i>
+    <span class="fw-bold fs-5">2 · Dataset</span>
+  </div>
+  <div class="card-body p-4">
+    <p class="text-secondary mb-4">
+      Synthetic dataset generated with Scikit-learn's .
+      100 records with 2 numeric features scaled to real-world ranges.
+    </p>
+    <div class="row g-3 mb-4">
+      {% for icon, color, label, val in [
+        ('bi-database-fill', 'primary', 'Total records',   stats.total_samples),
+        ('bi-people-fill',   'success', 'Features',        stats.features),
+        ('bi-bullseye',      'danger',  'Clusters (k)',     stats.clusters),
+        ('bi-arrow-repeat',  'info',    'Iterations',       stats.iterations),
+      ] %}
+      <div class="col-6 col-md-3">
+        <div class="bg-light rounded-3 p-3 text-center border">
+          <i class="bi {{ icon }} text-{{ color }} fs-3 mb-1 d-block"></i>
+          <p class="text-muted small mb-1">{{ label }}</p>
+          <p class="fw-bold fs-4 text-{{ color }} mb-0">{{ val }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <p class="text-uppercase text-primary fw-semibold small mb-2">
+      <i class="bi bi-list-columns me-1"></i> First 10 Records
+    </p>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered align-middle mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th>#</th>
+            <th>Age (years)</th>
+            <th>Income ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in results.data_preview %}
+          <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.age }}</td>
+            <td>{{ "{:,.1f}".format(row.income) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+    <i class="bi bi-list-columns fs-5"></i>
+    <span class="fw-bold fs-5">3 · Variables Used</span>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered align-middle mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th class="ps-4">Column</th>
+            <th>Role</th>
+            <th>Unit</th>
+            <th>Range</th>
+            <th class="pe-4">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for col, role, badge, unit, rng, desc in [
+            ('Age',    'Feature X₁', 'primary', 'years', '20 - 65',       'Customer age'),
+            ('Income', 'Feature X₂', 'danger',  '$',     '1,000 - 8,000', 'Monthly income in pesos'),
+          ] %}
+          <tr>
+            <td class="ps-4"><code class="text-{{ badge }}">{{ col }}</code></td>
+            <td><span class="badge bg-{{ badge }} bg-opacity-25 text-{{ badge }}">{{ role }}</span></td>
+            <td>{{ unit }}</td>
+            <td>{{ rng }}</td>
+            <td class="pe-4">{{ desc }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+    <i class="bi bi-gear-fill fs-5"></i>
+    <span class="fw-bold fs-5">4 · Data Preparation</span>
+  </div>
+  <div class="card-body p-4">
+    <div class="list-group list-group-flush">
+      {% for badge, title, desc in [
+        ('primary', 'Dataset generation',      'make_blobs(n_samples=100, centers=3) with random_state=42 for reproducibility.'),
+        ('success', 'Scale to real ranges',    'np.interp maps age (20-65 yrs) and income ($1,000-$8,000).'),
+        ('danger',  'Manual centroid init',    'Initial centroids chosen manually: indices 10, 50, and 85 from the dataset.'),
+        ('warning', 'Euclidean distance',      'For each point: square root of the sum of (xi minus ci) squared is computed against all 3 centroids.'),
+        ('info',    'Centroid recalculation',  'New centroid = mean of all points assigned to that cluster.'),
+      ] %}
+      <div class="list-group-item px-0 d-flex align-items-start gap-3 border-0 pb-3">
+        <span class="badge bg-{{ badge }} rounded-circle p-2 mt-1">{{ loop.index }}</span>
+        <div>
+          <p class="fw-semibold mb-0">{{ title }}</p>
+          <p class="text-muted small mb-0">{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+    <i class="bi bi-arrow-repeat fs-5"></i>
+    <span class="fw-bold fs-5">5 · Iteration Process</span>
+  </div>
+  <div class="card-body p-4">
+
+    {% for it in results.iterations %}
+    <div class="card border shadow-sm mb-4">
+      <div class="card-header bg-light d-flex align-items-center gap-3 py-3">
+        <span class="badge bg-primary rounded-circle fs-5 px-3 py-2">{{ it.num }}</span>
+        <div>
+          <h5 class="fw-bold mb-0">Iteration {{ it.num }}</h5>
+          <p class="text-muted small mb-0">Centroids → Assignment → Distance table → Recalculation</p>
+        </div>
+        <span class="ms-auto badge bg-secondary font-monospace">
+          Variance: {{ "{:,.0f}".format(it.variance) }}
+        </span>
+      </div>
+      <div class="card-body p-4">
+
+        <div class="row g-4 mb-4">
+          {# Centroids + sizes #}
+          <div class="col-md-5">
+            <p class="text-uppercase text-primary fw-semibold small mb-2">
+              <i class="bi bi-crosshair me-1"></i> Initial Centroids
+            </p>
+            {% for c in it.centroids %}
+            <div class="d-flex align-items-center gap-3 border-bottom py-2">
+              <span class="badge bg-{{ results.badge_colors[loop.index0] }} px-2">
+                {{ results.cluster_names[loop.index0] }}
+              </span>
+              <span class="font-monospace small">
+                Age={{ c.x }} · Income={{ c.y }}
+              </span>
+            </div>
+            {% endfor %}
+
+            <p class="text-uppercase text-primary fw-semibold small mt-3 mb-2">
+              <i class="bi bi-people-fill me-1"></i> Points per Cluster
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              {% for size in it.cluster_sizes %}
+              <span class="badge bg-{{ results.badge_colors[loop.index0] }} fs-6 px-3 py-2">
+                {{ results.cluster_names[loop.index0] }}: {{ size }} pts
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+
+          {# Scatter #}
+          <div class="col-md-7">
+            <p class="text-uppercase text-primary fw-semibold small mb-2">
+              <i class="bi bi-graph-up me-1"></i> Scatter Plot
+            </p>
+            <img src="data:image/png;base64,{{ it.scatter_img }}"
+                 alt="Scatter Iteration {{ it.num }}"
+                 class="img-fluid rounded shadow-sm border w-100"/>
+          </div>
+        </div>
+
+        <p class="text-uppercase text-primary fw-semibold small mb-2">
+          <i class="bi bi-table me-1"></i> Distance Table (first 10 points)
+        </p>
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered align-middle mb-0 small">
+            <thead class="table-primary">
+              <tr>
+                <th>Point</th>
+                <th>Age</th>
+                <th>Income ($)</th>
+                <th>D → C1</th>
+                <th>D → C2</th>
+                <th>D → C3</th>
+                <th>Assigned</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in it.dist_table %}
+              <tr>
+                <td>{{ row.point }}</td>
+                <td>{{ row.age }}</td>
+                <td>{{ "{:,.1f}".format(row.income) }}</td>
+                <td class="font-monospace">{{ row.d_c1 }}</td>
+                <td class="font-monospace">{{ row.d_c2 }}</td>
+                <td class="font-monospace">{{ row.d_c3 }}</td>
+                <td>
+                  <span class="badge bg-{{ results.badge_colors[row.cluster_idx] }}">
+                    {{ row.cluster }}
+                  </span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+    <i class="bi bi-graph-down-arrow fs-5"></i>
+    <span class="fw-bold fs-5">6 · Results — Variance Comparison</span>
+  </div>
+  <div class="card-body p-4">
+    <p class="text-muted small mb-4">
+      Intra-cluster variance decreases each iteration, confirming the clusters
+      become more compact and the algorithm is converging.
+    </p>
+
+    <img src="data:image/png;base64,{{ results.variance_img }}"
+         alt="Variance per iteration"
+         class="img-fluid rounded shadow-sm border w-100 mb-4"
+         style="max-height:320px; object-fit:contain;"/>
+
+    <div class="row g-3 mb-4">
+      {% for v in results.variance %}
+      <div class="col-md-4">
+        <div class="bg-light rounded-3 p-3 text-center border">
+          <p class="text-muted small mb-1">Iteration {{ loop.index }}</p>
+          <p class="fw-bold fs-4 text-primary mb-0 font-monospace">
+            {{ "{:,.0f}".format(v) }}
+          </p>
+          {% if loop.index > 1 %}
+            {% set prev = results.variance[loop.index0 - 1] %}
+            {% set diff = v - prev %}
+            <p class="small mb-0 {{ 'text-success' if diff < 0 else 'text-danger' }}">
+              {% if diff < 0 %}
+                <i class="bi bi-arrow-down-circle-fill me-1"></i>↓ {{ "{:,.0f}".format(diff|abs) }}
+              {% else %}
+                <i class="bi bi-arrow-up-circle-fill me-1"></i>↑ {{ "{:,.0f}".format(diff) }}
+              {% endif %}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="alert alert-success d-flex gap-3 mb-0" role="alert">
+      <i class="bi bi-check-circle-fill fs-4 flex-shrink-0 mt-1"></i>
+      <p class="mb-0">
+        <strong>Convergence confirmed.</strong>
+        Variance dropped from
+        <strong>{{ "{:,.0f}".format(results.variance[0]) }}</strong> (iter. 1)
+        to <strong>{{ "{:,.0f}".format(results.variance[2]) }}</strong> (iter. 3) —
+        a reduction of
+        <strong>
+          {{ (((results.variance[0] - results.variance[2]) / results.variance[0]) * 100)|round(1) }}%
+        </strong>.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
