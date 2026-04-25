@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="p-4 mb-4 bg-dark text-white rounded shadow-sm">
+        <h2 class="fw-bold">Unsupervised Learning — K-Means Clustering</h2>
+        <p class="mb-0">
+            K-Means is a fundamental algorithm used to discover hidden patterns in unlabeled data by grouping similar observations.
+        </p>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>What is Unsupervised Learning?</h4>
+            <p>
+                Unsupervised learning is a type of Machine Learning where the algorithm analyzes data without predefined labels.
+                The goal is to discover hidden structures or patterns within the dataset.
+            </p>
+            <ul>
+                <li>No labeled output</li>
+                <li>Pattern discovery</li>
+                <li>Used for clustering and dimensionality reduction</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>What is Clustering?</h4>
+            <p>
+                Clustering is the process of grouping data points into clusters based on similarity. Points within the same cluster
+                are more similar to each other than to those in other clusters.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>What is K-Means?</h4>
+            <p>
+                K-Means is a clustering algorithm that partitions data into <b>K groups</b>, where each group is represented by a centroid.
+                The algorithm iteratively assigns data points to the nearest centroid and updates centroid positions until convergence.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Key Elements of K-Means</h4>
+            <ul>
+                <li><b>K:</b> Number of clusters</li>
+                <li><b>Centroids:</b> Center of each cluster</li>
+                <li><b>Distance:</b> Usually Euclidean distance</li>
+                <li><b>Iterations:</b> Repeated updates until convergence</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>K-Means Algorithm Process</h4>
+            <ol>
+                <li>Select K initial centroids</li>
+                <li>Calculate distance from each point to centroids</li>
+                <li>Assign each point to the nearest centroid</li>
+                <li>Recalculate centroids (mean of cluster points)</li>
+                <li>Repeat until centroids stabilize</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Distance Metric (Euclidean)</h4>
+            <p>
+                The Euclidean distance is used to measure similarity between points:
+            </p>
+            <p class="bg-light p-3 rounded">
+                d = √((x₁ - x₂)² + (y₁ - y₂)²)
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Variance and Convergence</h4>
+            <p>
+                The algorithm aims to minimize variance within clusters. As iterations progress, variance decreases,
+                leading to more compact and stable clusters.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Real-World Applications</h4>
+            <ul>
+                <li>Customer segmentation</li>
+                <li>Market analysis</li>
+                <li>Image compression</li>
+                <li>Anomaly detection</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Example</h4>
+            <p>
+                In this project, K-Means is used to group customers based on income and spending behavior,
+                allowing businesses to identify different market segments.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

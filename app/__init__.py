@@ -11,7 +11,9 @@ def create_app():
     from app.controllers.controllersUseCases.customerController import customer_bp
     from app.controllers.controllerMachineSupervised.logisticController import logistic_bp
     from app.controllers.controllerMachineSupervised.sgdClassifierController import sgdClassifier_bp
+    from app.controllers.controllerMachineUnsupervised.kmeansController import kmeans_bp
 
+    app.register_blueprint(kmeans_bp)
     app.register_blueprint(weather_bp)
     app.register_blueprint(regression_bp)
     app.register_blueprint(index_bp)
