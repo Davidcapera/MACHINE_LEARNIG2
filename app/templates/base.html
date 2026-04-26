@@ -33,7 +33,9 @@
                         </a>
                     </li>
 
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
                     <li>
                         <a class="dropdown-item" href="#caseUseMenu" data-bs-toggle="collapse">
@@ -43,15 +45,21 @@
 
                         <div class="collapse" id="caseUseMenu">
                             <ul class="list-unstyled ps-3">
-                                <li><a class="dropdown-item" href="/caseWeather"><i class="bi bi-cloud-sun me-2"></i>Weather</a></li>
-                                <li><a class="dropdown-item" href="/sales"><i class="bi bi-graph-up me-2"></i>Sales Forecasting</a></li>
-                                <li><a class="dropdown-item" href="/air-quality"><i class="bi bi-wind me-2"></i>Air Quality</a></li>
-                                <li><a class="dropdown-item" href="/customer"><i class="bi bi-box me-2"></i>Customer</a></li>
+                                <li><a class="dropdown-item" href="/caseWeather"><i
+                                            class="bi bi-cloud-sun me-2"></i>Weather</a></li>
+                                <li><a class="dropdown-item" href="/sales"><i class="bi bi-graph-up me-2"></i>Sales
+                                        Forecasting</a></li>
+                                <li><a class="dropdown-item" href="/air-quality"><i class="bi bi-wind me-2"></i>Air
+                                        Quality</a></li>
+                                <li><a class="dropdown-item" href="/customer"><i class="bi bi-box me-2"></i>Customer</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
                     <li>
                         <a class="dropdown-item" href="#supervisedMenu" data-bs-toggle="collapse">
@@ -68,8 +76,10 @@
                                     </a>
                                     <div class="collapse" id="linearMenu">
                                         <ul class="list-unstyled ps-3">
-                                            <li><a class="dropdown-item" href="/regression/definition"><i class="bi bi-book me-2"></i>Basic Concepts</a></li>
-                                            <li><a class="dropdown-item" href="/regression"><i class="bi bi-activity me-2"></i>Application</a></li>
+                                            <li><a class="dropdown-item" href="/regression/definition"><i
+                                                        class="bi bi-book me-2"></i>Basic Concepts</a></li>
+                                            <li><a class="dropdown-item" href="/regression"><i
+                                                        class="bi bi-activity me-2"></i>Application</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -80,8 +90,10 @@
                                     </a>
                                     <div class="collapse" id="logisticMenu">
                                         <ul class="list-unstyled ps-3">
-                                            <li><a class="dropdown-item" href="/logistic/definition"><i class="bi bi-book me-2"></i>Basic Concepts</a></li>
-                                            <li><a class="dropdown-item" href="/rain-prediction"><i class="bi bi-activity me-2"></i>Application</a></li>
+                                            <li><a class="dropdown-item" href="/logistic/definition"><i
+                                                        class="bi bi-book me-2"></i>Basic Concepts</a></li>
+                                            <li><a class="dropdown-item" href="/rain-prediction"><i
+                                                        class="bi bi-activity me-2"></i>Application</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -92,8 +104,10 @@
                                     </a>
                                     <div class="collapse" id="classificationMenu">
                                         <ul class="list-unstyled ps-3">
-                                            <li><a class="dropdown-item" href="/classification/definition"><i class="bi bi-book me-2"></i>Basic Concepts</a></li>
-                                            <li><a class="dropdown-item" href="/classification"><i class="bi bi-activity me-2"></i>Application</a></li>
+                                            <li><a class="dropdown-item" href="/classification/definition"><i
+                                                        class="bi bi-book me-2"></i>Basic Concepts</a></li>
+                                            <li><a class="dropdown-item" href="/classification"><i
+                                                        class="bi bi-activity me-2"></i>Application</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -107,32 +121,36 @@
                         </a>
                         <div class="collapse" id="UnsupervisedMenu">
                             <ul class="list-unstyled ps-3">
-                            <li>
-                                <a class="dropdown-item" href="#kmeansMenu" data-bs-toggle="collapse">
+                                <li>
+                                    <a class="dropdown-item" href="#kmeansMenu" data-bs-toggle="collapse">
                                         <i class="bi bi-graph-up me-2"></i>k-means
-                                </a>
-                                <div class="collapse" id="kmeansMenu">
+                                    </a>
+                                    <div class="collapse" id="kmeansMenu">
                                         <ul class="list-unstyled ps-3">
+
                                             <li>
                                                 <a class="dropdown-item" href="/kmeans">
                                                     <i class="bi bi-box me-2"></i>Manual K-Means Simulation
                                                 </a>
                                             </li>
+
                                             <li>
                                                 <a class="dropdown-item" href="/kmeans/definition">
                                                     <i class="bi bi-activity me-2"></i>Basic concepts
                                                 </a>
                                             </li>
+
                                             <li>
                                                 <a class="dropdown-item" href="/kmeans/application">
-                                                    <i class="bi bi-activity me-2"></i>Application
+                                                    <i class="bi bi-diagram-3 me-2"></i>Application
                                                 </a>
                                             </li>
+
                                         </ul>
-                                </div>
-                            </li>
+                                    </div>
+                                </li>
                             </ul>
-                        </div>    
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -167,4 +185,5 @@
     {% block extra_js %}{% endblock %}
 
 </body>
+
 </html>

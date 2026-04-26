@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <!-- INTRODUCTION -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">
+                About This Application
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <p>
+                This interactive K-Means application allows users to simulate
+                customer segmentation using Machine Learning.
+            </p>
+
+            <p>
+                The algorithm groups customers based on:
+            </p>
+
+            <ul>
+                <li><strong>Age</strong> — customer age range</li>
+                <li><strong>Income</strong> — monthly income level</li>
+            </ul>
+
+            <p>
+                By entering values, the system dynamically predicts which cluster
+                the customer belongs to and visualizes the result using a real-time clustering graph.
+            </p>
+
+            <hr>
+
+            <h5 class="fw-bold">
+                How to Use
+            </h5>
+
+            <ol>
+                <li>Enter the customer's age.</li>
+                <li>Enter the customer's monthly income.</li>
+                <li>Click <strong>Analyze Customer</strong>.</li>
+                <li>Review the assigned cluster.</li>
+                <li>Interpret the graph and centroid positions.</li>
+            </ol>
+
+            <hr>
+
+            <h5 class="fw-bold">
+                Cluster Interpretation
+            </h5>
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <div class="card border-primary mb-3">
+                        <div class="card-body">
+
+                            <h6 class="text-primary fw-bold">
+                                Budget Customers
+                            </h6>
+
+                            <p class="small mb-0">
+                                Lower income users with basic purchasing behavior.
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card border-success mb-3">
+                        <div class="card-body">
+
+                            <h6 class="text-success fw-bold">
+                                Standard Customers
+                            </h6>
+
+                            <p class="small mb-0">
+                                Medium income customers with balanced purchasing capacity.
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card border-danger mb-3">
+                        <div class="card-body">
+
+                            <h6 class="text-danger fw-bold">
+                                Premium Customers
+                            </h6>
+
+                            <p class="small mb-0">
+                                High-income users likely to engage with premium services.
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<div class="container mt-4 mb-5">
+
+    <!-- HEADER -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">
+                K-Means Application — Customer Segmentation
+            </h3>
+        </div>
+
+        <div class="card-body">
+
+            <p class="text-muted">
+                Enter customer information to dynamically evaluate cluster assignment.
+                The graph updates automatically according to user input.
+            </p>
+
+            <form method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">
+                            Age
+                        </label>
+
+                        <input type="number" class="form-control" name="age" min="20" max="65" step="0.1" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">
+                            Income ($)
+                        </label>
+
+                        <input type="number" class="form-control" name="income" min="1000" max="8000" step="0.1"
+                            required>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary w-100">
+                    Analyze Customer
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    {% if prediction %}
+
+
+
+    <!-- RESULT -->
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">
+                Dynamic Prediction Result
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <!-- LEFT -->
+                <div class="col-md-4">
+
+                    <div class="card bg-light border-0 h-100">
+
+                        <div class="card-body text-center">
+
+                            <h5>Cluster Assigned</h5>
+
+                            <h2 class="text-primary fw-bold">
+                                {{ prediction.cluster_name }}
+                            </h2>
+
+                            <hr>
+
+                            <p>
+                                <strong>Age:</strong>
+                                {{ prediction.age }}
+                            </p>
+
+                            <p>
+                                <strong>Income:</strong>
+                                ${{ prediction.income }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+                <div class="col-md-8">
+
+                    <img src="data:image/png;base64,{{ prediction.graph }}" class="img-fluid rounded shadow"
+                        alt="KMeans Dynamic Graph">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CENTROIDS -->
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">
+                Cluster Centroids
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-light">
+                    <tr>
+                        <th>Cluster</th>
+                        <th>Age</th>
+                        <th>Income</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for c in prediction.centroids %}
+                    <tr>
+                        <td>Cluster {{ loop.index }}</td>
+                        <td>{{ c.age }}</td>
+                        <td>${{ c.income }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

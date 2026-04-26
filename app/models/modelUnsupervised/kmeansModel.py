@@ -4,10 +4,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import io, base64
 from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
 
 np.random.seed(42)
-X_raw, _ = make_blobs(n_samples=100, centers=3, n_features=2,
-                      cluster_std=1.5, random_state=42)
+X_raw, _, *extra = make_blobs(n_samples=100, centers=3, n_features=2,
+                      cluster_std=1.5, random_state=42, return_centers=False)
 
 ages    = np.interp(X_raw[:, 0], (X_raw[:, 0].min(), X_raw[:, 0].max()), (20, 65)).round(1)
 incomes = np.interp(X_raw[:, 1], (X_raw[:, 1].min(), X_raw[:, 1].max()), (1000, 8000)).round(1)
@@ -132,3 +133,105 @@ def run_kmeans():
 
 def get_dataset_stats():
     return {"total_samples": len(DATA), "features": 2, "clusters": 3, "iterations": 3}
+
+def run_dynamic_kmeans(user_age, user_income):
+
+    # Dataset base
+    X = DATA.copy()
+
+    # Modelo KMeans
+    kmeans = KMeans(
+        n_clusters=3,
+        random_state=42,
+        n_init=10
+    )
+
+    # Entrenamiento
+    labels = kmeans.fit_predict(X)
+
+    # Centroides
+    centroids = kmeans.cluster_centers_
+
+    # Punto ingresado por usuario
+    user_point = np.array([[user_age, user_income]])
+
+    # Predicción cluster usuario
+    user_cluster = int(kmeans.predict(user_point)[0])
+
+    # Información visual
+    cluster_names = [
+        "Premium Customers",
+        "Budget Customers",
+        "Standard Customers"
+    ]
+
+    cluster_colors = [
+        "#0d6efd",
+        "#dc3545",
+        "#198754"
+    ]
+
+    # Crear gráfico
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    fig.patch.set_facecolor("white")
+    ax.set_facecolor("#f8f9fa")
+
+    for k in range(3):
+
+        mask = labels == k
+
+        ax.scatter(
+            X[mask, 0],
+            X[mask, 1],
+            color=cluster_colors[k],
+            alpha=0.7,
+            s=55,
+            label=f"Cluster {k+1}"
+        )
+
+    # Dibujar centroides
+    ax.scatter(
+        centroids[:, 0],
+        centroids[:, 1],
+        marker='X',
+        s=280,
+        color='black',
+        linewidths=2,
+        label='Centroids'
+    )
+
+    # Dibujar usuario
+    ax.scatter(
+        user_age,
+        user_income,
+        marker='*',
+        s=350,
+        color='gold',
+        edgecolors='black',
+        linewidths=1.5,
+        label='User Input'
+    )
+
+    ax.set_xlabel("Age")
+    ax.set_ylabel("Income ($)")
+    ax.set_title("Dynamic K-Means Customer Segmentation")
+    ax.grid(True, linestyle='--', alpha=0.4)
+    ax.legend()
+
+    graph = fig_to_b64(fig)
+
+    return {
+        "cluster": user_cluster,
+        "cluster_name": cluster_names[user_cluster],
+        "graph": graph,
+        "age": user_age,
+        "income": user_income,
+        "centroids": [
+            {
+                "age": round(c[0], 2),
+                "income": round(c[1], 2)
+            }
+            for c in centroids
+        ]
+    }
