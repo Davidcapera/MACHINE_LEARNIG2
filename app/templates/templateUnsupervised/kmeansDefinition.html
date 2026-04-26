@@ -2,75 +2,70 @@
 
 {% block content %}
 
+<style>
+.img-medium {
+    max-width: 600px;
+}
+.img-small {
+    max-width: 500px;
+}
+</style>
+
 <div class="container">
 
-    <div class="p-4 mb-4 bg-dark text-white rounded shadow-sm">
-        <h2 class="fw-bold">Unsupervised Learning — K-Means Clustering</h2>
-        <p class="mb-0">
-            K-Means is a powerful unsupervised learning algorithm used to identify hidden patterns in unlabeled data by grouping similar observations. 
-            It is one of the most widely used clustering techniques in data science due to its simplicity, efficiency, and scalability when dealing with large datasets.
+    <div class="p-4 mb-4 bg-primary text-white rounded shadow-sm">
+        <h2 class="fw-bold mb-2">
+            <i class="bi bi-diagram-3 me-2"></i>
+            Unsupervised Learning — K-Means Clustering
+        </h2>
+        <p class="mb-0 opacity-75">
+            K-Means is a powerful unsupervised learning algorithm used to identify hidden patterns in unlabeled data by grouping similar observations.
         </p>
     </div>
 
     <div class="text-center mb-4">
-        <img src="/static/kmeans_general.png"
-        type="image/png" 
-        class="img-fluid rounded shadow"
-        alt="Visual representation of clustering, where data points are grouped based on similarity. Each color represents a different cluster identified by the algorithm.">
-        <p class="text-muted mt-2">
-            Figure 1. Visual representation of clustering, where data points are grouped based on similarity.
-            Each color represents a different cluster identified by the algorithm.
-        </p>
+        <img src="/static/kmeans_general.png" class="img-fluid img-medium rounded shadow">
+        <p class="text-muted mt-2">Figure 1. Visual representation of clustering.</p>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-cpu me-2"></i> What is Unsupervised Learning?
+        </div>
         <div class="card-body">
-            <h4>What is Unsupervised Learning?</h4>
             <p>
-                Unsupervised learning is a branch of Machine Learning in which algorithms analyze and interpret data without the use of labeled outputs.
-                Unlike supervised learning, where the model learns from known input-output pairs, unsupervised learning focuses on discovering intrinsic structures
-                within the data. This approach is especially useful when dealing with large volumes of data where manual labeling is impractical or impossible.
-            </p>
-            <p>
-                The main objective is to uncover hidden patterns, relationships, or groupings that are not immediately visible. These insights can then be used for
-                decision-making, data compression, anomaly detection, and exploratory data analysis.
+                Unsupervised learning analyzes data without labeled outputs and discovers hidden structures and patterns.
+                It is widely used when data labeling is not available.
             </p>
             <ul>
                 <li>No labeled output</li>
-                <li>Focus on pattern recognition</li>
-                <li>Useful for clustering and dimensionality reduction</li>
+                <li>Pattern discovery</li>
+                <li>Clustering and dimensionality reduction</li>
             </ul>
         </div>
     </div>
 
     <div class="text-center mb-4">
-        <img src="/static/clustering_example.png" class="img-fluid rounded shadow" alt="Example of clustering applied to customer data, where similar individuals are grouped together.">
-        <p class="text-muted mt-2">
-            Figure 2. Example of clustering applied to customer data, where similar individuals are grouped together.
-        </p>
+        <img src="/static/clustering_example.png" class="img-fluid img-medium rounded shadow">
+        <p class="text-muted mt-2">Figure 2. Example of clustering.</p>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-collection me-2"></i> What is Clustering?
+        </div>
         <div class="card-body">
-            <h4>What is Clustering?</h4>
             <p>
-                Clustering is a fundamental technique in unsupervised learning that involves grouping data points based on similarity.
-                The goal is to ensure that data points within the same cluster are more similar to each other than to those in different clusters.
-            </p>
-            <p>
-                Similarity is typically measured using distance metrics such as Euclidean distance. Clustering plays a crucial role in many applications,
-                including market segmentation, social network analysis, and biological data classification.
+                Clustering groups data based on similarity, allowing identification of patterns and meaningful segments.
             </p>
         </div>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-table me-2"></i> Example Dataset
+        </div>
         <div class="card-body">
-            <h4>Example Dataset</h4>
-            <p>
-                The following dataset represents a simplified example of customer data, including income and spending behavior.
-                These variables are used by the K-Means algorithm to identify patterns and segment customers into meaningful groups.
-            </p>
             <table class="table table-bordered">
                 <tr><th>Customer</th><th>Income</th><th>Spending</th></tr>
                 <tr><td>Ana</td><td>1200</td><td>300</td></tr>
@@ -82,27 +77,22 @@
         </div>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-diagram-2 me-2"></i> What is K-Means?
+        </div>
         <div class="card-body">
-            <h4>What is K-Means?</h4>
             <p>
-                K-Means is a partition-based clustering algorithm that divides a dataset into K distinct groups.
-                Each cluster is defined by its centroid, which represents the mean position of all points within that cluster.
-            </p>
-            <p>
-                The algorithm operates iteratively, assigning each data point to the nearest centroid and then recalculating the centroid positions.
-                This process continues until the centroids stabilize and no significant changes occur in cluster assignments.
+                K-Means divides data into K clusters using centroids and iterative optimization.
             </p>
         </div>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-bullseye me-2"></i> Initial Centroids
+        </div>
         <div class="card-body">
-            <h4>Initial Centroids</h4>
-            <p>
-                The initial selection of centroids plays a crucial role in the performance of the algorithm.
-                Poor initialization can lead to suboptimal clustering results, while good initialization improves convergence speed and accuracy.
-            </p>
             <table class="table table-bordered">
                 <tr><th>Cluster</th><th>Income</th><th>Spending</th></tr>
                 <tr><td>C1</td><td>1200</td><td>300</td></tr>
@@ -113,62 +103,57 @@
     </div>
 
     <div class="text-center mb-4">
-        <img src="/static/kmeans_process.png" class="img-fluid rounded shadow" alt="Iterative process showing centroid updates and cluster reassignment.">
-        <p class="text-muted mt-2">
-            Figure 3. Iterative process showing centroid updates and cluster reassignment.
-        </p>
+        <img src="/static/kmeans_process.png" class="img-fluid img-small rounded shadow">
+        <p class="text-muted mt-2">Figure 3. K-Means process.</p>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-arrow-repeat me-2"></i> Algorithm Process
+        </div>
         <div class="card-body">
-            <h4>K-Means Algorithm Process</h4>
             <ol>
-                <li>Select initial centroids</li>
-                <li>Calculate distances between points and centroids</li>
-                <li>Assign points to nearest cluster</li>
-                <li>Update centroid positions</li>
+                <li>Select centroids</li>
+                <li>Calculate distances</li>
+                <li>Assign clusters</li>
+                <li>Update centroids</li>
                 <li>Repeat until convergence</li>
             </ol>
-
-            <p>
-                The algorithm aims to minimize the <b>Within-Cluster Sum of Squares (WCSS)</b>, which measures how compact the clusters are.
-                Lower values indicate better clustering performance.
-            </p>
         </div>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-rulers me-2"></i> Distance (Euclidean)
+        </div>
         <div class="card-body">
-            <h4>Distance Metric (Euclidean)</h4>
-            <p>
-                Euclidean distance is the most commonly used metric in K-Means. It measures the straight-line distance between two points in space.
-            </p>
             <p class="bg-light p-3 rounded">
                 d = √((x₁ - x₂)² + (y₁ - y₂)²)
             </p>
         </div>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-graph-down me-2"></i> Variance Reduction
+        </div>
         <div class="card-body">
-            <h4>Variance Reduction</h4>
             <p>
-                Variance represents how spread out the data points are within each cluster.
-                As the algorithm iterates, variance decreases, indicating that clusters are becoming more compact and well-defined.
+                Variance decreases as clusters become more compact, improving clustering quality.
             </p>
         </div>
     </div>
 
     <div class="text-center mb-4">
-        <img src="/static/variance_graph.png" class="img-fluid rounded shadow" alt="Reduction of variance across iterations, demonstrating convergence.">
-        <p class="text-muted mt-2">
-            Figure 4. Reduction of variance across iterations, demonstrating convergence.
-        </p>
+        <img src="/static/variance_graph.png" class="img-fluid img-small rounded shadow">
+        <p class="text-muted mt-2">Figure 4. Variance reduction.</p>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-briefcase me-2"></i> Applications
+        </div>
         <div class="card-body">
-            <h4>Real-World Applications</h4>
             <ul>
                 <li>Customer segmentation</li>
                 <li>Market analysis</li>
@@ -178,16 +163,13 @@
         </div>
     </div>
 
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-lightbulb me-2"></i> Interpretation
+        </div>
         <div class="card-body">
-            <h4>Interpretation</h4>
             <p>
-                K-Means provides a powerful way to analyze and interpret complex datasets by grouping similar observations.
-                In this case, customers are segmented based on income and spending, allowing organizations to design targeted strategies.
-            </p>
-            <p>
-                The effectiveness of the model is reflected in the reduction of variance and the clear separation between clusters,
-                demonstrating the ability of K-Means to uncover meaningful patterns in data.
+                K-Means identifies patterns and supports decision-making by grouping similar data.
             </p>
         </div>
     </div>
