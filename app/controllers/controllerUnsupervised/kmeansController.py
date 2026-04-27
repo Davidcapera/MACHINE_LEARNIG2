@@ -10,8 +10,10 @@ kmeans_bp = Blueprint("kmeans", __name__)
 
 @kmeans_bp.route("/kmeans")
 def kmeans():
+
     results = run_kmeans()
     stats = get_dataset_stats()
+
     return render_template(
         "templateUnsupervised/kmeans.html",
         results=results,
@@ -21,14 +23,20 @@ def kmeans():
 
 @kmeans_bp.route('/kmeans/definition')
 def kmeans_home():
-    return render_template('templateUnsupervised/kmeansDefinition.html')
+
+    return render_template(
+        'templateUnsupervised/kmeansDefinition.html'
+    )
 
 
-# NEW APPLICATION PAGE
+# APPLICATION PAGE
 @kmeans_bp.route('/kmeans/application', methods=['GET', 'POST'])
 def kmeans_application():
 
     prediction = None
+
+    # Dataset stats for Application section
+    stats = get_dataset_stats()
 
     if request.method == 'POST':
 
@@ -39,5 +47,6 @@ def kmeans_application():
 
     return render_template(
         'templateUnsupervised/kmeansApplication.html',
-        prediction=prediction
+        prediction=prediction,
+        stats=stats
     )

@@ -2,110 +2,215 @@
 
 {% block content %}
 
-        <!-- INTRODUCTION -->
-    <div class="card shadow-sm border-0 mb-4">
+<!-- HERO SECTION -->
+<div class="p-4 mb-4 rounded-3 bg-primary text-white">
+    <div class="d-flex align-items-center gap-3">
+        <i class="bi bi-diagram-3-fill" style="font-size:2.8rem;"></i>
+        <div>
+            <h3 class="fw-bold mb-1">K-Means Application — Customer Segmentation</h3>
+            <p class="mb-0 opacity-75">
+                Dynamic clustering application using K-Means over customer age and income.
+            </p>
+        </div>
+    </div>
+</div>
 
-        <div class="card-header bg-dark text-white">
-            <h4 class="mb-0">
-                About This Application
-            </h4>
+<!-- 1 PROBLEM DESCRIPTION -->
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-info-circle-fill"></i>
+        <span class="fw-bold fs-5">1 · Problem Description</span>
+    </div>
+
+    <div class="card-body p-4">
+
+        <p class="text-secondary">
+            This clustering application predicts customer behavior using age and income.
+            K-Means automatically assigns users to one of three customer groups using
+            unsupervised machine learning.
+        </p>
+
+        <div class="row g-4 mt-2">
+
+            <div class="col-md-6">
+                <h6 class="text-primary fw-bold">Objective</h6>
+                <p class="text-muted small mb-0">
+                    Identify customer purchasing profiles through cluster segmentation.
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <h6 class="text-primary fw-bold">Algorithm</h6>
+
+                <div class="d-flex gap-2 flex-wrap">
+                    <span class="badge bg-primary">K-Means</span>
+                    <span class="badge bg-secondary">Unsupervised Learning</span>
+                    <span class="badge bg-info text-dark">Customer Clustering</span>
+                </div>
+            </div>
+
         </div>
 
-        <div class="card-body">
+    </div>
 
-            <p>
-                This interactive K-Means application allows users to simulate
-                customer segmentation using Machine Learning.
-            </p>
+</div>
 
-            <p>
-                The algorithm groups customers based on:
-            </p>
+<!-- 2 DATASET CONTEXT -->
+<div class="card border-0 shadow-sm mb-4">
 
-            <ul>
-                <li><strong>Age</strong> — customer age range</li>
-                <li><strong>Income</strong> — monthly income level</li>
-            </ul>
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-database-fill"></i>
+        <span class="fw-bold fs-5">2 · Dataset Context</span>
+    </div>
 
-            <p>
-                By entering values, the system dynamically predicts which cluster
-                the customer belongs to and visualizes the result using a real-time clustering graph.
-            </p>
+    <div class="card-body p-4">
 
-            <hr>
+        <p class="text-muted">
+            This dataset represents synthetic customer profiles created for clustering analysis.
+            Each record contains customer characteristics used for segmentation.
+        </p>
 
-            <h5 class="fw-bold">
-                How to Use
-            </h5>
+        <div class="row g-3 mt-3">
 
-            <ol>
-                <li>Enter the customer's age.</li>
-                <li>Enter the customer's monthly income.</li>
-                <li>Click <strong>Analyze Customer</strong>.</li>
-                <li>Review the assigned cluster.</li>
-                <li>Interpret the graph and centroid positions.</li>
-            </ol>
-
-            <hr>
-
-            <h5 class="fw-bold">
-                Cluster Interpretation
-            </h5>
-
-            <div class="row">
-
-                <div class="col-md-4">
-
-                    <div class="card border-primary mb-3">
-                        <div class="card-body">
-
-                            <h6 class="text-primary fw-bold">
-                                Budget Customers
-                            </h6>
-
-                            <p class="small mb-0">
-                                Lower income users with basic purchasing behavior.
-                            </p>
-
-                        </div>
-                    </div>
-
+            <div class="col-md-6">
+                <div class="bg-light rounded border p-3 h-100">
+                    <h6 class="text-primary fw-bold mb-2">
+                        <i class="bi bi-person-fill me-2"></i>Feature 1
+                    </h6>
+                    <p class="mb-0 small text-muted">
+                        Age between 20 and 65 years old.
+                    </p>
                 </div>
+            </div>
 
-                <div class="col-md-4">
-
-                    <div class="card border-success mb-3">
-                        <div class="card-body">
-
-                            <h6 class="text-success fw-bold">
-                                Standard Customers
-                            </h6>
-
-                            <p class="small mb-0">
-                                Medium income customers with balanced purchasing capacity.
-                            </p>
-
-                        </div>
-                    </div>
-
+            <div class="col-md-6">
+                <div class="bg-light rounded border p-3 h-100">
+                    <h6 class="text-primary fw-bold mb-2">
+                        <i class="bi bi-cash-stack me-2"></i>Feature 2
+                    </h6>
+                    <p class="mb-0 small text-muted">
+                        Monthly income between $1,000 and $8,000.
+                    </p>
                 </div>
+            </div>
 
-                <div class="col-md-4">
+        </div>
 
-                    <div class="card border-danger mb-3">
-                        <div class="card-body">
+    </div>
 
-                            <h6 class="text-danger fw-bold">
-                                Premium Customers
-                            </h6>
+</div>
 
-                            <p class="small mb-0">
-                                High-income users likely to engage with premium services.
-                            </p>
+<!-- 3 DATASET STATISTICS -->
+<div class="card border-0 shadow-sm mb-4">
 
-                        </div>
-                    </div>
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-bar-chart-fill"></i>
+        <span class="fw-bold fs-5">3 · Dataset Statistics</span>
+    </div>
 
+    <div class="card-body p-4">
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <div class="bg-light rounded border text-center p-3">
+                    <i class="bi bi-database-fill text-primary fs-2"></i>
+                    <h3 class="text-primary mt-2">1000+</h3>
+                    <p class="small text-muted mb-0">Records</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bg-light rounded border text-center p-3">
+                    <i class="bi bi-columns-gap text-success fs-2"></i>
+                    <h3 class="text-success mt-2">2</h3>
+                    <p class="small text-muted mb-0">Features</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bg-light rounded border text-center p-3">
+                    <i class="bi bi-diagram-3-fill text-danger fs-2"></i>
+                    <h3 class="text-danger mt-2">3</h3>
+                    <p class="small text-muted mb-0">Clusters</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 4 DATA PREPARATION -->
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-gear-fill"></i>
+        <span class="fw-bold fs-5">4 · Data Preparation</span>
+    </div>
+
+    <div class="card-body p-4">
+
+        <div class="list-group list-group-flush">
+
+            <div class="list-group-item border-0 px-0">
+                <strong class="text-primary">Step 1:</strong>
+                Dataset generated using make_blobs().
+            </div>
+
+            <div class="list-group-item border-0 px-0">
+                <strong class="text-primary">Step 2:</strong>
+                Features scaled into realistic age and income ranges.
+            </div>
+
+            <div class="list-group-item border-0 px-0">
+                <strong class="text-primary">Step 3:</strong>
+                K-Means model trained using sklearn.cluster.KMeans.
+            </div>
+
+            <div class="list-group-item border-0 px-0">
+                <strong class="text-primary">Step 4:</strong>
+                Dynamic prediction generated from user input.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 5 HOW TO USE -->
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-question-circle-fill"></i>
+        <span class="fw-bold fs-5">5 · How To Use This Application</span>
+    </div>
+
+    <div class="card-body p-4">
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+
+                <ol class="mb-0 text-muted">
+                    <li>Enter customer age.</li>
+                    <li>Enter monthly income.</li>
+                    <li>Click Analyze Customer.</li>
+                    <li>Review assigned cluster.</li>
+                    <li>Interpret graph and centroids.</li>
+                </ol>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="alert alert-primary mb-0">
+                    <i class="bi bi-lightbulb-fill me-2"></i>
+                    This application helps identify customer segments for
+                    marketing analysis and business decision-making.
                 </div>
 
             </div>
@@ -114,114 +219,164 @@
 
     </div>
 
+</div>
 
-<div class="container mt-4 mb-5">
+<!-- 6 USER FORM -->
+<div class="card border-0 shadow-sm mb-4">
 
-    <!-- HEADER -->
-    <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-cpu-fill"></i>
+        <span class="fw-bold fs-5">6 · Dynamic Customer Prediction</span>
+    </div>
 
-        <div class="card-header bg-primary text-white">
-            <h3 class="mb-0">
-                K-Means Application — Customer Segmentation
-            </h3>
-        </div>
+    <div class="card-body p-4">
 
-        <div class="card-body">
+        <p class="text-muted mb-4">
+            Enter customer information to dynamically evaluate cluster assignment.
+        </p>
 
-            <p class="text-muted">
-                Enter customer information to dynamically evaluate cluster assignment.
-                The graph updates automatically according to user input.
-            </p>
+        <form method="POST">
 
-            <form method="POST">
+            <div class="row">
 
-                <div class="row">
+                <div class="col-md-6 mb-3">
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">
-                            Age
-                        </label>
+                    <label class="form-label fw-bold">
+                        Age
+                    </label>
 
-                        <input type="number" class="form-control" name="age" min="20" max="65" step="0.1" required>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">
-                            Income ($)
-                        </label>
-
-                        <input type="number" class="form-control" name="income" min="1000" max="8000" step="0.1"
-                            required>
-                    </div>
+                    <input type="number" class="form-control" name="age" min="20" max="65" step="0.1" required>
 
                 </div>
 
-                <button class="btn btn-primary w-100">
-                    Analyze Customer
-                </button>
+                <div class="col-md-6 mb-3">
 
-            </form>
+                    <label class="form-label fw-bold">
+                        Income ($)
+                    </label>
+
+                    <input type="number" class="form-control" name="income" min="1000" max="8000" step="0.1" required>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary w-100">
+                Analyze Customer
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- 7 CLUSTER INTERPRETATION -->
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-people-fill"></i>
+        <span class="fw-bold fs-5">7 · Cluster Interpretation</span>
+    </div>
+
+    <div class="card-body p-4">
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <div class="border rounded p-3 h-100">
+
+                    <h6 class="text-danger fw-bold">
+                        Budget Customers
+                    </h6>
+
+                    <p class="small text-muted mb-0">
+                        Lower-income users with conservative purchasing behavior.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="border rounded p-3 h-100">
+
+                    <h6 class="text-primary fw-bold">
+                        Standard Customers
+                    </h6>
+
+                    <p class="small text-muted mb-0">
+                        Medium-income users with balanced spending patterns.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="border rounded p-3 h-100">
+
+                    <h6 class="text-success fw-bold">
+                        Premium Customers
+                    </h6>
+
+                    <p class="small text-muted mb-0">
+                        High-income customers interested in premium services.
+                    </p>
+
+                </div>
+            </div>
 
         </div>
 
     </div>
 
+</div>
 
-    {% if prediction %}
+{% if prediction %}
 
+<!-- 8 RESULT -->
+<div class="card border-0 shadow-sm mb-4">
 
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-graph-up-arrow"></i>
+        <span class="fw-bold fs-5">8 · Prediction Result</span>
+    </div>
 
-    <!-- RESULT -->
-    <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body p-4">
 
-        <div class="card-header bg-success text-white">
-            <h4 class="mb-0">
-                Dynamic Prediction Result
-            </h4>
-        </div>
+        <div class="row">
 
-        <div class="card-body">
+            <div class="col-md-4">
 
-            <div class="row">
+                <div class="bg-light border rounded p-4 text-center h-100">
 
-                <!-- LEFT -->
-                <div class="col-md-4">
+                    <h5 class="text-muted">
+                        Cluster Assigned
+                    </h5>
 
-                    <div class="card bg-light border-0 h-100">
+                    <h2 class="text-primary fw-bold">
+                        {{ prediction.cluster_name }}
+                    </h2>
 
-                        <div class="card-body text-center">
+                    <hr>
 
-                            <h5>Cluster Assigned</h5>
+                    <p>
+                        <strong>Age:</strong>
+                        {{ prediction.age }}
+                    </p>
 
-                            <h2 class="text-primary fw-bold">
-                                {{ prediction.cluster_name }}
-                            </h2>
-
-                            <hr>
-
-                            <p>
-                                <strong>Age:</strong>
-                                {{ prediction.age }}
-                            </p>
-
-                            <p>
-                                <strong>Income:</strong>
-                                ${{ prediction.income }}
-                            </p>
-
-                        </div>
-
-                    </div>
+                    <p>
+                        <strong>Income:</strong>
+                        ${{ prediction.income }}
+                    </p>
 
                 </div>
 
-                <!-- RIGHT -->
-                <div class="col-md-8">
+            </div>
 
-                    <img src="data:image/png;base64,{{ prediction.graph }}" class="img-fluid rounded shadow"
-                        alt="KMeans Dynamic Graph">
+            <div class="col-md-8">
 
-                </div>
+                <img src="data:image/png;base64,{{ prediction.graph }}" class="img-fluid rounded shadow-sm border"
+                    alt="KMeans Dynamic Graph">
 
             </div>
 
@@ -229,37 +384,49 @@
 
     </div>
 
+</div>
 
-    <!-- CENTROIDS -->
-    <div class="card shadow-sm border-0">
+<!-- 9 CENTROIDS -->
+<div class="card border-0 shadow-sm mb-4">
 
-        <div class="card-header bg-dark text-white">
-            <h4 class="mb-0">
-                Cluster Centroids
-            </h4>
-        </div>
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-bullseye"></i>
+        <span class="fw-bold fs-5">9 · Cluster Centroids</span>
+    </div>
 
-        <div class="card-body">
+    <div class="card-body p-4">
 
-            <table class="table table-bordered table-hover">
+        <div class="table-responsive">
 
-                <thead class="table-light">
+            <table class="table table-hover table-bordered align-middle">
+
+                <thead class="table-primary">
+
                     <tr>
                         <th>Cluster</th>
                         <th>Age</th>
                         <th>Income</th>
                     </tr>
-                </thead>
 
- <!-- x -->
+                </thead>
 
                 <tbody>
 
                     {% for c in prediction.centroids %}
                     <tr>
-                        <td>Cluster {{ loop.index }}</td>
-                        <td>{{ c.age }}</td>
-                        <td>${{ c.income }}</td>
+
+                        <td>
+                            Cluster {{ loop.index }}
+                        </td>
+
+                        <td>
+                            {{ c.age }}
+                        </td>
+
+                        <td>
+                            ${{ c.income }}
+                        </td>
+
                     </tr>
                     {% endfor %}
 
@@ -271,8 +438,32 @@
 
     </div>
 
-    {% endif %}
+</div>
+
+<!-- 10 INTERPRETATION -->
+<div class="card border-0 shadow-sm mb-5">
+
+    <div class="card-header bg-primary text-white d-flex align-items-center gap-2 py-3">
+        <i class="bi bi-lightbulb-fill"></i>
+        <span class="fw-bold fs-5">10 · Interpretation of Results</span>
+    </div>
+
+    <div class="card-body p-4">
+
+        <div class="alert alert-success mb-0">
+
+            <p class="mb-0">
+                The customer was assigned to a cluster according to similarity
+                with other records in the dataset. K-Means identifies hidden
+                patterns and groups users with similar characteristics.
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
+
+{% endif %}
 
 {% endblock %}

@@ -7,7 +7,7 @@ from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 
 np.random.seed(42)
-X_raw, _, *extra = make_blobs(n_samples=100, centers=3, n_features=2,
+X_raw, _, *extra = make_blobs(n_samples=1000, centers=3, n_features=2,
                       cluster_std=1.5, random_state=42, return_centers=False)
 
 ages    = np.interp(X_raw[:, 0], (X_raw[:, 0].min(), X_raw[:, 0].max()), (20, 65)).round(1)
