@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+.img-medium {
+    max-width: 600px;
+}
+.img-small {
+    max-width: 500px;
+}
+</style>
+
+<div class="container">
+
+    <div class="p-4 mb-4 bg-primary text-white rounded shadow-sm">
+        <h2 class="fw-bold mb-2">
+            <i class="bi bi-diagram-3 me-2"></i>
+            Unsupervised Learning — K-Means Clustering
+        </h2>
+        <p class="mb-0 opacity-75">
+            K-Means is a powerful unsupervised learning algorithm used to identify hidden patterns in unlabeled data by grouping similar observations.
+        </p>
+    </div>
+
+    <div class="text-center mb-4">
+        <img src="/static/kmeans_general.png" class="img-fluid img-medium rounded shadow">
+        <p class="text-muted mt-2">Figure 1. Visual representation of clustering.</p>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-cpu me-2"></i> What is Unsupervised Learning?
+        </div>
+        <div class="card-body">
+            <p>
+                Unsupervised learning analyzes data without labeled outputs and discovers hidden structures and patterns.
+                It is widely used when data labeling is not available.
+            </p>
+            <ul>
+                <li>No labeled output</li>
+                <li>Pattern discovery</li>
+                <li>Clustering and dimensionality reduction</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <img src="/static/clustering_example.png" class="img-fluid img-medium rounded shadow">
+        <p class="text-muted mt-2">Figure 2. Example of clustering.</p>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-collection me-2"></i> What is Clustering?
+        </div>
+        <div class="card-body">
+            <p>
+                Clustering groups data based on similarity, allowing identification of patterns and meaningful segments.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-table me-2"></i> Example Dataset
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr><th>Customer</th><th>Income</th><th>Spending</th></tr>
+                <tr><td>Ana</td><td>1200</td><td>300</td></tr>
+                <tr><td>Luis</td><td>1500</td><td>350</td></tr>
+                <tr><td>Carlos</td><td>1300</td><td>280</td></tr>
+                <tr><td>Marta</td><td>4000</td><td>1200</td></tr>
+                <tr><td>Elena</td><td>2500</td><td>700</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-diagram-2 me-2"></i> What is K-Means?
+        </div>
+        <div class="card-body">
+            <p>
+                K-Means divides data into K clusters using centroids and iterative optimization.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-bullseye me-2"></i> Initial Centroids
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr><th>Cluster</th><th>Income</th><th>Spending</th></tr>
+                <tr><td>C1</td><td>1200</td><td>300</td></tr>
+                <tr><td>C2</td><td>2600</td><td>700</td></tr>
+                <tr><td>C3</td><td>4200</td><td>1400</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <img src="/static/kmeans_process.png" class="img-fluid img-small rounded shadow">
+        <p class="text-muted mt-2">Figure 3. K-Means process.</p>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-arrow-repeat me-2"></i> Algorithm Process
+        </div>
+        <div class="card-body">
+            <ol>
+                <li>Select centroids</li>
+                <li>Calculate distances</li>
+                <li>Assign clusters</li>
+                <li>Update centroids</li>
+                <li>Repeat until convergence</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-rulers me-2"></i> Distance (Euclidean)
+        </div>
+        <div class="card-body">
+            <p class="bg-light p-3 rounded">
+                d = √((x₁ - x₂)² + (y₁ - y₂)²)
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-graph-down me-2"></i> Variance Reduction
+        </div>
+        <div class="card-body">
+            <p>
+                Variance decreases as clusters become more compact, improving clustering quality.
+            </p>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <img src="/static/variance_graph.png" class="img-fluid img-small rounded shadow">
+        <p class="text-muted mt-2">Figure 4. Variance reduction.</p>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-briefcase me-2"></i> Applications
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Customer segmentation</li>
+                <li>Market analysis</li>
+                <li>Anomaly detection</li>
+                <li>Recommendation systems</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-lightbulb me-2"></i> Interpretation
+        </div>
+        <div class="card-body">
+            <p>
+                K-Means identifies patterns and supports decision-making by grouping similar data.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

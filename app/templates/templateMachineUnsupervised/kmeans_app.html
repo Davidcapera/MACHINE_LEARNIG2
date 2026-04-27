@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="p-4 mb-4 bg-primary text-white rounded shadow-sm">
+        <h2 class="fw-bold">K-Means Clustering — Customer Segmentation</h2>
+        <p class="mb-0">
+            This application groups customers based on income and spending behavior using the K-Means algorithm.
+        </p>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Problem Description</h4>
+            <p>
+                The objective of this model is to segment customers into groups based on their income and spending habits.
+                This allows businesses to identify patterns and improve decision-making strategies such as marketing and pricing.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Dataset Information</h4>
+            <ul>
+                <li><b>Records:</b> 1000 customers</li>
+                <li><b>Features:</b> Income, Spending</li>
+                <li><b>Type:</b> Numerical data</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- GRAPH -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Clustering Visualization</h4>
+            <canvas id="chart" style="max-width: 900px;"></canvas>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Cluster Centroids</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cluster</th>
+                        <th>Income</th>
+                        <th>Spending</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in centroids %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ c[0]|round(2) }}</td>
+                        <td>{{ c[1]|round(2) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4>Interpretation of Results</h4>
+            <p>
+                The K-Means algorithm successfully grouped customers into three distinct segments:
+            </p>
+            <ul>
+                <li><b>Cluster 1:</b> Low income, low spending</li>
+                <li><b>Cluster 2:</b> Medium income, moderate spending</li>
+                <li><b>Cluster 3:</b> High income, high spending</li>
+            </ul>
+            <p>
+                These clusters allow businesses to design targeted strategies for each group, improving customer engagement
+                and maximizing revenue.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const data = {{ data | tojson }};
+    const centroids = {{ centroids | tojson }};
+
+    const colors = ['red', 'blue', 'green'];
+
+    const points = data.map(d => ({
+        x: d.ingresos,
+        y: d.gasto
+    }));
+
+    const datasets = [
+        {
+            label: 'Clusters',
+            data: points,
+            backgroundColor: data.map(d => colors[d.cluster])
+        },
+        {
+            label: 'Centroids',
+            data: centroids.map(c => ({
+                x: c[0],
+                y: c[1]
+            })),
+            backgroundColor: 'black',
+            pointRadius: 10
+        }
+    ];
+
+    const ctx = document.getElementById('chart');
+
+    new Chart(ctx, {
+        type: 'scatter',
+        data: { datasets },
+        options: {
+            plugins: {
+                legend: {
+                    display: true
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Income' }
+                },
+                y: {
+                    title: { display: true, text: 'Spending' }
+                }
+            }
+        }
+    });
+
+});
+</script>
+
+{% endblock %}
